@@ -545,7 +545,7 @@ function renderTabCharts(tab){
         {label:'Germania',data:[1.5,2.7,1.0,3.2,-0.3,0.2],backgroundColor:grey,borderRadius:4},
         {label:'Francia',data:[1.1,2.4,1.8,6.8,0.7,0.8],backgroundColor:blue,borderRadius:4},
         {label:'Spagna',data:[3.8,3.0,2.0,5.5,2.7,3.0],backgroundColor:green,borderRadius:4}
-      ]}
+      ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
     charts['produttivita'] = buildChart('chart-produttivita', {
