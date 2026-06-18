@@ -89,6 +89,13 @@
     <div class="legend"><span class="dot"></span> Dati ufficiali e stime OCSE/Eurostat · verificare sempre la fonte primaria</div>
   </div>
 
+
+  <div class="method-box" style="margin-bottom:20px">
+    <h4>Come leggere questi numeri in 30 secondi</h4>
+    <p>Il <strong>PIL</strong> (~€2.258 miliardi nel 2025) è la "taglia" dell'economia italiana. Quando qualcuno promette una spesa, dividila per 2.258: se è 22,6 miliardi, è l'1% del PIL. Il <strong>debito / PIL</strong> (137%) dice che lo Stato deve più di quanto l'Italia produce in un anno. Il <strong>deficit</strong> (-3,1%) dice che spendiamo ancora più di quanto incassiamo. La <strong>pressione fiscale</strong> (43%) dice che quasi metà della ricchezza passa per tasse e contributi.</p>
+    <p><strong>Non c'è un numero giusto o sbagliato da solo</strong>: conta il confronto (Italia vs UE, oggi vs 10 anni fa) e cosa si ottiene con quei soldi. Per ogni termine c'è una definizione nel tab <strong>Glossario</strong>.</p>
+  </div>
+
   <div class="controls">
     <div class="tabs">
       <div class="tab active" data-tab="panoramica">Panoramica</div>
@@ -102,6 +109,7 @@
       <div class="tab" data-tab="governi">Governi</div>
       <div class="tab" data-tab="recap">Recap & Metodo</div>
       <div class="tab" data-tab="fonti">Fonti</div>
+      <div class="tab" data-tab="glossario">Glossario</div>
     </div>
     <div class="year-sel">
       <label for="yearSelect">Anno</label>
@@ -124,13 +132,13 @@
   <!-- PANORAMICA -->
   <div id="panoramica" class="pane active">
     <div class="kpi-grid">
-      <div class="kpi"><div class="val" id="kpi-pil">€2.258Mld</div><div class="lbl">PIL 2025 (prezzi correnti)</div><div class="trend trend-neutral" id="kpi-pil-trend">+0,5% volume · +2,5% nominale</div></div>
+      <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Il PIL è la ricchezza totale prodotta in Italia in un anno. Ai prezzi correnti include l'inflazione; in volume no.</span></span><div class="val" id="kpi-pil">€2.258Mld</div><div class="lbl">PIL 2025 (prezzi correnti)</div><div class="trend trend-neutral" id="kpi-pil-trend">+0,5% volume · +2,5% nominale</div></div>
       <div class="kpi"><div class="val red" id="kpi-debito">137,1%</div><div class="lbl">Debito pubblico / PIL</div><div class="trend trend-up" id="kpi-debito-trend">+2,4pp vs 2024</div></div>
-      <div class="kpi"><div class="val" id="kpi-deficit">-3,1%</div><div class="lbl">Deficit / PIL</div><div class="trend trend-down" id="kpi-deficit-trend">-0,3pp vs 2024</div></div>
+      <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Quanto lo Stato spende in più di quanto incassa, in % del PIL. Negativo = debito che sale.</span></span><div class="val" id="kpi-deficit">-3,1%</div><div class="lbl">Deficit / PIL</div><div class="trend trend-down" id="kpi-deficit-trend">-0,3pp vs 2024</div></div>
       <div class="kpi"><div class="val accent" id="kpi-pressione">43,1%</div><div class="lbl">Pressione fiscale / PIL</div><div class="trend trend-up" id="kpi-pressione-trend">+0,7pp vs 2024</div></div>
     </div>
     <div class="kpi-grid" style="margin-top:-4px">
-      <div class="kpi"><div class="val" id="kpi-spesa">51,2%</div><div class="lbl">Spesa pubblica / PIL</div></div>
+      <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Spesa pubblica totale diviso PIL. Dice quanta parte della ricchezza passa per decisioni politiche.</span></span><div class="val" id="kpi-spesa">51,2%</div><div class="lbl">Spesa pubblica / PIL</div></div>
       <div class="kpi"><div class="val red" id="kpi-interessi">3,8%</div><div class="lbl">Spesa interessi / PIL</div></div>
       <div class="kpi"><div class="val green" id="kpi-primario">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
       <div class="kpi"><div class="val blue" id="kpi-produttivita">-1,4%</div><div class="lbl">Produttività 2024 (var. %)</div></div>
@@ -149,6 +157,7 @@
 
   <!-- PIL -->
   <div id="pil" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>da dove viene la ricchezza</strong> (PIL per settore) e <strong>cosa la fa crescere</strong> (consumi, investimenti, export). Serve per capire se l'Italia cresce per merito suo o solo per l'inflazione.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-pil2">€2.258Mld</div><div class="lbl">PIL 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-pil-vol">+0,5%</div><div class="lbl">Crescita volume 2025</div></div>
@@ -168,11 +177,13 @@
       <div class="chart-box"><h3>PIL generato per settore (mld €, 2024)</h3><div class="chart-container"><canvas id="chart-pil-settore-det"></canvas></div></div>
     </div>
     <div class="chart-grid">
-      <div class="chart-box"><h3>Contributi alla crescita del PIL per componente (p.p. annuali, 2015-2025)</h3><div class="chart-container"><canvas id="chart-pil-componenti"></canvas></div></div>
+      <div class="chart-box"><h3>Contributi alla crescita del PIL per componente (p.p. annuali, 2015-2025)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Ogni barra mostra quanto hanno contribuito consumi, investimenti, export e import alla crescita del PIL di quell'anno.</span></span></h3><div class="chart-container"><canvas id="chart-pil-componenti"></canvas></div>
+      <p style="font-size:11px;color:#666;margin-top:10px;line-height:1.5">Ogni barra mostra quanto punti percentuali (p.p.) ha contribuito ciascuna componente alla crescita del PIL di quell'anno. Una barra sopra lo zero = aiuta la crescita; sotto lo zero = la rallenta.</p></div>
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Crescita volume PIL: Italia vs UE (2015-2025, %)</h3><div class="chart-container"><canvas id="chart-pil-confronto"></canvas></div></div>
-      <div class="chart-box"><h3>Produttività del lavoro: Italia vs UE (indice 2010=100)</h3><div class="chart-container"><canvas id="chart-produttivita"></canvas></div></div>
+      <div class="chart-box"><h3>Produttività del lavoro: Italia vs UE (indice 2010=100)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Produttività = PIL / ore lavorate. Indica quanta ricchezza produciamo in un'ora di lavoro rispetto agli altri paesi.</span></span></h3><div class="chart-container"><canvas id="chart-produttivita"></canvas></div>
+      <p style="font-size:11px;color:#666;margin-top:10px;line-height:1.5">Confronto tra Italia, Germania, Francia e Spagna solo per gli anni selezionati (non serie continua).</p></div>
     </div>
     <div class="method-box">
       <h4>Cosa è il PIL ai prezzi di mercato?</h4>
@@ -183,6 +194,7 @@
 
   <!-- FISCO -->
   <div id="fisco" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si vede <strong>chi paga le tasse</strong> e quanto lo Stato incassa. Serve per giudicare promesse tipo "taglieremo le tasse" o "colpiremo i ricchi": bisogna prima sapere chi paga già oggi.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val accent" id="kpi-pressione2">43,1%</div><div class="lbl">Pressione fiscale 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-tributaria">29,3%</div><div class="lbl">Pressione tributaria 2025</div></div>
@@ -194,7 +206,7 @@
       <div class="chart-box"><h3>Composizione entrate pubbliche (% PIL, 2024)</h3><div class="chart-container"><canvas id="chart-entrate-tipo"></canvas></div></div>
     </div>
     <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Entrate fiscali per gruppo di contribuenti (% del totale, 2024)</h3><div class="chart-container"><canvas id="chart-entrate-gruppi"></canvas></div></div>
+      <div class="chart-box"><h3>Entrate fiscali per gruppo di contribuenti (% del totale, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Percentuale del gettito totale pagato da ciascun gruppo: dipendenti, pensionati, autonomi, società, IVA e accise.</span></span></h3><div class="chart-container"><canvas id="chart-entrate-gruppi"></canvas></div></div>
       <div class="chart-box"><h3>Tax gap IVA Italia vs media UE (%, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text"><strong>Tax gap IVA</strong> = differenza tra l'IVA che lo Stato dovrebbe incassare e quella che effettivamente incassa, principalmente per evasione e frodi. Più è alto, più il fisco "cola". Media UE = 8,7%.</span></span></h3><div class="chart-container"><canvas id="chart-taxgap"></canvas></div></div>
     </div>
     <div class="method-box">
@@ -207,6 +219,7 @@
 
   <!-- SPESA -->
   <div id="spesa" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>dove vanno i soldi pubblici</strong>. La maggior parte è bloccata in pensioni, sanità e interessi sul debito: la fetta libera per nuove politiche è più piccola di quanto sembri.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-spesa2">51,2%</div><div class="lbl">Spesa pubblica / PIL 2025</div></div>
       <div class="kpi"><div class="val red" id="kpi-protezione">42,2%</div><div class="lbl">Protezione sociale / spesa totale</div></div>
@@ -215,7 +228,7 @@
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Spesa pubblica per settore d'impiego (% totale, 2024)</h3><div class="chart-container"><canvas id="chart-spesa-settore"></canvas></div></div>
-      <div class="chart-box"><h3>Composizione della protezione sociale (% del totale, 2024)</h3><div class="chart-container"><canvas id="chart-protezione-sociale"></canvas></div></div>
+      <div class="chart-box"><h3>Composizione della protezione sociale (% del totale, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Come si dividono i soldi della protezione sociale: pensioni, sanità, famiglia, disoccupazione, disabilità, povertà.</span></span></h3><div class="chart-container"><canvas id="chart-protezione-sociale"></canvas></div></div>
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Spesa pubblica / PIL storico (2015-2025)</h3><div class="chart-container"><canvas id="chart-spesa-storico"></canvas></div></div>
@@ -240,6 +253,7 @@
 
   <!-- DEBITO -->
   <div id="debito" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si vede <strong>quanto lo Stato deve e a che costo</strong>. Il debito alto non è un problema solo "morale": assorbe soldi che non vanno più a scuole, ospedali o investimenti.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val red" id="kpi-debito2">137,1%</div><div class="lbl">Debito / PIL 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-debito-ass">€3.095Mld</div><div class="lbl">Debito pubblico nominale (stima)</div></div>
@@ -248,10 +262,10 @@
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Debito pubblico / PIL (1995-2025)</h3><div class="chart-container"><canvas id="chart-debito-lungo"></canvas></div></div>
-      <div class="chart-box"><h3>Deficit / PIL e saldo primario (2015-2025)</h3><div class="chart-container"><canvas id="chart-deficit"></canvas></div></div>
+      <div class="chart-box"><h3>Deficit / PIL e saldo primario (2015-2025)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Deficit = spese - entrate. Saldo primario = deficit senza contare gli interessi sul debito.</span></span></h3><div class="chart-container"><canvas id="chart-deficit"></canvas></div></div>
     </div>
     <div class="chart-grid">
-      <div class="chart-box"><h3>Debito / PIL: Italia vs altri grandi paesi UE (2024)</h3><div class="chart-container"><canvas id="chart-debito-ue"></canvas></div></div>
+      <div class="chart-box"><h3>Debito / PIL: Italia vs altri grandi paesi UE (2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Confronto del rapporto debito/PIL tra i grandi paesi europei. L'Italia è la seconda più indebitata dell'UE.</span></span></h3><div class="chart-container"><canvas id="chart-debito-ue"></canvas></div></div>
     </div>
     <div class="method-box">
       <h4>Perché il debito sale nonostante il deficit scenda?</h4>
@@ -262,6 +276,7 @@
 
   <!-- WELFARE -->
   <div id="welfare" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab confronta l'Italia con l'Europa su <strong>pensioni e sanità</strong>. Serve per capire se spendiamo tanto perché siamo generosi o perché abbiamo tanti anziani e pochi giovani.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val gold" id="kpi-pensioni">13,05%</div><div class="lbl">Spesa pensioni / PIL 2024</div></div>
       <div class="kpi"><div class="val" id="kpi-sanita-pil">6,3%</div><div class="lbl">Spesa sanità pubblica / PIL</div></div>
@@ -282,6 +297,7 @@
 
   <!-- LAVORO -->
   <div id="lavoro" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si guarda <strong>quanta gente lavora e quanto guadagna</strong>. Attenzione: "disoccupazione bassa" non sempre significa che tutto va bene, se tanta gente è inattiva o i salari sono fermi.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-occupati">24,1M</div><div class="lbl">Occupati 2025 (IV trim)</div></div>
       <div class="kpi"><div class="val green" id="kpi-disoccupazione">5,7%</div><div class="lbl">Tasso disoccupazione 2025</div></div>
@@ -317,6 +333,7 @@
 
   <!-- COMMERCIO -->
   <div id="commercio" class="pane">
+    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>cosa vendiamo all'estero e cosa compriamo</strong>. L'export è il punto di forza italiano, ma se importiamo più di quanto esportiamo in volume, la crescita ne risente.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-export">€643Mld</div><div class="lbl">Export beni 2025</div></div>
       <div class="kpi"><div class="val green" id="kpi-surplus">+€50,7Mld</div><div class="lbl">Surplus commerciale beni 2025</div></div>
@@ -352,6 +369,7 @@
   <div id="governi" class="pane">
     <div class="method-box">
       <h4>Cosa mostra questa tab</h4>
+      <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si confrontano i <strong>numeri per periodo di governo</strong>. Non è un giudizio definitivo: crisi esterne, BCE e governi precedenti influenzano i conti. Serve per contestualizzare le promesse elettorali.</p>
       <p>Un confronto per <strong>periodo di governo</strong> non attribuisce tutti i meriti o le colpe al governo in carica: l'economia dipende anche da crisi esterne (pandemia, guerra, inflazione), dalla BCE e dai governi precedenti. Serve però per contestualizzare i numeri quando si sente dire "con noi è andata peggio/meglio".</p>
     </div>
     <div class="chart-grid">
@@ -741,5 +759,38 @@ document.getElementById('yearSelect').addEventListener('change', e => {
 });
 
 </script>
+
+  <!-- GLOSSARIO -->
+  <div id="glossario" class="pane">
+    <div class="method-box">
+      <h4>Come leggere questa dashboard senza essere economisti</h4>
+      <p>I numeri qui raccolti servono per <strong>controllare</strong> le promesse politiche. Ogni euro speso va tolto da qualche parte: tasse, debito o tagli. Quando senti "investiremo X miliardi", confronta X con il PIL (~€2.258 miliardi) e con il deficit (~€70 miliardi l'anno).</p>
+    </div>
+    <div class="chart-box">
+      <h3>Glossario dei termini più usati</h3>
+      <table class="small-table">
+        <tr><th>Termine</th><th>Cosa significa</th><th>Perché importa</th></tr>
+        <tr><td><strong>PIL</strong></td><td>La ricchezza totale prodotta in Italia in un anno. Si misura in miliardi di euro.</td><td>E' la "taglia" dell'economia. Serve a capire se una spesa è piccola o enorme rispetto al paese.</td></tr>
+        <tr><td><strong>PIL in volume / reale</strong></td><td>Crescita del PIL depurata dall'inflazione.</td><td>Indica se l'economia è davvero cresciuta o se è solo salita la spesa a causa dei prezzi.</td></tr>
+        <tr><td><strong>Debito pubblico / PIL</strong></td><td>Quanto lo Stato deve rispetto a quanto produce il paese.</td><td>Più è alto, più soldi servono per pagare gli interessi e meno restano per servizi e investimenti.</td></tr>
+        <tr><td><strong>Deficit / PIL</strong></td><td>Quanto lo Stato spende in più di quanto incassa, in percentuale del PIL.</td><td>Se è negativo, il debito aumenta. Se è positivo (superav), il debito si riduce.</td></tr>
+        <tr><td><strong>Saldo primario</strong></td><td>Deficit al netto degli interessi sul debito.</td><td>Dice se le entrate ordinarie bastano a coprire la spesa corrente: se positivo, i conti "funzionano" senza contare il peso del debito passato.</td></tr>
+        <tr><td><strong>Pressione fiscale</strong></td><td>Tasse + contributi sociali (INPS, INAIL...) diviso PIL.</td><td>Misura quanto pesano complessivamente Stato e welfare sull'economia reale.</td></tr>
+        <tr><td><strong>Pressione tributaria</strong></td><td>Solo le tasse vere (IRPEF, IRES, IVA, IMU...) diviso PIL.</td><td>E' il carico fiscale "classico", senza contare i contributi che finanziano pensioni e sanità.</td></tr>
+        <tr><td><strong>Imposte dirette</strong></td><td>Tasse su reddito e patrimonio (IRPEF, IRES, IMU...).</td><td>Le paga chi ha reddito o possiede immobili/aziende.</td></tr>
+        <tr><td><strong>Imposte indirette</strong></td><td>Tasse su consumi e transazioni (IVA, accise, bollo auto).</td><td>Le pagano tutti, anche chi ha redditi bassi, ogni volta che compra benzina, vestiti o servizi.</td></tr>
+        <tr><td><strong>Tax gap IVA</strong></td><td>Differenza tra IVA dovuta e IVA effettivamente incassata.</td><td>Più è alto, più evasione c'è. L'Italia ha uno dei tax gap più alti d'Europa.</td></tr>
+        <tr><td><strong>Spesa pubblica / PIL</strong></td><td>Quanto lo Stato spende in percentuale della ricchezza prodotta.</td><td>Più è alto, più risorse passano per lo Stato. Non è automaticamente un male, ma definisce quanto pesano le scelte politiche.</td></tr>
+        <tr><td><strong>Protezione sociale</strong></td><td>Spesa per pensioni, sanità, disoccupazione, famiglia, povertà.</td><td>E' la metà circa della spesa pubblica. Pensioni e sanità ne occupano la maggior parte.</td></tr>
+        <tr><td><strong>Produttività del lavoro</strong></td><td>PIL diviso ore lavorate: quanta ricchezza si produce in un'ora.</td><td>Se cresce poco, anche con più occupati il PIL non cresce molto e i salari reali restano fermi.</td></tr>
+        <tr><td><strong>Partecipazione al lavoro</strong></td><td>Percentuale di persone tra 15 e 64 anni che lavorano o cercano lavoro.</td><td>Più è alta, più persone contribuiscono a produrre PIL e a pagare tasse. Italia sotto la media UE.</td></tr>
+        <tr><td><strong>Domanda interna / estera</strong></td><td>Chi compra i prodotti italiani: famiglie e imprese italiane vs stranieri.</td><td>Se le esportazioni crescono più delle importazioni, la domanda estera aiuta la crescita.</td></tr>
+        <tr><td><strong>Saldo commerciale</strong></td><td>Esportazioni meno importazioni di beni.</td><td>Se positivo (surplus), l'Italia vende più all'estero di quanto compra: aiuta conto corrente e lavoro.</td></tr>
+        <tr><td><strong>Interessi sul debito</strong></td><td>Quanto lo Stato paga ogni anno per i debiti passati.</td><td>Assorbe circa €86 miliardi/anno: sono soldi che non vanno a scuole, ospedali o strade.</td></tr>
+        <tr><td><strong>Crediti d'imposta / fuori bilancio</strong></td><td>Incentivi (es. bonus edilizi) che non contano nel deficit ma aumentano il debito.</td><td>Rendono il deficit apparentemente più basso, ma il debito reale cresce lo stesso.</td></tr>
+      </table>
+    </div>
+    <div class="footer-info">Glossario redatto su dati ISTAT/MEF/OCSE/Eurostat. Per definizioni ufficiali consultare le fonti.</div>
+  </div>
 </body>
 </html>
