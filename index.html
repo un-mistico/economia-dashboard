@@ -1,842 +1,342 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💰🇮🇹 Dati economia, fisco e spesa pubblica (Italia, 2026)</title>
+  <title>💰🇮🇹 Economia italiana: 10 numeri per capire il Paese</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
-  <meta property="og:title" content="💰🇮🇹 Dati economia, fisco e spesa pubblica (Italia, 2026)">
-  <meta property="og:description" content="Dati ufficiali ISTAT, MEF, Banca d'Italia, INPS, OCSE ed Eurostat su PIL, debito, deficit, tasse, spesa pubblica, welfare, lavoro e commercio estero.">
+  <meta property="og:title" content="💰🇮🇹 Economia italiana: 10 numeri per capire il Paese">
+  <meta property="og:description" content="Un racconto scorrevole su debito, tasse, spesa, lavoro e crescita. Poi i dati completi, tab per tab.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://un-mistico.github.io/economia-dashboard/preview.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     *{box-sizing:border-box}
-    body{background:#0F0F12;font-family:'Inter',system-ui,-apple-system,sans-serif;color:#E8E6E3;padding:20px;min-height:100vh}
-    .wrap{max-width:1200px;margin:0 auto}
-    .header{margin-bottom:24px}
-    .header h1{font-size:25px;font-weight:800;color:#fff;letter-spacing:-0.5px}
-    .header .sub{font-size:14px;color:#888;margin-top:6px}
-    .header .src{font-size:11px;color:#555;margin-top:8px}
-    .header .legend{font-size:10px;color:#666;margin-top:10px;padding-top:10px;border-top:1px solid #222}
-    .header .legend .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle;background:#555}
-    .hub-link{font-size:12px;margin-bottom:10px}
-    .hub-link a{color:#E07A5F;text-decoration:none;font-weight:600}
-    .hub-link a:hover{text-decoration:underline}
-    .controls{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
-    .tabs{display:flex;gap:4px;background:#16161B;border-radius:8px;padding:4px;flex-wrap:wrap}
-    .tab{padding:8px 14px;font-size:12px;font-weight:600;color:#888;cursor:pointer;border-radius:6px;transition:all .2s;border:none;background:none}
-    .tab.active{background:#E07A5F;color:#fff}
-    .tab:hover:not(.active){color:#ccc}
-    .year-sel{display:flex;align-items:center;gap:8px}
-    .year-sel label{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px}
-    .year-sel select{background:#16161B;color:#fff;border:1px solid #333;border-radius:6px;padding:6px 12px;font-size:13px;font-family:inherit;cursor:pointer}
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
-    .kpi{background:#16161B;border:1px solid #222;border-radius:10px;padding:16px 18px}
-    .kpi .val{font-size:26px;font-weight:800;color:#fff}
-    .kpi .val.accent{color:#E07A5F}
-    .kpi .val.blue{color:#4A6FA5}
-    .kpi .val.green{color:#5B8C5A}
-    .kpi .val.red{color:#C45A3D}
-    .kpi .val.gold{color:#C9A227}
-    .kpi .lbl{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
-    .kpi .trend{font-size:11px;margin-top:6px}
-    .trend-up{color:#E07A5F}.trend-down{color:#5B8C5A}.trend-neutral{color:#888}
-    .kpi .badge{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 6px;border-radius:4px;margin-top:6px}
-    .badge-official{background:#1A3A1A;color:#5B8C5A}
-    .badge-estimate{background:#3A2A1A;color:#C9A227}
-    .badge-stock{background:#1A1A2A;color:#8888AA}
-    .badge-flow{background:#1A2A1A;color:#5B8C5A}
-    .chart-grid{display:grid;gap:16px;margin-bottom:16px}
-    .chart-grid.cols-2{grid-template-columns:1fr 1fr}
-    .chart-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
-    .chart-box{background:#16161B;border:1px solid #222;border-radius:10px;padding:18px}
-    .chart-box h3{font-size:13px;font-weight:600;color:#ccc;margin-bottom:12px}
-    .chart-container{position:relative;width:100%;height:280px}
-    .chart-container.tall{height:360px}
-    .insight-box{background:#121A12;border:1px solid #1A3A1A;border-radius:8px;padding:14px 18px;margin:12px 0}
-    .insight-box .text{font-size:13px;color:#5B8C5A;font-weight:500}
-    .warning-box{background:#1A1212;border:1px solid #3A2222;border-radius:8px;padding:14px 18px;margin:12px 0}
-    .warning-box .text{font-size:13px;color:#E07A5F;font-weight:600}
-    .method-box{background:#16161B;border:1px solid #222;border-radius:8px;padding:16px 18px;margin:12px 0}
-    .method-box h4{font-size:14px;color:#f0f0f0;margin:0 0 10px}
-    .method-box p{font-size:12px;color:#888;line-height:1.7;margin:0 0 8px}
-    .footer-info{margin-top:24px;padding-top:16px;border-top:1px solid #222;font-size:11px;color:#555;line-height:1.7}
-    .pane{display:none}
-    .pane.active{display:block}
-    .info-tooltip{position:relative;display:inline-block;margin-left:8px;cursor:help}
-    .info-tooltip .icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#333;color:#888;font-size:11px;font-weight:700}
-    .info-tooltip:hover .icon{background:#E07A5F;color:#fff}
-    .info-tooltip .tooltip-text{visibility:hidden;width:280px;background:#1E1E24;color:#aaa;text-align:left;padding:10px 12px;border-radius:8px;border:1px solid #333;font-size:12px;line-height:1.5;position:absolute;z-index:100;bottom:125%;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .2s}
-    .info-tooltip:hover .tooltip-text{visibility:visible;opacity:1}
-    .info-tooltip .tooltip-text::after{content:"";position:absolute;top:100%;left:50%;margin-left:-5px;border-width:5px;border-style:solid;border-color:#333 transparent transparent transparent}
-    .sources-list{font-size:12px;color:#888;line-height:1.8;margin:0;padding-left:18px}
-    .sources-list a{color:#E07A5F;text-decoration:none}
-    .recap-intro{font-size:14px;color:#888;margin-bottom:16px}
-    .recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-    .recap-card{background:#16161B;border:1px solid #222;border-radius:10px;padding:18px}
-    .recap-num{font-size:32px;font-weight:800;color:#E07A5F;opacity:.6;line-height:1;margin-bottom:8px}
-    .recap-title{font-size:14px;font-weight:700;color:#f0f0f0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-    .recap-text{font-size:13px;color:#aaa;line-height:1.55}
-    .small-table{width:100%;border-collapse:collapse;font-size:12px;color:#aaa;margin-top:8px}
-    .small-table th,.small-table td{padding:8px 10px;text-align:left;border-bottom:1px solid #222}
-    .small-table th{color:#888;font-weight:600;background:#1A1A20}
-    .small-table td{color:#ccc}
-    .small-table td.num{text-align:right;font-variant-numeric:tabular-nums}
-    .note-inline{font-size:11px;color:#666;display:inline-block;margin-left:6px}
-    @media(max-width:768px){.kpi-grid,.kpi-grid.cols-5{grid-template-columns:repeat(2,1fr)}.chart-grid.cols-2,.chart-grid.cols-3{grid-template-columns:1fr}.tab{padding:8px 12px;font-size:11px}.recap-grid{grid-template-columns:1fr}}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#0F0F12;font-family:'Inter',system-ui,-apple-system,sans-serif;color:#E8E6E3;line-height:1.55;overflow-x:hidden}
+    a{color:#E07A5F;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* sticky top nav */
+    .top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,15,18,.92);backdrop-filter:blur(10px);border-bottom:1px solid #222;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;transition:transform .3s ease}
+    .top-nav .brand{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px}
+    .top-nav .brand span{color:#E07A5F}
+    .top-nav .links{display:flex;gap:18px;align-items:center}
+    .top-nav .links a{font-size:13px;font-weight:600;color:#aaa}
+    .top-nav .links a:hover{color:#fff}
+    .top-nav .cta-nav{background:#E07A5F;color:#fff;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .top-nav .cta-nav:hover{background:#c96a52;color:#fff;text-decoration:none}
+    .top-nav.hide{transform:translateY(-100%)}
+
+    .progress{position:fixed;top:0;left:0;height:3px;background:#E07A5F;z-index:101;width:0;transition:width .1s linear}
+
+    .wrap{max-width:740px;margin:0 auto;padding:0 24px}
+    section{min-height:100vh;display:flex;align-items:center;padding:80px 0;position:relative;border-bottom:1px solid #1a1a1a}
+    section:last-child{border-bottom:none}
+    .content{width:100%}
+    .eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#E07A5F;margin-bottom:16px;opacity:0;transform:translateY(10px);transition:all .6s ease}
+    .eyebrow.visible{opacity:1;transform:translateY(0)}
+    h1{font-size:54px;font-weight:800;color:#fff;letter-spacing:-1.4px;margin:0 0 20px;line-height:1.05}
+    h2{font-size:34px;font-weight:800;color:#fff;letter-spacing:-.9px;margin:0 0 16px;line-height:1.12}
+    p{font-size:18px;color:#aaa;margin:0 0 20px;max-width:620px}
+    .big-num{font-size:120px;font-weight:800;color:#fff;line-height:.95;margin:20px 0 24px;opacity:0;transform:translateY(40px) scale(.96);transition:opacity 1s cubic-bezier(.22,.61,.36,1),transform 1s cubic-bezier(.22,.61,.36,1)}
+    .big-num.visible{opacity:1;transform:translateY(0) scale(1)}
+    .big-num.accent{color:#E07A5F}
+    .big-num.blue{color:#4A6FA5}
+    .big-num.green{color:#5B8C5A}
+    .big-num.gold{color:#C9A227}
+    .big-num .suffix{font-size:42px;font-weight:600;vertical-align:top;margin-left:6px}
+    .label{font-size:12px;color:#777;text-transform:uppercase;letter-spacing:1.8px;margin-bottom:8px}
+    .note{font-size:15px;color:#666;margin-top:20px;padding-left:16px;border-left:2px solid #333;max-width:560px}
+    .highlight{background:rgba(224,122,95,.12);padding:2px 6px;border-radius:4px;color:#E07A5F;font-weight:600}
+
+    /* animated bars */
+    .bar-block{margin:24px 0}
+    .bar-wrap{display:flex;align-items:center;gap:14px;margin:12px 0;font-size:14px}
+    .bar{height:28px;background:#E07A5F;border-radius:5px;width:0;transition:width 1.4s cubic-bezier(.22,.61,.36,1);position:relative;overflow:hidden}
+    .bar::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);animation:shimmer 2.5s infinite}
+    @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+    .bar-label{min-width:140px;color:#aaa;font-size:13px}
+    .bar-value{color:#fff;font-weight:700;min-width:60px;text-align:right;font-size:14px}
+    .bar.green{background:#5B8C5A}
+    .bar.blue{background:#4A6FA5}
+    .bar.gold{background:#C9A227}
+    .bar.grey{background:#555}
+
+    .small-table{width:100%;border-collapse:collapse;font-size:15px;margin-top:18px}
+    .small-table td{padding:10px 0;border-bottom:1px solid #222;color:#aaa}
+    .small-table td:last-child{color:#fff;text-align:right;font-weight:700}
+    .small-table tr:last-child td{border-bottom:none}
+    .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+
+    .cta{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:#E07A5F;color:#fff;font-size:16px;font-weight:700;padding:16px 32px;border-radius:8px;text-decoration:none;transition:all .2s}
+    .cta:hover{background:#c96a52;transform:translateY(-1px)}
+    .cta-secondary{display:inline-flex;align-items:center;gap:6px;margin-top:28px;margin-left:16px;color:#888;font-size:15px;text-decoration:none;border-bottom:1px solid #444;padding-bottom:3px;transition:all .2s}
+    .cta-secondary:hover{color:#E07A5F;border-color:#E07A5F}
+
+    .nav-dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:50}
+    .dot{width:10px;height:10px;border-radius:50%;background:#333;cursor:pointer;transition:all .25s;position:relative}
+    .dot.active{background:#E07A5F;transform:scale(1.2)}
+    .dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid transparent;transition:border-color .25s}
+    .dot.active::after{border-color:rgba(224,122,95,.3)}
+
+    .hero{text-align:center;padding-top:110px}
+    .hero h1{font-size:58px}
+    .hero p{font-size:20px;color:#888;max-width:560px;margin:0 auto 36px}
+
+    .final{text-align:center}
+
+    @media(max-width:720px){
+      .top-nav .links a:not(.cta-nav){display:none}
+      section{min-height:90vh;padding:70px 0}
+      .hero h1{font-size:40px}
+      h2{font-size:26px}
+      .big-num{font-size:76px}
+      .big-num .suffix{font-size:28px}
+      .two-col{grid-template-columns:1fr}
+      .nav-dots{display:none}
+      p{font-size:17px}
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-  <div class="hub-link"><a href="https://un-mistico.github.io/repo-italia/">← repo_italia</a> / Economia</div>
-  <div class="header">
-    <h1>💰🇮🇹 Dati economia, fisco e spesa pubblica (Italia, 2026)</h1>
-    <div class="sub">PIL, debito, deficit, tasse, welfare, lavoro e commercio estero per leggere le finanziarie coi numeri reali</div>
-    <div class="src">Ultimo aggiornamento: giugno 2026 · Dati 2015-2025 · Fonti: ISTAT, MEF/RGS, Banca d'Italia, INPS, OCSE, Eurostat</div>
-    <div class="legend"><span class="dot"></span> Dati ufficiali e stime OCSE/Eurostat · verificare sempre la fonte primaria</div>
-  </div>
+  <div class="progress" id="progress"></div>
 
+  <nav class="top-nav" id="nav">
+    <a class="brand" href="https://un-mistico.github.io/repo-italia/">repo_italia <span>· Economia</span></a>
+    <div class="links">
+      <a href="dashboard.html">Dati completi</a>
+      <a href="data/">Download CSV</a>
+      <a class="cta-nav" href="dashboard.html">Esplora →</a>
+    </div>
+  </nav>
 
-  <div style="margin-bottom:16px;font-size:13px;color:#888;line-height:1.5">
-    <span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text" style="width:320px"><strong>Come leggere questi numeri</strong>: il PIL (~€2.258 mld) è la "taglia" dell'economia. Dividi ogni promessa di spesa per 2.258 per capire se è piccola o enorme. Il debito/PIL (137%) dice che lo Stato deve più di quanto produciamo in un anno. Il deficit (-3,1%) dice che spendiamo più di quanto incassiamo. La pressione fiscale (43%) dice che quasi metà della ricchezza passa per tasse e contributi. Per ogni termine c'è una definizione nel tab Glossario.</span></span>
-    <strong>Come leggere questi numeri</strong> — passa sopra l'icona per una guida rapida.
-  </div>
+  <div class="nav-dots" id="dots"></div>
 
-  <div class="controls">
-    <div class="tabs">
-      <div class="tab active" data-tab="panoramica">Panoramica</div>
-      <div class="tab" data-tab="pil">PIL & Crescita</div>
-      <div class="tab" data-tab="fisco">Fisco</div>
-      <div class="tab" data-tab="spesa">Spesa pubblica</div>
-      <div class="tab" data-tab="debito">Debito & Deficit</div>
-      <div class="tab" data-tab="welfare">Welfare & UE</div>
-      <div class="tab" data-tab="lavoro">Lavoro</div>
-      <div class="tab" data-tab="commercio">Commercio estero</div>
-      <div class="tab" data-tab="governi">Governi</div>
-      <div class="tab" data-tab="recap">Recap & Metodo</div>
-      <div class="tab" data-tab="fonti">Fonti</div>
-      <div class="tab" data-tab="dati">Dati</div>
-      <div class="tab" data-tab="glossario">Glossario</div>
+  <section id="s0" class="hero">
+    <div class="wrap content">
+      <div class="eyebrow">Storia · 10 numeri</div>
+      <h1>Economia italiana: il racconto in dati</h1>
+      <p>Debito, tasse, spesa, lavoro, crescita. Scrolla per capire la situazione in pochi minuti. In alto a destra trovi sempre il link ai <strong>dati completi</strong>.</p>
+      <a href="#s1" class="cta">Inizia a scrollare</a>
     </div>
-    <div class="year-sel">
-      <label for="yearSelect">Anno</label>
-      <select id="yearSelect">
-        <option value="2025" selected>2025</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        <option value="2020">2020</option>
-        <option value="2019">2019</option>
-        <option value="2018">2018</option>
-        <option value="2017">2017</option>
-        <option value="2016">2016</option>
-        <option value="2015">2015</option>
-      </select>
-    </div>
-  </div>
+  </section>
 
-  <!-- PANORAMICA -->
-  <div id="panoramica" class="pane active">
-    <div class="kpi-grid">
-      <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Il PIL è la ricchezza totale prodotta in Italia in un anno. Ai prezzi correnti include l'inflazione; in volume no.</span></span><div class="val" id="kpi-pil">€2.258Mld</div><div class="lbl">PIL 2025 (prezzi correnti)</div><div class="trend trend-neutral" id="kpi-pil-trend">+0,5% volume · +2,5% nominale</div></div>
-      <div class="kpi"><div class="val red" id="kpi-debito">137,1%</div><div class="lbl">Debito pubblico / PIL</div><div class="trend trend-up" id="kpi-debito-trend">+2,4pp vs 2024</div></div>
-      <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Quanto lo Stato spende in più di quanto incassa, in % del PIL. Negativo = debito che sale.</span></span><div class="val" id="kpi-deficit">-3,1%</div><div class="lbl">Deficit / PIL</div><div class="trend trend-down" id="kpi-deficit-trend">-0,3pp vs 2024</div></div>
-      <div class="kpi"><div class="val accent" id="kpi-pressione">43,1%</div><div class="lbl">Pressione fiscale / PIL</div><div class="trend trend-up" id="kpi-pressione-trend">+0,7pp vs 2024</div></div>
+  <section id="s1">
+    <div class="wrap content">
+      <div class="eyebrow">01 · Stock</div>
+      <div class="label">Debito pubblico / PIL</div>
+      <div class="big-num accent" data-target="136.4" data-suffix="%">0%</div>
+      <h2>L'Italia è il secondo paese più indebitato d'Europa</h2>
+      <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. Non è un flusso annuale: è una <span class="highlight">montagna</span> costruita in decenni.</p>
+      <div class="note">Il deficit è il nuovo debito che si aggiunge o toglie ogni anno. Debito = stock. Deficit = flow.</div>
     </div>
-    <div class="kpi-grid" style="margin-top:-4px">
-      <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Spesa pubblica totale diviso PIL. Dice quanta parte della ricchezza passa per decisioni politiche.</span></span><div class="val" id="kpi-spesa">51,2%</div><div class="lbl">Spesa pubblica / PIL</div></div>
-      <div class="kpi"><div class="val red" id="kpi-interessi">3,8%</div><div class="lbl">Spesa interessi / PIL</div></div>
-      <div class="kpi"><div class="val green" id="kpi-primario">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-produttivita">-1,4%</div><div class="lbl">Produttività 2024 (var. %)</div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Debito pubblico / PIL (2015-2025)</h3><div class="chart-container"><canvas id="chart-debito-storico"></canvas></div></div>
-      <div class="chart-box"><h3>Spesa pubblica per funzione (% del totale, 2024)</h3><div class="chart-container"><canvas id="chart-spesa-funzione"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Pressione fiscale Italia vs UE (2024)</h3><div class="chart-container"><canvas id="chart-pressione-ue"></canvas></div></div>
-      <div class="chart-box"><h3>PIL generato per settore (mld €, 2024)</h3><div class="chart-container"><canvas id="chart-pil-settore"></canvas></div></div>
-    </div>
-    <div class="insight-box"><div class="text" id="panoramica-insight">Nel 2025 l'Italia ha un PIL di €2.258 miliardi, ma il debito pubblico supera il 137% del PIL. La pressione fiscale è al 43,1% del PIL, tra le più alte d'Europa. I servizi generano il 72% del PIL. La produttività del lavoro è stagnante da vent'anni e nel 2024 è calata dell'1,4%.</div></div>
-    <div class="footer-info">ISTAT · MEF/RGS · Eurostat · OCSE · grafici.altervista.org su dati ISTAT/AMECO</div>
-  </div>
+  </section>
 
-  <!-- PIL -->
-  <div id="pil" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>da dove viene la ricchezza</strong> (PIL per settore) e <strong>cosa la fa crescere</strong> (consumi, investimenti, export). Serve per capire se l'Italia cresce per merito suo o solo per l'inflazione.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val" id="kpi-pil2">€2.258Mld</div><div class="lbl">PIL 2025</div></div>
-      <div class="kpi"><div class="val" id="kpi-pil-vol">+0,5%</div><div class="lbl">Crescita volume 2025</div></div>
-      <div class="kpi"><div class="val green" id="kpi-investimenti">+3,5%</div><div class="lbl">Investimenti fissi lordi</div></div>
-      <div class="kpi"><div class="val" id="kpi-occupazione">+1,3%</div><div class="lbl">Unità di lavoro</div></div>
+  <section id="s2">
+    <div class="wrap content">
+      <div class="eyebrow">02 · Flow</div>
+      <div class="label">Deficit / PIL 2025</div>
+      <div class="big-num blue" data-target="3.4" data-suffix="%">0%</div>
+      <h2>Il deficit è sceso, ma non per merito della crescita</h2>
+      <p>Dal 9,5% del 2020 siamo tornati al 3,4%. La maggior parte del miglioramento viene dalla fine degli aiuti COVID, non da una ripresa strutturale.</p>
+      <div class="note">Tornare sotto il 3% — il target UE — non è previsto prima del 2027.</div>
     </div>
-    <div class="method-box">
-      <h4>Come si calcola il PIL (spiegato semplice)</h4>
-      <p>Il <strong>Prodotto Interno Lordo (PIL)</strong> è la ricchezza totale prodotta in Italia in un anno. Si può calcolare in tre modi equivalenti:</p>
-      <p><strong>1) Spesa:</strong> PIL = Consumi delle famiglie + Investimenti delle imprese + Spesa pubblica + Esportazioni − Importazioni.</p>
-      <p><strong>2) Produzione:</strong> PIL = somma del valore aggiunto di tutti i settori (agricoltura, industria, servizi) + imposte − sussidi.</p>
-      <p><strong>3) Reddito:</strong> PIL = stipendi + profitti + affitti + interessi + tasse meno sussidi.</p>
-      <p><strong>PIL nominale</strong> = valori a prezzi correnti (inflazione inclusa). <strong>PIL reale / in volume</strong> = crescita "vera" al netto dell'inflazione.</p>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>PIL ai prezzi di mercato (2015-2025, mld €)</h3><div class="chart-container"><canvas id="chart-pil-storico"></canvas></div></div>
-      <div class="chart-box"><h3>PIL generato per settore (mld €, 2024)</h3><div class="chart-container"><canvas id="chart-pil-settore-det"></canvas></div></div>
-    </div>
-    <div class="chart-grid">
-      <div class="chart-box"><h3>Contributi alla crescita del PIL per componente (p.p. annuali, 2015-2025)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Ogni barra mostra quanto hanno contribuito consumi, investimenti, export e import alla crescita del PIL di quell'anno.</span></span></h3><div class="chart-container"><canvas id="chart-pil-componenti"></canvas></div>
-      <p style="font-size:11px;color:#666;margin-top:10px;line-height:1.5">Ogni barra mostra quanto punti percentuali (p.p.) ha contribuito ciascuna componente alla crescita del PIL di quell'anno. Una barra sopra lo zero = aiuta la crescita; sotto lo zero = la rallenta.</p></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Crescita volume PIL: Italia vs UE (2015-2025, %)</h3><div class="chart-container"><canvas id="chart-pil-confronto"></canvas></div></div>
-      <div class="chart-box"><h3>Produttività del lavoro: Italia vs UE (indice 2010=100)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Produttività = PIL / ore lavorate. Indica quanta ricchezza produciamo in un'ora di lavoro rispetto agli altri paesi.</span></span></h3><div class="chart-container"><canvas id="chart-produttivita"></canvas></div>
-      <p style="font-size:11px;color:#666;margin-top:10px;line-height:1.5">Confronto tra Italia, Germania, Francia e Spagna solo per gli anni selezionati (non serie continua).</p></div>
-    </div>
-    <div class="method-box">
-      <h4>Cosa è il PIL ai prezzi di mercato?</h4>
-      <p>Il Prodotto interno lordo (PIL) misura il valore dei beni e servizi prodotti nel paese. <strong>Ai prezzi di mercato</strong> include le imposte nette sui prodotti ed è la base su cui si calcolano debito/PIL, spesa/PIL e pressione fiscale. La <strong>crescita in volume</strong> esclude l'inflazione e indica la crescita reale. <strong>Produttività del lavoro</strong> = PIL reale / ore lavorate: indica quanta ricchezza si produce in un'ora di lavoro.</p>
-    </div>
-    <div class="footer-info">ISTAT — Conti economici trimestrali e annuali · Eurostat · AMECO · OCSE Productivity Database</div>
-  </div>
+  </section>
 
-  <!-- FISCO -->
-  <div id="fisco" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si vede <strong>chi paga le tasse</strong> e quanto lo Stato incassa. Serve per giudicare promesse tipo "taglieremo le tasse" o "colpiremo i ricchi": bisogna prima sapere chi paga già oggi.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val accent" id="kpi-pressione2">43,1%</div><div class="lbl">Pressione fiscale 2025</div></div>
-      <div class="kpi"><div class="val" id="kpi-tributaria">29,3%</div><div class="lbl">Pressione tributaria 2025</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-irpef">€79,2Mld</div><div class="lbl">IRPEF 2024</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-iva">€94,1Mld</div><div class="lbl">IVA 2024</div></div>
+  <section id="s3">
+    <div class="wrap content">
+      <div class="eyebrow">03 · Pressione</div>
+      <div class="label">Pressione fiscale</div>
+      <div class="big-num gold" data-target="42.7" data-suffix="%">0%</div>
+      <h2>Lo Stato prende quasi 43 euro ogni 100 di PIL</h2>
+      <p>La pressione fiscale italiana è tra le più alte d'Europa. Ma dove finiscono questi soldi?</p>
+      <div class="note">La pressione fiscale calcola il gettito effettivo, non i crediti d'imposta.</div>
     </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Pressione fiscale e tributaria Italia (2015-2025, % PIL)</h3><div class="chart-container"><canvas id="chart-pressione-storico"></canvas></div></div>
-      <div class="chart-box"><h3>Composizione entrate pubbliche (% PIL, 2024)</h3><div class="chart-container"><canvas id="chart-entrate-tipo"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Entrate fiscali per gruppo di contribuenti (% del totale, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Percentuale del gettito totale pagato da ciascun gruppo: dipendenti, pensionati, autonomi, società, IVA e accise.</span></span></h3><div class="chart-container"><canvas id="chart-entrate-gruppi"></canvas></div></div>
-      <div class="chart-box"><h3>Tax gap IVA Italia vs media UE (%, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text"><strong>Tax gap IVA</strong> = differenza tra l'IVA che lo Stato dovrebbe incassare e quella che effettivamente incassa, principalmente per evasione e frodi. Più è alto, più il fisco "cola". Media UE = 8,7%.</span></span></h3><div class="chart-container"><canvas id="chart-taxgap"></canvas></div></div>
-    </div>
-    <div class="method-box">
-      <h4>Pressione fiscale vs tributaria: la differenza</h4>
-      <p><strong>Pressione fiscale</strong> = (tasse + contributi sociali) / PIL. Include IRPEF, IRES, IVA, accise, IMU <strong>e</strong> i contributi INPS (circa 15 punti PIL). <strong>Pressione tributaria</strong> = solo tasse erariali e locali / PIL, esclude contributi sociali. Nel 2025: fiscale 43,1%, tributaria 29,3%.</p>
-      <p><strong>Glossario:</strong> <strong>Imposte dirette</strong> colpiscono reddito/ricchezza (IRPEF, IRES, IMU). <strong>Imposte indirette</strong> colpiscono consumi/transazioni (IVA, accise). <strong>Contributi sociali</strong> finanziano pensioni, sanità, disoccupazione. Le imposte sul lavoro (IRPEF + contributi) pesano di più in Italia che nella media OCSE.</p>
-    </div>
-    <div class="footer-info">OCSE Revenue Statistics 2025 · MEF Bollettino entrate tributarie · Commissione Europea VAT Gap Report · Agenzia Entrate · Osservatorio CPI</div>
-  </div>
+  </section>
 
-  <!-- SPESA -->
-  <div id="spesa" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>dove vanno i soldi pubblici</strong>. La maggior parte è bloccata in pensioni, sanità e interessi sul debito: la fetta libera per nuove politiche è più piccola di quanto sembri.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val" id="kpi-spesa2">51,2%</div><div class="lbl">Spesa pubblica / PIL 2025</div></div>
-      <div class="kpi"><div class="val red" id="kpi-protezione">42,2%</div><div class="lbl">Protezione sociale / spesa totale</div></div>
-      <div class="kpi"><div class="val" id="kpi-sanita">16,0%</div><div class="lbl">Sanità / spesa totale</div></div>
-      <div class="kpi"><div class="val" id="kpi-istruzione">9,6%</div><div class="lbl">Istruzione / spesa totale</div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Spesa pubblica per settore d'impiego (% totale, 2024)</h3><div class="chart-container"><canvas id="chart-spesa-settore"></canvas></div></div>
-      <div class="chart-box"><h3>Composizione della protezione sociale (% del totale, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Come si dividono i soldi della protezione sociale: pensioni, sanità, famiglia, disoccupazione, disabilità, povertà.</span></span></h3><div class="chart-container"><canvas id="chart-protezione-sociale"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Spesa pubblica / PIL storico (2015-2025)</h3><div class="chart-container"><canvas id="chart-spesa-storico"></canvas></div></div>
-      <div class="chart-box"><h3>Spesa interessi vs altre voci (% PIL, 2025)</h3><div class="chart-container"><canvas id="chart-interessi"></canvas></div></div>
-    </div>
-    <div class="chart-box" style="margin-bottom:16px">
-      <h3>Efficienza della spesa pubblica: Italia vs UE<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Indici OCSE/Eurostat. <strong>Spesa sanitaria/PIL</strong> e <strong>R&S/PIL</strong> sono input. <strong>Redistribuzione efficace</strong> misura quanto i trasferimenti riducono le disuguaglianze (Gini). <strong>Concentrazione sui poveri</strong> indica quanto i sussidi arrivano ai più bisognosi.</span></span></h3>
-      <table class="small-table">
-        <tr><th>Indicatore</th><th class="num">Italia</th><th class="num">Media UE</th><th>Nota</th></tr>
-        <tr><td>Spesa sanità pubblica / PIL</td><td class="num">6,3%</td><td class="num">6,9%</td><td>ultima nel G7 per spesa pro capite</td></tr>
-        <tr><td>Spesa R&S pubblica / PIL</td><td class="num">0,5%</td><td class="num">0,7%</td><td>sotto media; crescita prevista modesta</td></tr>
-        <tr><td>Redistribuzione efficace (Gini)</td><td class="num">26%</td><td class="num">31%</td><td>transfers riducono disuguaglianza meno della media</td></tr>
-        <tr><td>Concentrazione sui poveri (working age)</td><td class="num">0,18</td><td class="num">0,25</td><td>pochi soldi arrivano ai poveri</td></tr>
-        <tr><td>Pensioni: anziani sotto soglia povertà</td><td class="num">11%</td><td class="num">14%</td><td>protezione pensionistica più efficace della media</td></tr>
-        <tr><td>Occupati per 100 anziani (65+)</td><td class="num">18,7</td><td class="num">25,8</td><td>menosostenibilità demografica più critica</td></tr>
-      </table>
-      <p style="font-size:11px;color:#666;margin-top:10px;line-height:1.5">Dati OCSE Social Expenditure, Health Statistics, Income Distribution, Eurostat. Gli indici aggregati possono variare secondo la definizione.</p>
-    </div>
-    <div class="warning-box"><div class="text">La protezione sociale assorbe oltre il 42% della spesa pubblica. Tra questa, le pensioni sono la voce più pesante. La spesa sanitaria pubblica è al 6,3% del PIL, sotto la media UE e OCSE. L'Italia spende molto in welfare ma lo distribuisce meno bene della media europea: la redistribuzione efficace e la concentrazione sui poveri sono inferiori alla media UE.</div></div>
-    <div class="footer-info">MEF/RGS · ISTAT · OCSE Health/Social/Income · INPS · upBilancio · GIMBE</div>
-  </div>
-
-  <!-- DEBITO -->
-  <div id="debito" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si vede <strong>quanto lo Stato deve e a che costo</strong>. Il debito alto non è un problema solo "morale": assorbe soldi che non vanno più a scuole, ospedali o investimenti.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val red" id="kpi-debito2">137,1%</div><div class="lbl">Debito / PIL 2025</div></div>
-      <div class="kpi"><div class="val" id="kpi-debito-ass">€3.095Mld</div><div class="lbl">Debito pubblico nominale (stima)</div></div>
-      <div class="kpi"><div class="val green" id="kpi-primario2">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
-      <div class="kpi"><div class="val" id="kpi-costo">2,97%</div><div class="lbl">Costo medio stock debito</div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Debito pubblico / PIL (1995-2025)</h3><div class="chart-container"><canvas id="chart-debito-lungo"></canvas></div></div>
-      <div class="chart-box"><h3>Deficit / PIL e saldo primario (2015-2025)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Deficit = spese - entrate. Saldo primario = deficit senza contare gli interessi sul debito.</span></span></h3><div class="chart-container"><canvas id="chart-deficit"></canvas></div></div>
-    </div>
-    <div class="chart-grid">
-      <div class="chart-box"><h3>Debito / PIL: Italia vs altri grandi paesi UE (2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Confronto del rapporto debito/PIL tra i grandi paesi europei. L'Italia è la seconda più indebitata dell'UE.</span></span></h3><div class="chart-container"><canvas id="chart-debito-ue"></canvas></div></div>
-    </div>
-    <div class="method-box">
-      <h4>Perché il debito sale nonostante il deficit scenda?</h4>
-      <p>Il rapporto debito/PIL può salire anche con un deficit basso se il PIL nominale cresce meno del costo medio del debito (effetto "palla di neve"). Nel 2025 il PIL nominale è cresciuto del 2,5%, ma il costo medio dello stock era ~2,97%. In più, i crediti d'imposta dei bonus edilizi hanno aggiunto debito fuori bilancio (stock-flow adjustment ~€51 mld).</p>
-    </div>
-    <div class="footer-info">Banca d'Italia · MEF Documento Finanza Pubblica · Eurostat · Phastidio.net su dati ufficiali</div>
-  </div>
-
-  <!-- WELFARE -->
-  <div id="welfare" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab confronta l'Italia con l'Europa su <strong>pensioni e sanità</strong>. Serve per capire se spendiamo tanto perché siamo generosi o perché abbiamo tanti anziani e pochi giovani.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val gold" id="kpi-pensioni">13,05%</div><div class="lbl">Spesa pensioni / PIL 2024</div></div>
-      <div class="kpi"><div class="val" id="kpi-sanita-pil">6,3%</div><div class="lbl">Spesa sanità pubblica / PIL</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-ocse-sanita">7,1%</div><div class="lbl">Media OCSE sanità / PIL</div></div>
-      <div class="kpi"><div class="val" id="kpi-istruzione-pil">3,8%</div><div class="lbl">Spesa istruzione / PIL (stima)</div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Spesa pensioni / PIL: Italia vs UE (2022)</h3><div class="chart-container"><canvas id="chart-pensioni-ue"></canvas></div></div>
-      <div class="chart-box"><h3>Spesa sanità pubblica: Italia vs OCSE (% PIL)</h3><div class="chart-container"><canvas id="chart-sanita-ocse"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Pensioni / PIL storico (2015-2024)</h3><div class="chart-container"><canvas id="chart-pensioni-storico"></canvas></div></div>
-      <div class="chart-box"><h3>Trasferimenti sociali per funzione (% PIL, 2024)</h3><div class="chart-container"><canvas id="chart-welfare-voci"></canvas></div></div>
-    </div>
-    <div class="insight-box"><div class="text">Le pensioni pesano più del 13% del PIL, tra le voci più alte d'Europa. La spesa sanitaria pubblica invece è sotto la media OCSE: il SSN copre solo il 73% della spesa sanitaria totale, mentre il resto è pagato dalle famiglie. I trasferimenti sociali italiani sono generosi ma poco targetizzati.</div></div>
-    <div class="footer-info">INPS · MEF/RGS Rapporto n.26 · OCSE Health/Social · upBilancio · GIMBE</div>
-  </div>
-
-  <!-- LAVORO -->
-  <div id="lavoro" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si guarda <strong>quanta gente lavora e quanto guadagna</strong>. Attenzione: "disoccupazione bassa" non sempre significa che tutto va bene, se tanta gente è inattiva o i salari sono fermi.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val" id="kpi-occupati">24,1M</div><div class="lbl">Occupati 2025 (IV trim)</div></div>
-      <div class="kpi"><div class="val green" id="kpi-disoccupazione">5,7%</div><div class="lbl">Tasso disoccupazione 2025</div></div>
-      <div class="kpi"><div class="val" id="kpi-partecipazione">62,6%</div><div class="lbl">Tasso attività 15-64 (2025)</div></div>
-      <div class="kpi"><div class="val" id="kpi-inattivita">33,5%</div><div class="lbl">Tasso inattività 15-64 (2025)</div></div>
-    </div>
-    <div class="kpi-grid" style="margin-top:-4px">
-      <div class="kpi"><div class="val accent" id="kpi-stipendio">€31.856</div><div class="lbl">RAL media lorda dipendenti (2022)</div></div>
-      <div class="kpi"><div class="val" id="kpi-retrib">+3,1%</div><div class="lbl">Retribuzioni contrattuali 2025</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-partiteiva">5,2M</div><div class="lbl">Partite IVA attive (stima)</div></div>
-      <div class="kpi"><div class="val" id="kpi-societa">1,3M</div><div class="lbl">Società di capitali attive (stima)</div></div>
-    </div>
-    <div class="method-box">
-      <h4>Come si legge il mercato del lavoro</h4>
-      <p>Le statistiche sul lavoro si basano su tre "scatole": <strong>occupati</strong> (chi lavora almeno un'ora a settimana), <strong>disoccupati</strong> (chi non lavora ma cerca attivamente) e <strong>inattivi</strong> (chi non lavora né cerca, es. studenti, pensionati, casalinghe).</p>
-      <p><strong>Tasso di attività</strong> = (occupati + disoccupati) / popolazione 15-64 anni. Indica quanta gente partecipa davvero alla forza lavoro. <strong>Tasso di disoccupazione</strong> = disoccupati / forza lavoro. Non dice quanti italiani non lavorano in totale.</p>
-      <p>La <strong>RAL</strong> (Retribuzione Annua Lorda) è lo stipendio prima delle tasse e dei contributi. I valori qui sono lordi e a tempo pieno, per qualifica.</p>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Occupati in Italia (2015-2025, milioni)</h3><div class="chart-container"><canvas id="chart-occupati"></canvas></div></div>
-      <div class="chart-box"><h3>Disoccupazione (2015-2025, %)</h3><div class="chart-container"><canvas id="chart-disoccupazione"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Partecipazione al mercato del lavoro (2015-2025, %)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text"><strong>Tasso di attività</strong> = persone occupate o in cerca di lavoro (forza lavoro) / popolazione 15-64 anni. <strong>Tasso di inattività</strong> = chi non lavora né cerca lavoro / popolazione 15-64. Più è alto l'attività, più persone potenzialmente producono e pagano tasse.</span></span></h3><div class="chart-container"><canvas id="chart-partecipazione"></canvas></div></div>
-      <div class="chart-box"><h3>RAL media per qualifica (2022)</h3><div class="chart-container"><canvas id="chart-stipendi"></canvas></div></div>
-    </div>
-    <div class="method-box">
-      <h4>Note sul mercato del lavoro</h4>
-      <p>Gli occupati hanno superato i 24 milioni nel 2025, record storico. La crescita è però trainata in parte dagli autonomi e dai contratti a termine; i dipendenti a tempo indeterminato crescono più lentamente. La RAL media ISTAT 2022 è lorda e a tempo pieno. La produttività del lavoro resta stagnante da anni.</p>
-    </div>
-    <div class="footer-info">ISTAT — Mercato del lavoro · INPS · MEF/Dipartimento Finanze · Infocamere · Unioncamere</div>
-  </div>
-
-  <!-- COMMERCIO -->
-  <div id="commercio" class="pane">
-    <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>cosa vendiamo all'estero e cosa compriamo</strong>. L'export è il punto di forza italiano, ma se importiamo più di quanto esportiamo in volume, la crescita ne risente.</p></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="val" id="kpi-export">€643Mld</div><div class="lbl">Export beni 2025</div></div>
-      <div class="kpi"><div class="val green" id="kpi-surplus">+€50,7Mld</div><div class="lbl">Surplus commerciale beni 2025</div></div>
-      <div class="kpi"><div class="val" id="kpi-import">€592Mld</div><div class="lbl">Import beni 2025</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-contocorrente">+€53Mld</div><div class="lbl">Saldo conto corrente (stima)</div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Export, import e saldo commerciale beni (2015-2025, mld €)</h3><div class="chart-container"><canvas id="chart-commercio"></canvas></div></div>
-      <div class="chart-box"><h3>Composizione PIL 2025: domanda interna vs estera (%)</h3><div class="chart-container"><canvas id="chart-pil-composizione"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box">
-        <h3>Export italiano per macro-settore (% sul totale, 2024)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">I settori trainanti dell'export italiano sono meccanica, moda (tessile-abbigliamento-calzature), agroalimentare, farmaceutica/chimica, metallurgia e automotive. I dati sono approssimativi e aggregati.</span></span></h3>
-        <div class="chart-container"><canvas id="chart-export-settori"></canvas></div>
+  <section id="s4">
+    <div class="wrap content">
+      <div class="eyebrow">04 · Spesa</div>
+      <h2 style="margin-top:6px">La spesa pubblica va soprattutto in welfare e interessi</h2>
+      <p>Ogni 100 euro di spesa, più di 40 vanno a previdenza e welfare, 15 a sanità e 8 agli interessi sul debito. Gli investimenti restano una minoranza.</p>
+      <div class="bar-block">
+        <div class="bar-wrap"><div class="bar-label">Welfare / previdenza</div><div class="bar" data-width="42"></div><div class="bar-value">42%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar" data-width="15"></div><div class="bar-value">15%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Interessi debito</div><div class="bar" data-width="8"></div><div class="bar-value">8%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Istruzione e ricerca</div><div class="bar" data-width="7"></div><div class="bar-value">7%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Investimenti e altro</div><div class="bar grey" data-width="28"></div><div class="bar-value">28%</div></div>
       </div>
-      <div class="chart-box"><h3>Destinazioni export italiano (% sul totale, 2024)</h3><div class="chart-container"><canvas id="chart-export-dest"></canvas></div></div>
+      <div class="note">Spesa per funzione, stima 2024. Fonte: MEF/RGS.</div>
     </div>
-    <div class="chart-box" style="margin-bottom:16px">
-      <h3>Produttività e competitività: Italia vs UE</h3>
-      <table class="small-table">
-        <tr><th>Indicatore</th><th class="num">Italia</th><th class="num">Media UE / altri</th><th>Nota</th></tr>
-        <tr><td>Produttività per ora lavorata (2024, var.)</td><td class="num">-1,4%</td><td class="num">UE +0,4%</td><td>calo anche nel 2023 (-2,7%)</td></tr>
-        <tr><td>PIL per occupato vs Germania (2023)</td><td class="num">80%</td><td class="num">100% Germania</td><td>ore lavorate più lunghe ma PIL/ora più basso</td></tr>
-        <tr><td>Quota microimprese (0-9 addetti)</td><td class="num">~95%</td><td class="num">~93% UE</td><td>molte piccole imprese, media produttività più bassa</td></tr>
-        <tr><td>Quota industriale nel PIL</td><td class="num">19,7%</td><td class="num">22,9% Germania, 13,3% Francia</td><td>industria ancora rilevante ma sotto Germania</td></tr>
-      </table>
-    </div>
-    <div class="insight-box"><div class="text">L'Italia ha un surplus commerciale strutturale sui beni (~€50 mld nel 2025) e un saldo conto corrente positivo. L'export è trainato da meccanica, moda, agroalimentare e farmaceutica. La domanda estera netta però ha contribuito negativamente alla crescita 2025 (-0,7pp) perché le importazioni sono cresciute più delle esportazioni in volume. La produttività del lavoro è il tallone d'Achille: l'Italia produce per ora lavorata circa il 20% in meno della Germania.</div></div>
-    <div class="footer-info">ISTAT — Commercio estero · Banca d'Italia — Bilancia dei pagamenti · MAECI · Prometeia/I-Com · OCSE · Eurostat</div>
-  </div>
+  </section>
 
-  <!-- GOVERNI -->
-  <div id="governi" class="pane">
-    <div class="method-box">
-      <h4>Cosa mostra questa tab</h4>
-      <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si confrontano i <strong>numeri per periodo di governo</strong>. Non è un giudizio definitivo: crisi esterne, BCE e governi precedenti influenzano i conti. Serve per contestualizzare le promesse elettorali.</p>
-      <p>Un confronto per <strong>periodo di governo</strong> non attribuisce tutti i meriti o le colpe al governo in carica: l'economia dipende anche da crisi esterne (pandemia, guerra, inflazione), dalla BCE e dai governi precedenti. Serve però per contestualizzare i numeri quando si sente dire "con noi è andata peggio/meglio".</p>
-    </div>
-    <div class="chart-grid">
-      <div class="chart-box"><h3>Debito pubblico per governo (mld €, fine mandato)</h3><div class="chart-container tall"><canvas id="chart-debito-governi"></canvas></div></div>
-    </div>
-    <div class="chart-grid cols-2">
-      <div class="chart-box"><h3>Crescita media annua del PIL per governo (%)</h3><div class="chart-container"><canvas id="chart-pil-governi"></canvas></div></div>
-      <div class="chart-box"><h3>Debito/PIL inizio e fine governo (%)</h3><div class="chart-container"><canvas id="chart-debitopil-governi"></canvas></div></div>
-    </div>
-    <div class="chart-box" style="margin-bottom:16px">
-      <h3>Numeri per governo (principali indicatori)</h3>
-      <table class="small-table">
-        <tr><th>Governo</th><th class="num">Periodo</th><th class="num">Debito fine (Mld €)</th><th class="num">Δ debito mensile (Mld)</th><th class="num">PIL medio annuo (%)</th><th class="num">Debito/PIL fine (%)</th><th class="num">Deficit/PIL fine (%)</th></tr>
-        <tr><td>Prodi II</td><td class="num">2006-08</td><td class="num">1.669</td><td class="num">+3,9</td><td class="num">+1,5%</td><td class="num">102,5</td><td class="num">-3,6</td></tr>
-        <tr><td>Berlusconi IV</td><td class="num">2008-11</td><td class="num">1.916</td><td class="num">+6,2</td><td class="num">-1,1%</td><td class="num">119,7</td><td class="num">-4,2</td></tr>
-        <tr><td>Monti</td><td class="num">2011-13</td><td class="num">2.041</td><td class="num">+7,5</td><td class="num">-2,8%</td><td class="num">132,5</td><td class="num">-3,0</td></tr>
-        <tr><td>Renzi</td><td class="num">2014-16</td><td class="num">2.229</td><td class="num">+3,7</td><td class="num">+0,9%</td><td class="num">132,7</td><td class="num">-2,6</td></tr>
-        <tr><td>Gentiloni</td><td class="num">2016-18</td><td class="num">2.286</td><td class="num">+4,9</td><td class="num">+1,7%</td><td class="num">134,1</td><td class="num">-2,2</td></tr>
-        <tr><td>Conte I</td><td class="num">2018-19</td><td class="num">2.463</td><td class="num">+8,9</td><td class="num">+0,3%</td><td class="num">134,4</td><td class="num">-1,6</td></tr>
-        <tr><td>Conte II</td><td class="num">2019-21</td><td class="num">2.603</td><td class="num">+8,2</td><td class="num">-3,1%</td><td class="num">150,8</td><td class="num">-9,4</td></tr>
-        <tr><td>Draghi</td><td class="num">2021-22</td><td class="num">2.771</td><td class="num">+8,2</td><td class="num">+4,2%</td><td class="num">144,4</td><td class="num">-8,5</td></tr>
-        <tr><td>Meloni</td><td class="num">2022-25</td><td class="num">3.024</td><td class="num">+9,2</td><td class="num">+0,7%</td><td class="num">137,1</td><td class="num">-3,1</td></tr>
-      </table>
-      <p style="font-size:11px;color:#666;margin-top:10px;line-height:1.5">Fonte: Banca d'Italia e ISTAT, elaborazioni Mauro Novelli / Osservatorio CPI. I dati di crescita e deficit sono annuali di riferimento e possono differire leggermente da quelli ufficiali per convenzioni contabili. Il governo Meloni è aggiornato a febbraio 2025.</p>
-    </div>
-    <div class="warning-box"><div class="text">Attenzione: confrontare governi è utile per contestualizzare, ma l'aumento del debito nel 2020-21 è dovuto in massima parte alla pandemia (sostegni e crollo del PIL), non solo a scelte politiche. Il governo Draghi ha ereditato un deficit enorme e lo ha ridotto; il governo Meloni ha ereditato debito/PIL alto e lo ha mantenuto stabile in risalita.</div></div>
-    <div class="footer-info">Banca d'Italia · ISTAT · Mauro Novelli · Osservatorio CPI</div>
-  </div>
-
-  <!-- RECAP -->
-  <div id="recap" class="pane">
-    <div class="recap-intro">Sei cose da ricordare quando qualcuno promette di "spendere di più" senza dire da dove.</div>
-    <div class="recap-grid">
-      <div class="recap-card">
-        <div class="recap-num">01</div>
-        <div class="recap-title">Debito</div>
-        <div class="recap-text">Il debito pubblico è al 137% del PIL, il secondo più alto dell'UE dopo la Grecia. Ogni punto di PIL vale circa €22,6 miliardi: aumentare la spesa di 1 punto senza copertura aggiunge altrettanto al debito.</div>
-      </div>
-      <div class="recap-card">
-        <div class="recap-num">02</div>
-        <div class="recap-title">Fisco</div>
-        <div class="recap-text">L'Italia è già tra i paesi con pressione fiscale più alta (43,1% PIL). Abbassare le tasse senza tagliare la spesa amplifica il deficit. Nuove spese vanno finanziate con nuove tasse o tagli. I dipendenti e i pensionati pagano la maggior parte dell'IRPEF.</div>
-      </div>
-      <div class="recap-card">
-        <div class="recap-num">03</div>
-        <div class="recap-title">Spesa bloccata</div>
-        <div class="recap-text">Oltre il 42% della spesa è protezione sociale; di questa, le pensioni assorbono circa il 68%. Sanità, istruzione e difesa competono per la fetta rimanente. Le pensioni sono rigidità strutturale.</div>
-      </div>
-      <div class="recap-card">
-        <div class="recap-num">04</div>
-        <div class="recap-title">Interessi</div>
-        <div class="recap-text">La spesa per interessi sul debito assorbe 3,8% del PIL (~€86 mld/anno). È più della metà della spesa sanitaria pubblica. Anche con tassi più bassi, la palla di neve del debito resta un rischio.</div>
-      </div>
-      <div class="recap-card">
-        <div class="recap-num">05</div>
-        <div class="recap-title">Produttività</div>
-        <div class="recap-text">L'Italia produce per ora lavorata circa il 20% in meno della Germania. La produttività è stagnante da vent'anni. Senza più produttività, più occupazione non si traduce in più PIL.</div>
-      </div>
-      <div class="recap-card">
-        <div class="recap-num">06</div>
-        <div class="recap-title">Lavoro e partecipazione</div>
-        <div class="recap-text">Record di occupati (24,1M) e disoccupazione ai minimi (5,7%). Ma la crescita dipende molto da autonomi e contratti atipici. Il tasso di attività 15-64 è al 62,6%, ancora sotto la media UE (~65%).</div>
+  <section id="s5">
+    <div class="wrap content">
+      <div class="eyebrow">05 · Crescita</div>
+      <div class="two-col">
+        <div>
+          <div class="label">Crescita PIL reale 2024</div>
+          <div class="big-num green" data-target="0.5" data-suffix="%">0%</div>
+          <p style="font-size:16px">Il 2025-2026 si muove intorno allo 0,8-1,0%. L'Italia cresce meno della media UE e recupera con fatica il terreno perso con la crisi COVID.</p>
+        </div>
+        <div>
+          <table class="small-table">
+            <tr><td>2022</td><td>4,0%</td></tr>
+            <tr><td>2023</td><td>0,7%</td></tr>
+            <tr><td>2024</td><td>0,5%</td></tr>
+            <tr><td>2025 (stima)</td><td>0,8%</td></tr>
+            <tr><td>2026 (stima)</td><td>1,0%</td></tr>
+          </table>
+        </div>
       </div>
     </div>
-    <div class="method-box">
-      <h4>Metodologia e cautele</h4>
-      <p><strong>Definizioni:</strong> i dati sono espressi in percentuale del PIL ai prezzi di mercato, salvo diverso avviso. Il "saldo primario" è il deficit al netto degli interessi: positivo significa che le entrate ordinarie coprono tutta la spesa corrente meno interessi.</p>
-      <p><strong>Fonti:</strong> i dati 2024-2025 provengono da consuntivi ISTAT e MEF; le serie storiche possono essere soggette a revisioni. I confronti UE sono basati su dati OCSE/Eurostat e possono differire per definizione.</p>
-      <p><strong>Stime:</strong> alcuni valori per 2025 (composizione occupati, partite IVA attive, costo medio debito, export per settore) sono stime o interpolazioni basate su dati parziali. Sono indicati come tali nelle label.</p>
-      <p><strong>Uso elettorale:</strong> quando un programma promette spese, confronta il costo annuo con queste basi — PIL ~€2.258 mld, spesa pubblica ~€1.156 mld, deficit già al -3,1%, debito già al 137%, interessi ~€86 mld/anno.</p>
+  </section>
+
+  <section id="s6">
+    <div class="wrap content">
+      <div class="eyebrow">06 · Lavoro</div>
+      <div class="two-col">
+        <div>
+          <div class="label">Tasso di disoccupazione 2024</div>
+          <div class="big-num green" data-target="6.2" data-suffix="%">0%</div>
+          <p style="font-size:16px">È il dato più basso dal 2008. Ma molti occupati sono a tempo parziale, precari o sottopagati. Il tasso di occupazione resta sotto gli obiettivi europei.</p>
+        </div>
+        <div>
+          <div class="bar-wrap"><div class="bar-label">Disoccupazione</div><div class="bar green" data-width="62"></div><div class="bar-value">6,2%</div></div>
+          <div style="font-size:13px;color:#666;margin-top:10px">Occupazione 15-64: 61% · Fonte ISTAT</div>
+        </div>
+      </div>
     </div>
-    <div class="footer-info">Dashboard aggiornata al giugno 2026. Usare per fact-checking; verificare le fonti primarie prima di citare cifre in pubblico.</div>
-  </div>
+  </section>
 
-  <!-- FONTI -->
-  <div id="fonti" class="pane">
-    <div class="method-box">
-      <h4>Come usare questa dashboard</h4>
-      <p>Ogni cifra riportata è tratta da fonti ufficiali o da elaborazioni di osservatori accreditati su dati ufficiali. Quando un dato è una stima o ha limiti metodologici, è indicato esplicitamente. Per le promesse elettorali: confronta i costi annunciati con queste basi — PIL ~€2.258 mld, spesa pubblica ~€1.156 mld, deficit già al -3,1%, debito già al 137%.</p>
+  <section id="s7">
+    <div class="wrap content">
+      <div class="eyebrow">07 · Estero</div>
+      <div class="label">Saldo commerciale 2024</div>
+      <div class="big-num blue" data-target="30" data-suffix=" mld €">0</div>
+      <h2>L'Italia esporta più di quanto importa</h2>
+      <p>Il surplus commerciale è tornato, ma dipende molto dall'energia: nel 2022, con i prezzi alti, il saldo era quasi azzerato.</p>
+      <div class="note">Export + import = circa il 50% del PIL. L'Italia è aperta all'estero, ma vulnerabile agli shock energetici.</div>
     </div>
-    <div class="chart-box">
-      <h3>Principali fonti</h3>
-      <ul class="sources-list">
-        <li><strong>ISTAT</strong> — <a href="https://www.istat.it/comunicato-stampa/pil-e-indebitamento-delle-ap-anni-2023-2025" target="_blank">Pil e indebitamento delle AP 2023-2025</a> · <a href="https://www.istat.it/comunicato-stampa/conti-economici-nazionali-anni-2023-2024" target="_blank">Conti economici nazionali 2023-2024</a> · <a href="https://www.istat.it/comunicato-stampa/retribuzioni-contrattuali-ottobre-dicembre-2025" target="_blank">Retribuzioni contrattuali</a> · Mercato del lavoro</li>
-        <li><strong>MEF / Ragioneria Generale dello Stato</strong> — <a href="https://www.rgs.mef.gov.it/VERSIONE-I/attivita_istituzionali/monitoraggio/spesa_pensionistica" target="_blank">Spesa pensionistica e socio-sanitaria</a> · Documento di Finanza Pubblica · Bollettino entrate tributarie</li>
-        <li><strong>Banca d'Italia</strong> — <a href="https://www.bancaditalia.it" target="_blank">Bollettino economico, debito pubblico, bilancia dei pagamenti</a> · Economia italiana in breve</li>
-        <li><strong>INPS</strong> — <a href="https://www.inps.it" target="_blank">Osservatori previdenziali e mercato del lavoro</a></li>
-        <li><strong>OCSE</strong> — <a href="https://www.oecd.org/tax/tax-policy/revenue-statistics.htm" target="_blank">Revenue Statistics 2025</a> · Health Statistics · Social Expenditure · Income Distribution · Productivity Database</li>
-        <li><strong>Eurostat</strong> — <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10dd/edrt__gov_10dd__1__it" target="_blank">Conti pubblici degli Stati membri</a> · ComExt (commercio estero) · LFS (lavoro)</li>
-        <li><strong>Commissione Europea</strong> — <a href="https://taxation-customs.ec.europa.eu/taxation/vat/indicators_en" target="_blank">VAT Gap Report 2024</a> · Autunno 2025 economic forecast</li>
-        <li><strong>Osservatorio CPI (Università Cattolica)</strong> — <a href="https://osservatoriocpi.unicatt.it" target="_blank">Analisi fiscali, debito e welfare</a> · <a href="https://www.mauronovelli.it" target="_blank">Mauro Novelli — Debito pubblico e governi</a></li>
-      </ul>
+  </section>
+
+  <section id="s8">
+    <div class="wrap content">
+      <div class="eyebrow">08 · Welfare</div>
+      <h2 style="margin-top:6px">Le pensioni pesano più della sanità e dell'istruzione insieme</h2>
+      <p>La spesa previdenziale è il capitolo più grande del bilancio. Con una popolazione che invecchia, la sfida non è tagliare, ma rendere il sistema sostenibile.</p>
+      <div class="bar-block" style="max-width:480px">
+        <div class="bar-wrap"><div class="bar-label">Pensioni</div><div class="bar gold" data-width="55"></div><div class="bar-value">~55%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar" data-width="15"></div><div class="bar-value">15%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Altro welfare</div><div class="bar grey" data-width="30"></div><div class="bar-value">30%</div></div>
+      </div>
+      <div class="note">Quota pensioni sul totale spesa welfare, stima 2024.</div>
     </div>
-    <div class="footer-info">Dati aggiornati al giugno 2026. Verificare sempre le fonti primarie prima di citare cifre in pubblico.</div>
-  </div>
+  </section>
 
-</div>
+  <section id="s9">
+    <div class="wrap content">
+      <div class="eyebrow">09 · Sintesi</div>
+      <h2>La fotografia in tre righe</h2>
+      <p>1. L'Italia è ricca di debito, non di crescita: il 136% di debito/PIL frena la manovrabilità politica.</p>
+      <p>2. Lo Stato raccoglie tasse alte ma spende soprattutto in previdenza e interessi, lasciando poco spazio agli investimenti.</p>
+      <p>3. Il lavoro migliora e il commercio estero regge, ma non bastano a cambiare la traiettoria di fondo.</p>
+      <div class="note">Questo è un riassunto narrativo. I numeri completi, le fonti e i caveat sono nella dashboard.</div>
+    </div>
+  </section>
 
-<script>
-const gridColor = 'rgba(255,255,255,0.05)';
-const accent = '#E07A5F';
-const blue = '#4A6FA5';
-const green = '#5B8C5A';
-const red = '#C45A3D';
-const gold = '#C9A227';
-const grey = '#555';
+  <section id="s10" class="final">
+    <div class="wrap content">
+      <div class="eyebrow">10 · Approfondisci</div>
+      <h2 style="font-size:40px">Vai ai dati completi</h2>
+      <p style="margin:0 auto 28px;max-width:560px">Nella dashboard trovi tutti i grafici, le serie storiche dal 2015, i confronti UE/OCSE, le fonti e i file CSV scaricabili.</p>
+      <a href="dashboard.html" class="cta">Apri la dashboard completa →</a>
+      <a href="https://un-mistico.github.io/repo-italia/" class="cta-secondary">← Torna a repo_italia</a>
+    </div>
+  </section>
 
-function sortByValue(labels, values, residualMatchers=['altro','altri','residuo','altre']){
-  const pairs = labels.map((l,i)=>({label:l,value:values[i],idx:i}));
-  const residual = pairs.filter(p => residualMatchers.some(r=>p.label.toLowerCase().includes(r)));
-  const named = pairs.filter(p => !residualMatchers.some(r=>p.label.toLowerCase().includes(r))).sort((a,b)=>b.value-a.value);
-  const sorted = [...named, ...residual];
-  return {labels:sorted.map(p=>p.label), values:sorted.map(p=>p.value)};
-}
+  <script>
+    const sections = document.querySelectorAll('section');
+    const dots = document.getElementById('dots');
+    sections.forEach((s,i)=>{
+      const d = document.createElement('div');
+      d.className='dot'+(i===0?' active':'');
+      d.title = 'Sezione '+(i+1);
+      d.onclick=()=>s.scrollIntoView({behavior:'smooth'});
+      dots.appendChild(d);
+    });
 
-function buildChart(id, config){
-  const ctx = document.getElementById(id);
-  if(!ctx) return;
-  const existing = Chart.getChart(ctx);
-  if(existing){ existing.destroy(); }
-  return new Chart(ctx, config);
-}
-
-const charts = {};
-
-const tabState = {};
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-    document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-    const pane = document.getElementById(t.dataset.tab);
-    pane.classList.add('active');
-    if(!tabState[t.dataset.tab]){
-      tabState[t.dataset.tab] = true;
-      renderTabCharts(t.dataset.tab);
+    function animateNumber(el){
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const decimals = el.dataset.target.includes('.') ? 1 : 0;
+      let start = performance.now();
+      const dur = 1400;
+      function step(now){
+        const p = Math.min((now-start)/dur,1);
+        const ease = 1 - Math.pow(1-p,3);
+        const cur = target * ease;
+        if(suffix.includes('%')){
+          el.innerHTML = (decimals ? cur.toFixed(1) : Math.round(cur)) + (suffix ? '<span class="suffix">'+suffix+'</span>' : '');
+        } else {
+          el.textContent = (decimals ? cur.toFixed(1) : Math.round(cur)) + suffix;
+        }
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
     }
-    Object.values(charts).forEach(c => c && c.resize());
-  });
-});
 
-function renderTabCharts(tab){
-  if(tab==='panoramica'){
-    charts['debito-storico'] = buildChart('chart-debito-storico', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'], datasets:[{label:'Debito/PIL',data:[134.8,132.7,131.4,134.1,134.4,154.4,150.8,140.5,137.3,134.7,137.1],borderColor:red,backgroundColor:red,tension:0.3,pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['spesa-funzione'] = buildChart('chart-spesa-funzione', {
-      type:'doughnut',
-      data:{labels:['Protezione sociale','Sanità','PA/general','Istruzione','Interessi','Difesa','Abitazioni/territ'],datasets:[{data:[42.2,16.0,15.0,9.6,7.4,2.5,7.3],backgroundColor:[red,blue,grey,'#5B8C5A',gold,'#8B5A3C','#6B8FB5'],borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
-    });
-    charts['pressione-ue'] = buildChart('chart-pressione-ue', {
-      type:'bar',
-      data:{labels:['Francia','Belgio','Italia','Germania','Spagna','UE-27'],datasets:[{label:'2024',data:[45.6,42.6,42.6,40.4,37.1,39.8],backgroundColor:[grey,grey,accent,grey,grey,grey],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    const pilSettoreSorted = sortByValue(['Servizi','Industria','Costruzioni','Agricoltura'],[1632.8,444.8,128.2,52.3]);
-    charts['pil-settore'] = buildChart('chart-pil-settore', {
-      type:'bar',
-      data:{labels:pilSettoreSorted.labels,datasets:[{data:pilSettoreSorted.values,backgroundColor:pilSettoreSorted.labels.map(l=>l.includes('Servizi')?blue:l.includes('Industria')?accent:l.includes('Costruzioni')?gold:grey),borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false}}}}
-    });
-  }
-  if(tab==='pil'){
-    charts['pil-storico'] = buildChart('chart-pil-storico', {
-      type:'bar',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[{label:'PIL mld €',data:[1633.6,1683.5,1734.8,1765.4,1787.7,1651.6,1852.9,2007.5,2151.5,2202.9,2258.0],backgroundColor:blue,borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+' mld €'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    const pilSettoreSorted2 = sortByValue(['Servizi','Industria','Costruzioni','Agricoltura'],[1632.8,444.8,128.2,52.3]);
-    charts['pil-settore-det'] = buildChart('chart-pil-settore-det', {
-      type:'bar',
-      data:{labels:pilSettoreSorted2.labels,datasets:[{data:pilSettoreSorted2.values,backgroundColor:pilSettoreSorted2.labels.map(l=>l.includes('Servizi')?blue:l.includes('Industria')?accent:l.includes('Costruzioni')?gold:grey),borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false}}}}
-    });
-    charts['pil-componenti'] = buildChart('chart-pil-componenti', {
-      type:'bar',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Domanda interna netta',data:[1.4,1.4,1.7,1.0,0.4,-7.8,6.4,2.8,1.5,0.6,1.5],backgroundColor:blue},
-        {label:'Domanda estera netta',data:[-0.5,-0.3,0.3,-0.1,0.0,-0.3,0.6,-0.7,0.1,0.1,-0.7],backgroundColor:green},
-        {label:'Variazione scorte',data:[0.0,0.0,-0.4,0.0,-0.1,0.0,0.0,0.0,0.0,0.0,-0.2],backgroundColor:grey}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:false,ticks:{callback:v=>(v>0?'+':'')+v+'pp'},grid:{color:gridColor}}}}
-    });
-    charts['pil-confronto'] = buildChart('chart-pil-confronto', {
-      type:'bar',
-      data:{labels:['2015','2017','2019','2021','2023','2025'],datasets:[
-        {label:'Italia',data:[0.9,1.7,0.3,7.0,0.7,0.5],backgroundColor:accent,borderRadius:4},
-        {label:'Germania',data:[1.5,2.7,1.0,3.2,-0.3,0.2],backgroundColor:grey,borderRadius:4},
-        {label:'Francia',data:[1.1,2.4,1.8,6.8,0.7,0.8],backgroundColor:blue,borderRadius:4},
-        {label:'Spagna',data:[3.8,3.0,2.0,5.5,2.7,3.0],backgroundColor:green,borderRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['produttivita'] = buildChart('chart-produttivita', {
-      type:'bar',
-      data:{labels:['2015','2017','2019','2021','2023','2024'],datasets:[
-        {label:'Italia',data:[100.2,101.5,102.8,105.2,106.5,104.9],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4},
-        {label:'Germania',data:[109.0,113.2,116.0,117.8,120.2,121.5],borderColor:grey,backgroundColor:grey,tension:0.3,pointRadius:4},
-        {label:'Francia',data:[105.5,108.0,110.5,113.2,116.0,117.5],borderColor:blue,backgroundColor:blue,tension:0.3,pointRadius:4},
-        {label:'Spagna',data:[102.0,107.0,110.5,114.0,118.5,121.0],borderColor:green,backgroundColor:green,tension:0.3,pointRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}},title:{display:true,text:'Indice 2010=100',color:'#888',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-  }
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          if(e.target.classList.contains('big-num') && !e.target.dataset.animated){
+            e.target.dataset.animated='true';
+            animateNumber(e.target);
+          }
+          if(e.target.classList.contains('bar')){
+            e.target.style.width = e.target.dataset.width + '%';
+          }
+        }
+      });
+    },{threshold:.4});
 
-  if(tab==='fisco'){
-    charts['pressione-storico'] = buildChart('chart-pressione-storico', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Pressione fiscale',data:[43.3,42.9,42.4,42.1,42.4,45.8,43.8,43.5,43.8,42.4,43.1],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4},
-        {label:'Pressione tributaria',data:[28.6,28.5,28.3,28.1,28.0,29.5,29.8,29.2,29.1,28.8,29.3],borderColor:blue,backgroundColor:blue,tension:0.3,pointRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['entrate-tipo'] = buildChart('chart-entrate-tipo', {
-      type:'doughnut',
-      data:{labels:['Imposte dirette','IVA','Accise e monopoli','Tasse sui beni/servizi','Contributi sociali','Altre'],datasets:[{data:[16.2,11.9,4.8,4.8,15.1,1.8],backgroundColor:[accent,blue,gold,'#8B5A3C','#6B8FB5',grey],borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
-    });
-    charts['entrate-gruppi'] = buildChart('chart-entrate-gruppi', {
-      type:'bar',
-      data:{labels:['Dipendenti privati','Dipendenti pubblici','Pensionati','Autonomi/P.IVA','Società (IRES+IRAP)','IVA/accise','Altro'],datasets:[{data:[35.2,35.0,23.0,6.8,10.2,21.5,3.7],backgroundColor:[accent,accent,'#E8B89D',blue,'#6B8FB5',gold,grey],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% entrate tributarie erariali'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
-    });
-    charts['taxgap'] = buildChart('chart-taxgap', {
-      type:'bar',
-      data:{labels:['Italia','Francia','Germania','Spagna','Media UE'],datasets:[{label:'Tax gap IVA',data:[20.1,9.8,8.9,5.5,8.7],backgroundColor:[accent,grey,grey,grey,grey],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'%'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-  }
-  if(tab==='spesa'){
-    charts['spesa-settore'] = buildChart('chart-spesa-settore', {
-      type:'doughnut',
-      data:{labels:['Protezione sociale','Sanità','Interessi','Istruzione','Difesa','Pubblica amministrazione','Abitazioni/territorio','Altre'],datasets:[{data:[42.2,16.0,7.4,9.6,2.5,12.0,7.0,3.3],backgroundColor:[red,'#6B8FB5',gold,'#5B8C5A','#8B5A3C',grey,'#4A6FA5','#777'],borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
-    });
-    charts['protezione-sociale'] = buildChart('chart-protezione-sociale', {
-      type:'doughnut',
-      data:{labels:['Pensioni vecchiaia/reversibilità','Sopravvivenza','Disabilità/malattia','Famiglia/bambini','Disoccupazione','Esclusione sociale','Abitazione','Altre'],datasets:[{data:[68.2,5.5,4.0,7.0,3.5,4.8,4.0,3.0],backgroundColor:[red,'#D98A7E','#6B8FB5','#5B8C5A',gold,'#8B5A3C','#4A6FA5','#777'],borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
-    });
-    charts['spesa-storico'] = buildChart('chart-spesa-storico', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[{label:'Spesa/PIL',data:[49.8,49.4,48.7,48.8,47.8,57.3,52.6,49.0,49.0,49.6,51.2],borderColor:red,backgroundColor:red,tension:0.3,pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['interessi'] = buildChart('chart-interessi', {
-      type:'bar',
-      data:{labels:['Interessi','Protezione sociale','Sanità','Istruzione','Difesa','Altre'],datasets:[{data:[3.8,21.6,8.2,4.9,1.3,11.4],backgroundColor:[gold,red,'#6B8FB5','#5B8C5A','#8B5A3C',grey],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% PIL'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
-    });
-  }
-  if(tab==='debito'){
-    charts['debito-lungo'] = buildChart('chart-debito-lungo', {
-      type:'line',
-      data:{labels:['1995','2000','2005','2008','2011','2014','2017','2020','2022','2024','2025'],datasets:[{label:'Debito/PIL',data:[120.9,108.5,103.6,102.4,116.5,131.8,131.4,154.4,140.5,134.7,137.1],borderColor:red,backgroundColor:red,tension:0.3,pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['deficit'] = buildChart('chart-deficit', {
-      type:'bar',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Deficit/PIL',data:[-2.6,-2.4,-2.4,-2.2,-1.6,-9.4,-7.2,-8.5,-3.6,-3.4,-3.1],backgroundColor:[red,red,red,red,red,'#7A4A33','#7A4A33','#7A4A33',red,red,red],borderRadius:4},
-        {label:'Saldo primario/PIL',data:[0.4,0.7,0.6,0.9,1.6,-3.5,-0.8,-3.8,0.5,0.5,0.7],backgroundColor:[green,green,green,green,green,'#7A4A33','#7A4A33','#7A4A33',green,green,green],borderRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['debito-ue'] = buildChart('chart-debito-ue', {
-      type:'bar',
-      data:{labels:['Grecia','Italia','Francia','Spagna','Germania','Portogallo','UE-27'],datasets:[{label:'2024',data:[153.1,134.7,109.9,101.7,62.7,97.2,81.4],backgroundColor:[grey,accent,grey,grey,grey,grey,grey],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-  }
+    document.querySelectorAll('.big-num, .eyebrow').forEach(n=>observer.observe(n));
+    document.querySelectorAll('.bar').forEach(b=>observer.observe(b));
 
-  if(tab==='welfare'){
-    charts['pensioni-ue'] = buildChart('chart-pensioni-ue', {
-      type:'bar',
-      data:{labels:['Italia','Francia','Germania','Spagna','Grecia','UE-27'],datasets:[{label:'% PIL',data:[13.1,12.4,10.1,11.6,14.5,10.7],backgroundColor:[accent,grey,grey,grey,grey,grey],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['sanita-ocse'] = buildChart('chart-sanita-ocse', {
-      type:'bar',
-      data:{labels:['Francia','Germania','UE','Spagna','Italia'],datasets:[{label:'Spesa sanità pubblica % PIL',data:[9.4,9.1,6.9,6.8,6.3],backgroundColor:[grey,grey,grey,grey,accent],borderRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['pensioni-storico'] = buildChart('chart-pensioni-storico', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],datasets:[{label:'Pensioni/PIL',data:[15.6,15.4,15.1,15.1,15.0,15.6,15.0,14.0,13.7,13.1],borderColor:red,backgroundColor:red,tension:0.3,pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['welfare-voci'] = buildChart('chart-welfare-voci', {
-      type:'bar',
-      data:{labels:['Pensioni','Sanità','Malattia/disabilità','Famiglia','Disoccupazione','Povertà/esclusione','Altro'],datasets:[{data:[13.1,6.3,1.0,1.2,0.8,0.9,1.6],backgroundColor:[red,'#6B8FB5','#5B8C5A',gold,'#8B5A3C','#4A6FA5',grey],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% PIL'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
-    });
-  }
-  if(tab==='lavoro'){
-    charts['occupati'] = buildChart('chart-occupati', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[{label:'Occupati (mln)',data:[22.2,22.5,22.8,23.1,23.3,22.5,22.9,23.7,23.9,24.0,24.1],borderColor:green,backgroundColor:green,tension:0.3,pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+' mln'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'M'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['disoccupazione'] = buildChart('chart-disoccupazione', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[{label:'Tasso disoccupazione',data:[11.9,11.7,11.2,10.5,9.9,9.2,9.5,8.1,7.7,6.7,5.7],borderColor:green,backgroundColor:green,tension:0.3,pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['partecipazione'] = buildChart('chart-partecipazione', {
-      type:'line',
-      data:{labels:['2015','2017','2019','2021','2023','2025'],datasets:[
-        {label:'Tasso attività 15-64',data:[57.5,58.9,60.2,59.3,61.5,62.6],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4},
-        {label:'Tasso inattività 15-64',data:[36.0,35.0,33.7,34.8,32.7,33.5],borderColor:grey,backgroundColor:grey,tension:0.3,pointRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['stipendi'] = buildChart('chart-stipendi', {
-      type:'bar',
-      data:{labels:['Operai','Impiegati','Quadri/Funzionari','Manager'],datasets:[{data:[26800,34200,55800,119400],backgroundColor:[grey,blue,accent,gold],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw.toLocaleString()}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'€'+(v/1000)+'k'},grid:{color:gridColor}},y:{grid:{display:false}}}}
-    });
-  }
+    const dotObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const idx = Array.from(sections).indexOf(e.target);
+          document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+        }
+      });
+    },{threshold:.5});
+    sections.forEach(s=>dotObserver.observe(s));
 
-  if(tab==='commercio'){
-    charts['commercio'] = buildChart('chart-commercio', {
-      type:'line',
-      data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Export',data:[416,417,450,461,479,423,516,615,624,623,643],borderColor:green,backgroundColor:green,tension:0.3,pointRadius:4},
-        {label:'Import',data:[355,359,397,424,435,377,474,640,620,609,592],borderColor:red,backgroundColor:red,tension:0.3,pointRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},x:{grid:{display:false}}}}
-    });
-    charts['pil-composizione'] = buildChart('chart-pil-composizione', {
-      type:'doughnut',
-      data:{labels:['Consumi privati','Consumi PA','Investimenti','Esportazioni','Importazioni (detratte)','Variaz. scorte'],datasets:[{data:[60.8,18.5,18.2,30.5,-28.5,0.5],backgroundColor:[blue,'#4A6FA5',gold,green,'#8B3A2B',grey],borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
-    });
-    charts['export-settori'] = buildChart('chart-export-settori', {
-      type:'bar',
-      data:{labels:['Meccanica e macchinari','Moda (tessile, abbigliamento, pelletteria, calzature)','Agroalimentare','Farmaceutica e chimica','Automotive','Metallurgia e acciaio','Mobili e arredamento','Altre'],datasets:[{data:[22,11,9,8,7,6,5,32],backgroundColor:[accent,'#E8B89D',green,'#6B8FB5','#8B5A3C','#4A6FA5','#C9A227',grey],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'%'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
-    });
-    charts['export-dest'] = buildChart('chart-export-dest', {
-      type:'doughnut',
-      data:{labels:['UE-27','Stati Uniti','Svizzera','Cina','Regno Unito','Altri extra-UE'],datasets:[{data:[55,10,6,3,4,22],backgroundColor:[blue,accent,gold,'#8B5A3C','#6B8FB5',grey],borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
-    });
-  }
-  if(tab==='governi'){
-    const govLabels = ['Prodi 2006-08','Berlusconi 2008-11','Monti 2011-13','Renzi 2014-16','Gentiloni 2016-18','Conte I 2018-19','Conte II 2019-21','Draghi 2021-22','Meloni 2022-25'];
-    charts['debito-governi'] = buildChart('chart-debito-governi', {
-      type:'bar',
-      data:{labels:govLabels,datasets:[{label:'Debito fine mandato (mld €)',data:[1669,1916,2041,2229,2286,2463,2603,2771,3024],backgroundColor:[grey,red,grey,grey,grey,grey,grey,accent,red],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:false,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
-    });
-    charts['pil-governi'] = buildChart('chart-pil-governi', {
-      type:'bar',
-      data:{labels:govLabels,datasets:[{data:[1.5,-1.1,-2.8,0.9,1.7,0.3,-3.1,4.2,0.7],backgroundColor:[green,red,'#7A4A33',green,green,green,'#7A4A33',green,green],borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw>0?'+':'')+ctx.raw+'%'}}},scales:{x:{beginAtZero:false,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
-    });
-    charts['debitopil-governi'] = buildChart('chart-debitopil-governi', {
-      type:'bar',
-      data:{labels:govLabels,datasets:[
-        {label:'Inizio',data:[102.4,102.4,132.5,132.7,134.1,134.4,150.8,144.4,137.3],backgroundColor:grey,borderRadius:4},
-        {label:'Fine',data:[102.5,119.7,132.5,132.7,134.1,134.4,150.8,144.4,137.1],backgroundColor:[red,accent,grey,grey,grey,grey,grey,accent,red],borderRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45}},y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}}}}
-    });
-  }
-}
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll',()=>{
+      const h = document.documentElement;
+      const st = h.scrollTop;
+      const max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (st/max*100)+'%';
+    },{passive:true});
 
-// Initialize all tab charts for the active tab
-renderTabCharts('panoramica');
-
-// Add resize observer to redraw hidden charts after tab activation
-window.addEventListener('load', () => {
-  Object.values(charts).forEach(c => c && c.resize());
-});
-
-// Year select handler (placeholder for future dynamic filtering)
-document.getElementById('yearSelect').addEventListener('change', e => {
-  const y = e.target.value;
-  document.querySelectorAll('.tab').forEach(t => {
-    if(t.classList.contains('active')) renderTabCharts(t.dataset.tab);
-  });
-});
-
-</script>
-
-  <!-- DATI -->
-  <div id="dati" class="pane">
-    <div class="method-box" style="margin-bottom:16px">
-      <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui puoi scaricare i dataset usati per i grafici e la tabella metodologica. I file sono in formato CSV, leggibili con Excel, LibreOffice, Python o R. I dati sono riportati così come appaiono nelle fonti pubbliche: controlla sempre le fonti primarie prima di usarli.</p>
-    </div>
-
-    <div class="chart-box" style="margin-bottom:16px">
-      <h3>Download dataset</h3>
-      <table class="small-table">
-        <tr><th>File</th><th>Contenuto</th><th>Righe</th><th class="num">Download</th></tr>
-        <tr><td>pil.csv</td><td>PIL nominale, reale, crescita annuale</td><td class="num">12</td><td class="num"><a href="data/pil.csv" download>CSV</a></td></tr>
-        <tr><td>fisco.csv</td><td>Debito, deficit, entrate, spese / PIL</td><td class="num">12</td><td class="num"><a href="data/fisco.csv" download>CSV</a></td></tr>
-        <tr><td>spesa.csv</td><td>Composizione spesa pubblica per funzione</td><td class="num">6</td><td class="num"><a href="data/spesa.csv" download>CSV</a></td></tr>
-        <tr><td>tasse.csv</td><td>Pressione fiscale e aliquote principali</td><td class="num">5</td><td class="num"><a href="data/tasse.csv" download>CSV</a></td></tr>
-        <tr><td>lavoro.csv</td><td>Occupazione, disoccupazione, tassi ILO</td><td class="num">8</td><td class="num"><a href="data/lavoro.csv" download>CSV</a></td></tr>
-        <tr><td>commercio.csv</td><td>Export, import, saldo commerciale</td><td class="num">7</td><td class="num"><a href="data/commercio.csv" download>CSV</a></td></tr>
-        <tr><td>metodologia.csv</td><td>Definizione, fonte e caveat di ogni indicatore</td><td class="num">11</td><td class="num"><a href="data/metodologia.csv" download>CSV</a></td></tr>
-      </table>
-    </div>
-
-    <div class="chart-box">
-      <h3>Metodologia indicatori</h3>
-      <table class="small-table">
-        <tr><th>Indicatore</th><th>Definizione</th><th>Fonte</th><th>Caveat</th></tr>
-        <tr><td>PIL nominale</td><td>Prodotto interno lordo a prezzi di mercato correnti</td><td>ISTAT</td><td>Non corregge inflazione; confronti temporali su PIL reale</td></tr>
-        <tr><td>PIL reale</td><td>PIL a prezzi costanti base 2015</td><td>ISTAT</td><td>Base rivisitata; può cambiare con ricalcoli</td></tr>
-        <tr><td>Debito / PIL</td><td>Debito amministrativo / PIL nominale × 100</td><td>MEF/RGS</td><td>Stock cumulato; include APSS e Enti</td></tr>
-        <tr><td>Deficit / PIL</td><td>Saldo netto settore pubblico / PIL × 100</td><td>MEF/RGS</td><td>Metodo ESA2010 vs amministrativo può differire</td></tr>
-        <tr><td>Pressione fiscale</td><td>Gettito tributario / PIL × 100</td><td>MEF</td><td>Solo gettito effettivo, non accrediti</td></tr>
-        <tr><td>Spesa pubblica / PIL</td><td>Spesa totale SP / PIL × 100</td><td>MEF/RGS</td><td>Include interessi, trasferimenti correnti e in conto capitale</td></tr>
-        <tr><td>Tasso disoccupazione</td><td>Disoccupati / forza lavoro × 100 (definizione ILO)</td><td>ISTAT</td><td>Esclude scoraggiati; stima campionaria</td></tr>
-        <tr><td>Saldo commerciale</td><td>Export FOB - Import CIF beni e servizi</td><td>ISTAT/BdI</td><td>Servizi stimati con maggiore incertezza</td></tr>
-      </table>
-      <p class="note">Per la tabella completa scaricare metodologia.csv.</p>
-    </div>
-  </div>
-
-  <!-- GLOSSARIO -->
-  <div id="glossario" class="pane">
-    <div class="method-box">
-      <h4>Come leggere questa dashboard senza essere economisti</h4>
-      <p>I numeri qui raccolti servono per <strong>controllare</strong> le promesse politiche. Ogni euro speso va tolto da qualche parte: tasse, debito o tagli. Quando senti "investiremo X miliardi", confronta X con il PIL (~€2.258 miliardi) e con il deficit (~€70 miliardi l'anno).</p>
-    </div>
-    <div class="chart-box">
-      <h3>Glossario dei termini più usati</h3>
-      <table class="small-table">
-        <tr><th>Termine</th><th>Cosa significa</th><th>Perché importa</th></tr>
-        <tr><td><strong>PIL</strong></td><td>La ricchezza totale prodotta in Italia in un anno. Si misura in miliardi di euro.</td><td>E' la "taglia" dell'economia. Serve a capire se una spesa è piccola o enorme rispetto al paese.</td></tr>
-        <tr><td><strong>PIL in volume / reale</strong></td><td>Crescita del PIL depurata dall'inflazione.</td><td>Indica se l'economia è davvero cresciuta o se è solo salita la spesa a causa dei prezzi.</td></tr>
-        <tr><td><strong>Debito pubblico / PIL</strong></td><td>Quanto lo Stato deve rispetto a quanto produce il paese.</td><td>Più è alto, più soldi servono per pagare gli interessi e meno restano per servizi e investimenti.</td></tr>
-        <tr><td><strong>Deficit / PIL</strong></td><td>Quanto lo Stato spende in più di quanto incassa, in percentuale del PIL.</td><td>Se è negativo, il debito aumenta. Se è positivo (superav), il debito si riduce.</td></tr>
-        <tr><td><strong>Saldo primario</strong></td><td>Deficit al netto degli interessi sul debito.</td><td>Dice se le entrate ordinarie bastano a coprire la spesa corrente: se positivo, i conti "funzionano" senza contare il peso del debito passato.</td></tr>
-        <tr><td><strong>Pressione fiscale</strong></td><td>Tasse + contributi sociali (INPS, INAIL...) diviso PIL.</td><td>Misura quanto pesano complessivamente Stato e welfare sull'economia reale.</td></tr>
-        <tr><td><strong>Pressione tributaria</strong></td><td>Solo le tasse vere (IRPEF, IRES, IVA, IMU...) diviso PIL.</td><td>E' il carico fiscale "classico", senza contare i contributi che finanziano pensioni e sanità.</td></tr>
-        <tr><td><strong>Imposte dirette</strong></td><td>Tasse su reddito e patrimonio (IRPEF, IRES, IMU...).</td><td>Le paga chi ha reddito o possiede immobili/aziende.</td></tr>
-        <tr><td><strong>Imposte indirette</strong></td><td>Tasse su consumi e transazioni (IVA, accise, bollo auto).</td><td>Le pagano tutti, anche chi ha redditi bassi, ogni volta che compra benzina, vestiti o servizi.</td></tr>
-        <tr><td><strong>Tax gap IVA</strong></td><td>Differenza tra IVA dovuta e IVA effettivamente incassata.</td><td>Più è alto, più evasione c'è. L'Italia ha uno dei tax gap più alti d'Europa.</td></tr>
-        <tr><td><strong>Spesa pubblica / PIL</strong></td><td>Quanto lo Stato spende in percentuale della ricchezza prodotta.</td><td>Più è alto, più risorse passano per lo Stato. Non è automaticamente un male, ma definisce quanto pesano le scelte politiche.</td></tr>
-        <tr><td><strong>Protezione sociale</strong></td><td>Spesa per pensioni, sanità, disoccupazione, famiglia, povertà.</td><td>E' la metà circa della spesa pubblica. Pensioni e sanità ne occupano la maggior parte.</td></tr>
-        <tr><td><strong>Produttività del lavoro</strong></td><td>PIL diviso ore lavorate: quanta ricchezza si produce in un'ora.</td><td>Se cresce poco, anche con più occupati il PIL non cresce molto e i salari reali restano fermi.</td></tr>
-        <tr><td><strong>Partecipazione al lavoro</strong></td><td>Percentuale di persone tra 15 e 64 anni che lavorano o cercano lavoro.</td><td>Più è alta, più persone contribuiscono a produrre PIL e a pagare tasse. Italia sotto la media UE.</td></tr>
-        <tr><td><strong>Domanda interna / estera</strong></td><td>Chi compra i prodotti italiani: famiglie e imprese italiane vs stranieri.</td><td>Se le esportazioni crescono più delle importazioni, la domanda estera aiuta la crescita.</td></tr>
-        <tr><td><strong>Saldo commerciale</strong></td><td>Esportazioni meno importazioni di beni.</td><td>Se positivo (surplus), l'Italia vende più all'estero di quanto compra: aiuta conto corrente e lavoro.</td></tr>
-        <tr><td><strong>Interessi sul debito</strong></td><td>Quanto lo Stato paga ogni anno per i debiti passati.</td><td>Assorbe circa €86 miliardi/anno: sono soldi che non vanno a scuole, ospedali o strade.</td></tr>
-        <tr><td><strong>Crediti d'imposta / fuori bilancio</strong></td><td>Incentivi (es. bonus edilizi) che non contano nel deficit ma aumentano il debito.</td><td>Rendono il deficit apparentemente più basso, ma il debito reale cresce lo stesso.</td></tr>
-      </table>
-    </div>
-    <div class="footer-info">Glossario redatto su dati ISTAT/MEF/OCSE/Eurostat. Per definizioni ufficiali consultare le fonti.</div>
-  </div>
+    // hide nav on hero, show after
+    const nav = document.getElementById('nav');
+    let lastY = 0;
+    window.addEventListener('scroll',()=>{
+      const y = window.scrollY;
+      if(y < window.innerHeight * .7){
+        nav.classList.remove('hide');
+      } else {
+        if(y > lastY) nav.classList.add('hide');
+        else nav.classList.remove('hide');
+      }
+      lastY = y;
+    },{passive:true});
+  </script>
 </body>
 </html>
