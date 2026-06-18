@@ -117,6 +117,7 @@
       <div class="tab" data-tab="governi">Governi</div>
       <div class="tab" data-tab="recap">Recap & Metodo</div>
       <div class="tab" data-tab="fonti">Fonti</div>
+      <div class="tab" data-tab="dati">Dati</div>
       <div class="tab" data-tab="glossario">Glossario</div>
     </div>
     <div class="year-sel">
@@ -767,6 +768,43 @@ document.getElementById('yearSelect').addEventListener('change', e => {
 });
 
 </script>
+
+  <!-- DATI -->
+  <div id="dati" class="pane">
+    <div class="method-box" style="margin-bottom:16px">
+      <p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui puoi scaricare i dataset usati per i grafici e la tabella metodologica. I file sono in formato CSV, leggibili con Excel, LibreOffice, Python o R. I dati sono riportati così come appaiono nelle fonti pubbliche: controlla sempre le fonti primarie prima di usarli.</p>
+    </div>
+
+    <div class="chart-box" style="margin-bottom:16px">
+      <h3>Download dataset</h3>
+      <table class="small-table">
+        <tr><th>File</th><th>Contenuto</th><th>Righe</th><th class="num">Download</th></tr>
+        <tr><td>pil.csv</td><td>PIL nominale, reale, crescita annuale</td><td class="num">12</td><td class="num"><a href="data/pil.csv" download>CSV</a></td></tr>
+        <tr><td>fisco.csv</td><td>Debito, deficit, entrate, spese / PIL</td><td class="num">12</td><td class="num"><a href="data/fisco.csv" download>CSV</a></td></tr>
+        <tr><td>spesa.csv</td><td>Composizione spesa pubblica per funzione</td><td class="num">6</td><td class="num"><a href="data/spesa.csv" download>CSV</a></td></tr>
+        <tr><td>tasse.csv</td><td>Pressione fiscale e aliquote principali</td><td class="num">5</td><td class="num"><a href="data/tasse.csv" download>CSV</a></td></tr>
+        <tr><td>lavoro.csv</td><td>Occupazione, disoccupazione, tassi ILO</td><td class="num">8</td><td class="num"><a href="data/lavoro.csv" download>CSV</a></td></tr>
+        <tr><td>commercio.csv</td><td>Export, import, saldo commerciale</td><td class="num">7</td><td class="num"><a href="data/commercio.csv" download>CSV</a></td></tr>
+        <tr><td>metodologia.csv</td><td>Definizione, fonte e caveat di ogni indicatore</td><td class="num">11</td><td class="num"><a href="data/metodologia.csv" download>CSV</a></td></tr>
+      </table>
+    </div>
+
+    <div class="chart-box">
+      <h3>Metodologia indicatori</h3>
+      <table class="small-table">
+        <tr><th>Indicatore</th><th>Definizione</th><th>Fonte</th><th>Caveat</th></tr>
+        <tr><td>PIL nominale</td><td>Prodotto interno lordo a prezzi di mercato correnti</td><td>ISTAT</td><td>Non corregge inflazione; confronti temporali su PIL reale</td></tr>
+        <tr><td>PIL reale</td><td>PIL a prezzi costanti base 2015</td><td>ISTAT</td><td>Base rivisitata; può cambiare con ricalcoli</td></tr>
+        <tr><td>Debito / PIL</td><td>Debito amministrativo / PIL nominale × 100</td><td>MEF/RGS</td><td>Stock cumulato; include APSS e Enti</td></tr>
+        <tr><td>Deficit / PIL</td><td>Saldo netto settore pubblico / PIL × 100</td><td>MEF/RGS</td><td>Metodo ESA2010 vs amministrativo può differire</td></tr>
+        <tr><td>Pressione fiscale</td><td>Gettito tributario / PIL × 100</td><td>MEF</td><td>Solo gettito effettivo, non accrediti</td></tr>
+        <tr><td>Spesa pubblica / PIL</td><td>Spesa totale SP / PIL × 100</td><td>MEF/RGS</td><td>Include interessi, trasferimenti correnti e in conto capitale</td></tr>
+        <tr><td>Tasso disoccupazione</td><td>Disoccupati / forza lavoro × 100 (definizione ILO)</td><td>ISTAT</td><td>Esclude scoraggiati; stima campionaria</td></tr>
+        <tr><td>Saldo commerciale</td><td>Export FOB - Import CIF beni e servizi</td><td>ISTAT/BdI</td><td>Servizi stimati con maggiore incertezza</td></tr>
+      </table>
+      <p class="note">Per la tabella completa scaricare metodologia.csv.</p>
+    </div>
+  </div>
 
   <!-- GLOSSARIO -->
   <div id="glossario" class="pane">

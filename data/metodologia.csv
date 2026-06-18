@@ -1,0 +1,11 @@
+Indicatore,Definizione,Formula / origine,Fonte primaria,Aggiornamento,Caveat principale
+PIL nominale,Prodotto interno lordo a prezzi di mercato correnti,Somma del valore aggiunto lordo,ISTAT,Annuale,Non tiene conto dell'inflazione; confronti temporali meglio su PIL reale
+PIL reale,PIL a prezzi costanti base 2015,PIL nominale scontato dell'inflazione,ISTAT,Annuale,Base 2015; rivisitato con nuovi metodi di calcolo
+Crescita reale,Variazione % del PIL reale,(PILt - PILt-1)/PILt-1,ISTAT,Trimestrale e annuale,Può essere rivista nei mesi successivi
+Debito pubblico / PIL,Rapporto tra debito amministrativo e PIL nominale,Debito / PIL × 100,MEF / Ragioneria Generale dello Stato,Mensile,Stock cumulato; include passività di Enti e APSS
+Deficit / PIL,Saldo netto settore pubblico / PIL,Entrate - spese / PIL,MEF / RGS,Trimestrale,Flow annuale; metodo contabile ESA2010 vs amministrativo differiscono
+Pressione fiscale,Rapporto tra gettito tributario e PIL,Gettito / PIL × 100,MEF,Annuale,"Include solo gettito effettivo, non accrediti"
+Spesa pubblica / PIL,Spesa totale settore pubblico / PIL,Spesa / PIL × 100,MEF / RGS,Annuale,Include interessi e trasferimenti correnti e in conto capitale
+Occupati,Numero di occupati 15-64 anni,Stima da LFS (indagine forze lavoro),ISTAT,Mensile,"Include lavoratori a termine, part-time, parasubordinati"
+Tasso disoccupazione,Disoccupati / forza lavoro × 100,Disoccupati / (occupati + disoccupati),ISTAT,Mensile,Definizione ILO; esclude scoraggiati
+Export / Import,Valore FOB beni e servizi,Dati doganali + bilancia servizi,ISTAT / Banca d'Italia,Mensile,Servizi stimati con maggiore incertezza
