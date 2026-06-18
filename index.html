@@ -13,7 +13,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <style>
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
     body{margin:0;background:#0F0F12;font-family:'Inter',system-ui,-apple-system,sans-serif;color:#E8E6E3;line-height:1.55;overflow-x:hidden}
     a{color:#E07A5F;text-decoration:none}
     a:hover{text-decoration:underline}
@@ -89,7 +89,7 @@
 
     @media(max-width:720px){
       .top-nav .links a:not(.cta-nav){display:none}
-      section{min-height:90vh;padding:70px 0}
+      section{min-height:90vh;padding:70px 0;scroll-snap-align:start;scroll-snap-stop:always}
       .hero h1{font-size:40px}
       h2{font-size:26px}
       .big-num{font-size:76px}
