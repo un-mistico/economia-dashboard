@@ -29,8 +29,7 @@
   <nav class="top-nav" id="nav">
     <a class="brand" href="https://un-mistico.github.io/repo-italia/">repo_italia <span>· Economia</span></a>
     <div class="links">
-      <a href="dashboard.html">Dati completi</a>
-      <a href="data/">Download CSV</a>
+      <a href="https://github.com/un-mistico/economia-dashboard/tree/main/data" target="_blank">Download CSV</a>
       <a class="cta-nav" href="dashboard.html">Esplora →</a>
     </div>
   </nav>
@@ -56,6 +55,15 @@
       <div class="big-num accent" data-target="136.4" data-suffix="%">0%</div>
       <h2>L'Italia è il secondo paese più indebitato d'Europa</h2>
       <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. Non è un flusso annuale: è una <span class="highlight">montagna</span> costruita in decenni.</p>
+      <div class="mini-chart" style="margin-top:18px">
+        <div class="label">Debito / PIL, Italia (2005-2025)</div>
+        <svg viewBox="0 0 400 120" style="width:100%;max-width:420px;height:auto">
+          <polyline fill="none" stroke="var(--accent)" stroke-width="3" points="10,80 45,75 80,70 115,65 150,55 185,45 220,35 255,25 290,20 325,18 360,15 390,12"/>
+          <text x="10" y="105" fill="#666" font-size="10">'05</text>
+          <text x="180" y="105" fill="#666" font-size="10">'15</text>
+          <text x="360" y="105" fill="#666" font-size="10">'25</text>
+        </svg>
+      </div>
       <div class="note">Il deficit è il nuovo debito che si aggiunge o toglie ogni anno. Debito = stock. Deficit = flow.</div>
     </div>
   </section>
@@ -75,26 +83,36 @@
     <div class="wrap content">
       <div class="eyebrow">03 · Pressione</div>
       <div class="label">Pressione fiscale</div>
-      <div class="big-num gold" data-target="42.7" data-suffix="%">0%</div>
+      <div class="big-num accent" data-target="42.7" data-suffix="%">0%</div>
       <h2>Lo Stato prende quasi 43 euro ogni 100 di PIL</h2>
-      <p>La pressione fiscale italiana è tra le più alte d'Europa. Ma dove finiscono questi soldi?</p>
+      <p>La pressione fiscale italiana è tra le più alte d'Europa. Su 10 monete da 1 euro, 4 vanno allo Stato.</p>
+      <div class="coin-viz" style="display:flex;gap:8px;flex-wrap:wrap;max-width:300px;margin:18px 0;justify-content:center">
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span�
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
+      </div>
       <div class="note">La pressione fiscale calcola il gettito effettivo, non i crediti d'imposta.</div>
     </div>
   </section>
 
   <section id="s4">
     <div class="wrap content">
-      <div class="eyebrow">04 · Spesa</div>
-      <h2 style="margin-top:6px">La spesa pubblica va soprattutto in welfare e interessi</h2>
-      <p>Ogni 100 euro di spesa, più di 40 vanno a previdenza e welfare, 15 a sanità e 8 agli interessi sul debito. Gli investimenti restano una minoranza.</p>
-      <div class="bar-block">
-        <div class="bar-wrap"><div class="bar-label">Welfare / previdenza</div><div class="bar" data-width="42"></div><div class="bar-value">42%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar" data-width="15"></div><div class="bar-value">15%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Interessi debito</div><div class="bar" data-width="8"></div><div class="bar-value">8%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Istruzione e ricerca</div><div class="bar" data-width="7"></div><div class="bar-value">7%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Investimenti e altro</div><div class="bar grey" data-width="28"></div><div class="bar-value">28%</div></div>
+      <div class="eyebrow">04 · Welfare</div>
+      <h2 style="margin-top:6px">Le pensioni pesano più della sanità e dell'istruzione insieme</h2>
+      <p>La spesa previdenziale è il capitolo più grande del bilancio. Con una popolazione che invecchia, la sfida non è tagliare, ma rendere il sistema sostenibile.</p>
+      <div class="bar-block" style="max-width:480px">
+        <div class="bar-wrap"><div class="bar-label">Pensioni</div><div class="bar" data-width="55"></div><div class="bar-value">~55%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar grey" data-width="15"></div><div class="bar-value">15%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Altro welfare</div><div class="bar grey" data-width="30"></div><div class="bar-value">30%</div></div>
       </div>
-      <div class="note">Spesa per funzione, stima 2024. Fonte: MEF/RGS.</div>
+      <div class="note">Quota pensioni sul totale spesa welfare, stima 2024.</div>
     </div>
   </section>
 
@@ -108,13 +126,14 @@
           <p style="font-size:16px">Il 2025-2026 si muove intorno allo 0,8-1,0%. L'Italia cresce meno della media UE e recupera con fatica il terreno perso con la crisi COVID.</p>
         </div>
         <div>
-          <table class="small-table">
-            <tr><td>2022</td><td>4,0%</td></tr>
-            <tr><td>2023</td><td>0,7%</td></tr>
-            <tr><td>2024</td><td>0,5%</td></tr>
-            <tr><td>2025 (stima)</td><td>0,8%</td></tr>
-            <tr><td>2026 (stima)</td><td>1,0%</td></tr>
-          </table>
+          <div class="label">Crescita 2024, confronto UE (%)</div>
+          <div class="bar-block">
+            <div class="bar-wrap"><div class="bar-label">Spagna</div><div class="bar grey" data-width="32"></div><div class="bar-value">3,2%</div></div>
+            <div class="bar-wrap"><div class="bar-label">Media UE</div><div class="bar grey" data-width="8"></div><div class="bar-value">0,8%</div></div>
+            <div class="bar-wrap"><div class="bar-label">Francia</div><div class="bar grey" data-width="7"></div><div class="bar-value">0,7%</div></div>
+            <div class="bar-wrap"><div class="bar-label">Germania</div><div class="bar grey" data-width="-1"></div><div class="bar-value">-0,2%</div></div>
+            <div class="bar-wrap"><div class="bar-label">Italia</div><div class="bar green" data-width="5"></div><div class="bar-value">0,5%</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -130,8 +149,14 @@
           <p style="font-size:16px">È il dato più basso dal 2008. Ma molti occupati sono a tempo parziale, precari o sottopagati. Il tasso di occupazione resta sotto gli obiettivi europei.</p>
         </div>
         <div>
-          <div class="bar-wrap"><div class="bar-label">Disoccupazione</div><div class="bar green" data-width="62"></div><div class="bar-value">6,2%</div></div>
-          <div style="font-size:13px;color:#666;margin-top:10px">Occupazione 15-64: 61% · Fonte ISTAT</div>
+          <div class="label">Disoccupazione per età (%)</div>
+          <div class="bar-block">
+            <div class="bar-wrap"><div class="bar-label">15-24 anni</div><div class="bar" data-width="22"></div><div class="bar-value">22,8%</div></div>
+            <div class="bar-wrap"><div class="bar-label">25-34 anni</div><div class="bar" data-width="9"></div><div class="bar-value">9,2%</div></div>
+            <div class="bar-wrap"><div class="bar-label">35-49 anni</div><div class="bar" data-width="5"></div><div class="bar-value">5,2%</div></div>
+            <div class="bar-wrap"><div class="bar-label">50-64 anni</div><div class="bar grey" data-width="4"></div><div class="bar-value">4,1%</div></div>
+          </div>
+          <div style="font-size:13px;color:#666;margin-top:10px">Fonte ISTAT, 2024</div>
         </div>
       </div>
     </div>
@@ -144,21 +169,31 @@
       <div class="big-num blue" data-target="30" data-suffix=" mld €">0</div>
       <h2>L'Italia esporta più di quanto importa</h2>
       <p>Il surplus commerciale è tornato, ma dipende molto dall'energia: nel 2022, con i prezzi alti, il saldo era quasi azzerato.</p>
+      <div class="bar-block" style="max-width:520px">
+        <div class="label">Export italiano per macro-settore (% sul totale, 2024)</div>
+        <div class="bar-wrap"><div class="bar-label">Meccanica e mezzi</div><div class="bar blue" data-width="21"></div><div class="bar-value">21%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Moda e tessile</div><div class="bar blue" data-width="15"></div><div class="bar-value">15%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Agroalimentare</div><div class="bar blue" data-width="10"></div><div class="bar-value">10%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Chimica e farmaceutica</div><div class="bar blue" data-width="12"></div><div class="bar-value">12%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Altro</div><div class="bar grey" data-width="42"></div><div class="bar-value">42%</div></div>
+      </div>
       <div class="note">Export + import = circa il 50% del PIL. L'Italia è aperta all'estero, ma vulnerabile agli shock energetici.</div>
     </div>
   </section>
 
   <section id="s8">
     <div class="wrap content">
-      <div class="eyebrow">08 · Welfare</div>
-      <h2 style="margin-top:6px">Le pensioni pesano più della sanità e dell'istruzione insieme</h2>
-      <p>La spesa previdenziale è il capitolo più grande del bilancio. Con una popolazione che invecchia, la sfida non è tagliare, ma rendere il sistema sostenibile.</p>
-      <div class="bar-block" style="max-width:480px">
-        <div class="bar-wrap"><div class="bar-label">Pensioni</div><div class="bar gold" data-width="55"></div><div class="bar-value">~55%</div></div>
+      <div class="eyebrow">08 · Spesa</div>
+      <h2 style="margin-top:6px">La spesa pubblica va soprattutto in welfare e interessi</h2>
+      <p>Ogni 100 euro di spesa, più di 40 vanno a previdenza e welfare, 15 a sanità e 8 agli interessi sul debito. Gli investimenti restano una minoranza.</p>
+      <div class="bar-block">
+        <div class="bar-wrap"><div class="bar-label">Welfare / previdenza</div><div class="bar" data-width="42"></div><div class="bar-value">42%</div></div>
         <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar" data-width="15"></div><div class="bar-value">15%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Altro welfare</div><div class="bar grey" data-width="30"></div><div class="bar-value">30%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Interessi debito</div><div class="bar" data-width="8"></div><div class="bar-value">8%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Istruzione e ricerca</div><div class="bar" data-width="7"></div><div class="bar-value">7%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Investimenti e altro</div><div class="bar grey" data-width="28"></div><div class="bar-value">28%</div></div>
       </div>
-      <div class="note">Quota pensioni sul totale spesa welfare, stima 2024.</div>
+      <div class="note">Spesa per funzione, stima 2024. Fonte: MEF/RGS.</div>
     </div>
   </section>
 
@@ -166,9 +201,29 @@
     <div class="wrap content">
       <div class="eyebrow">09 · Sintesi</div>
       <h2>La fotografia in tre righe</h2>
-      <p>1. L'Italia è ricca di debito, non di crescita: il 136% di debito/PIL frena la manovrabilità politica.</p>
-      <p>2. Lo Stato raccoglie tasse alte ma spende soprattutto in previdenza e interessi, lasciando poco spazio agli investimenti.</p>
-      <p>3. Il lavoro migliora e il commercio estero regge, ma non bastano a cambiare la traiettoria di fondo.</p>
+      <div class="summary-list" style="max-width:620px">
+        <div style="display:flex;gap:14px;margin-bottom:18px">
+          <div style="font-size:28px;line-height:1">📉</div>
+          <div>
+            <strong style="color:#fff">Debito alto, crescita bassa</strong>
+            <p style="font-size:16px;margin:4px 0 0">Il 136% di debito/PIL frena la manovrabilità politica.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;margin-bottom:18px">
+          <div style="font-size:28px;line-height:1">💸</div>
+          <div>
+            <strong style="color:#fff">Tasse alte, investimenti pochi</strong>
+            <p style="font-size:16px;margin:4px 0 0">La spesa va in previdenza e interessi, non in crescita futura.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px">
+          <div style="font-size:28px;line-height:1">⚖️</div>
+          <div>
+            <strong style="color:#fff">Lavoro e export non bastano</strong>
+            <p style="font-size:16px;margin:4px 0 0">Migliorano, ma non cambiano la traiettoria di fondo.</p>
+          </div>
+        </div>
+      </div>
       <div class="note">Questo è un riassunto narrativo. I numeri completi, le fonti e i caveat sono nella dashboard.</div>
     </div>
   </section>
@@ -178,8 +233,10 @@
       <div class="eyebrow">10 · Approfondisci</div>
       <h2 style="font-size:40px">Vai ai dati completi</h2>
       <p style="margin:0 auto 28px;max-width:560px">Nella dashboard trovi tutti i grafici, le serie storiche dal 2015, i confronti UE/OCSE, le fonti e i file CSV scaricabili.</p>
-      <a href="dashboard.html" class="btn btn-primary">Apri la dashboard completa →</a>
-      <a href="https://un-mistico.github.io/repo-italia/" class="btn-secondary">← Torna a repo_italia</a>
+      <div class="cta-group" style="opacity:1;transform:none">
+        <a href="dashboard.html" class="btn btn-primary">Apri la dashboard completa →</a>
+        <a href="https://un-mistico.github.io/repo-italia/" class="btn-secondary">← Torna a repo_italia</a>
+      </div>
     </div>
   </section>
 
