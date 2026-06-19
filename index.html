@@ -22,7 +22,7 @@
     .scrolly .eyebrow{opacity:0}
     .scrolly .eyebrow.visible{opacity:1;transform:translateY(0)}
 
-    html{scroll-snap-type:y mandatory}
+    
     .top-nav .brand span{color:var(--accent)}
     .scrolly .bar.positive{background:var(--positive)}
     .scrolly .bar.negative{background:var(--negative)}
@@ -66,11 +66,22 @@
       <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. Non è un flusso annuale: è una <span class="highlight">montagna</span> costruita in decenni.</p>
       <div class="mini-chart" style="margin-top:18px">
         <div class="label">Debito / PIL, Italia (2005-2025)</div>
-        <svg viewBox="0 0 400 120" style="width:100%;max-width:420px;height:auto">
+        <svg viewBox="0 0 400 140" style="width:100%;max-width:420px;height:auto">
+          <line x1="10" y1="120" x2="390" y2="120" stroke="#333" stroke-width="1"/>
           <polyline fill="none" stroke="var(--accent)" stroke-width="3" points="10,80 45,75 80,70 115,65 150,55 185,45 220,35 255,25 290,20 325,18 360,15 390,12"/>
-          <text x="10" y="105" fill="#666" font-size="10">'05</text>
-          <text x="180" y="105" fill="#666" font-size="10">'15</text>
-          <text x="360" y="105" fill="#666" font-size="10">'25</text>
+          <g>
+            <circle cx="10" cy="80" r="4" fill="var(--accent)"/><title>102% (2005)</title>
+            <circle cx="80" cy="70" r="4" fill="var(--accent)"/><title>103% (2008)</title>
+            <circle cx="150" cy="55" r="4" fill="var(--accent)"/><title>123% (2012)</title>
+            <circle cx="220" cy="35" r="4" fill="var(--accent)"/><title>132% (2016)</title>
+            <circle cx="290" cy="20" r="4" fill="var(--accent)"/><title>134% (2020)</title>
+            <circle cx="360" cy="15" r="4" fill="var(--accent)"/><title>136% (2024)</title>
+            <circle cx="390" cy="12" r="4" fill="var(--accent)"/><title>136,4% (2025)</title>
+          </g>
+          <text x="10" y="135" fill="#666" font-size="10">'05</text>
+          <text x="180" y="135" fill="#666" font-size="10">'15</text>
+          <text x="360" y="135" fill="#666" font-size="10">'25</text>
+          <text x="10" y="12" fill="#666" font-size="10">Debito/PIL →</text>
         </svg>
       </div>
       <div class="note">Il deficit è il nuovo debito che si aggiunge o toglie ogni anno. Debito = stock. Deficit = flow.</div>
@@ -168,9 +179,9 @@
         <div>
           <div class="label">Disoccupazione per età (%)</div>
           <div class="bar-block">
-            <div class="bar-wrap"><div class="bar-label">15-24 anni</div><div class="bar" data-width="22"></div><div class="bar-value">22,8%</div></div>
-            <div class="bar-wrap"><div class="bar-label">25-34 anni</div><div class="bar" data-width="9"></div><div class="bar-value">9,2%</div></div>
-            <div class="bar-wrap"><div class="bar-label">35-49 anni</div><div class="bar" data-width="5"></div><div class="bar-value">5,2%</div></div>
+            <div class="bar-wrap"><div class="bar-label">15-24 anni</div><div class="bar accent" data-width="22"></div><div class="bar-value">22,8%</div></div>
+            <div class="bar-wrap"><div class="bar-label">25-34 anni</div><div class="bar accent" data-width="9"></div><div class="bar-value">9,2%</div></div>
+            <div class="bar-wrap"><div class="bar-label">35-49 anni</div><div class="bar accent" data-width="5"></div><div class="bar-value">5,2%</div></div>
             <div class="bar-wrap"><div class="bar-label">50-64 anni</div><div class="bar neutral" data-width="4"></div><div class="bar-value">4,1%</div></div>
           </div>
           <div style="font-size:13px;color:#666;margin-top:10px">Fonte ISTAT, 2024</div>
