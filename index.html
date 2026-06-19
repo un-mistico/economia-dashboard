@@ -24,10 +24,10 @@
 
     html{scroll-snap-type:y mandatory}
     .top-nav .brand span{color:var(--accent)}
-    .scrolly .bar.green{background:var(--green)}
-    .scrolly .bar.blue{background:var(--blue)}
-    .scrolly .bar.gold{background:var(--gold)}
-    .scrolly .bar.grey{background:#555}
+    .scrolly .bar.positive{background:var(--positive)}
+    .scrolly .bar.negative{background:var(--negative)}
+    .scrolly .bar.neutral{background:var(--neutral)}
+    .scrolly .bar.shade{background:var(--accent-dim)}
     .final p{max-width:560px;margin:0 auto 28px}
     @media(max-width:720px){}
   </style>
@@ -36,7 +36,7 @@
   <div class="progress" id="progress"></div>
 
   <nav class="top-nav" id="nav">
-    <a class="brand" href="https://un-mistico.github.io/repo-italia/">repo_italia <span>· Economia</span></a>
+    <a class="brand" href="https://un-mistico.github.io/repo-italia/">repo_italia <span>· Economia</span>>></a>
     <div class="links">
       <a href="https://github.com/un-mistico/economia-dashboard/tree/main/data" target="_blank">Download CSV</a>
       <a class="cta-nav" href="dashboard.html">Esplora →</a>
@@ -63,7 +63,7 @@
       <div class="label">Debito pubblico / PIL</div>
       <div class="big-num accent" data-target="136.4" data-suffix="%">0%</div>
       <h2>L'Italia è il secondo paese più indebitato del mondo</h2>
-      <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. Non è un flusso annuale: è una <span class="highlight">montagna</span> costruita in decenni.</p>
+      <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. Non è un flusso annuale: è una <span class="highlight">montagna</span>>> costruita in decenni.</p>
       <div class="mini-chart" style="margin-top:18px">
         <div class="label">Debito / PIL, Italia (2005-2025)</div>
         <svg viewBox="0 0 400 120" style="width:100%;max-width:420px;height:auto">
@@ -82,9 +82,17 @@
       <div class="eyebrow">02 · Flow</div>
       <div class="label">Deficit / PIL 2025</div>
       <div class="big-num accent" data-target="3.4" data-suffix="%">0%</div>
-      <h2>Il deficit è sceso, ma non per merito della crescita</h2>
-      <p>Dal 9,5% del 2020 siamo tornati al 3,4%. La maggior parte del miglioramento viene dalla fine degli aiuti COVID, non da una ripresa strutturale.</p>
-      <div class="note">Tornare sotto il 3% — il target UE — non è previsto prima del 2027.</div>
+      <h2>Il deficit è sceso, ma resta sopra il target UE</h2>
+      <p>Il saldo primario (entrate meno spese, esclusi interessi sul debito) è tornato positivo. Ma gli interessi pesano ancora circa 4 punti di PIL. Ecco perché il deficit strutturale non chiude.</p>
+      <div class="bar-block" style="max-width:520px">
+        <div class="label">Deficit/PIL, Italia (%)</div>
+        <div class="bar-wrap"><div class="bar-label">2020 (picco COVID)</div><div class="bar negative" data-width="95"></div><div class="bar-value">-9,5%</div></div>
+        <div class="bar-wrap"><div class="bar-label">2022</div><div class="bar accent" data-width="70"></div><div class="bar-value">-5,3%</div></div>
+        <div class="bar-wrap"><div class="bar-label">2024</div><div class="bar accent" data-width="48"></div><div class="bar-value">-3,6%</div></div>
+        <div class="bar-wrap"><div class="bar-label">2025 (stima)</div><div class="bar accent" data-width="43"></div><div class="bar-value">-3,4%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Target UE 3%</div><div class="bar shade" data-width="38"></div><div class="bar-value">3,0%</div></div>
+      </div>
+      <div class="note">Il target UE 3% non è previsto prima del 2027.</div>
     </div>
   </section>
 
@@ -96,16 +104,16 @@
       <h2>Lo Stato prende quasi 43 euro ogni 100 di PIL</h2>
       <p>La pressione fiscale italiana è tra le più alte d'Europa. Su 10 monete da 1 euro, 4 vanno allo Stato.</p>
       <div class="coin-viz" style="display:flex;gap:8px;flex-wrap:wrap;max-width:300px;margin:18px 0;justify-content:center">
-        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span�
-        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>
-        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>>�
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">€</span>>>
+        <span style="width:34px;height:34px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">€</span>>>
       </div>
       <div class="note">La pressione fiscale calcola il gettito effettivo, non i crediti d'imposta.</div>
     </div>
@@ -117,7 +125,7 @@
       <h2 style="margin-top:6px">Le pensioni pesano più della sanità e dell'istruzione insieme</h2>
       <p>La spesa previdenziale è il capitolo più grande del bilancio. Con una popolazione che invecchia, la sfida non è tagliare, ma rendere il sistema sostenibile.</p>
       <div class="bar-block" style="max-width:480px">
-        <div class="bar-wrap"><div class="bar-label">Pensioni</div><div class="bar" data-width="55"></div><div class="bar-value">~55%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Pensioni</div><div class="bar accent" data-width="55"></div><div class="bar-value">~55%</div></div>
         <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar neutral" data-width="15"></div><div class="bar-value">15%</div></div>
         <div class="bar-wrap"><div class="bar-label">Altro welfare</div><div class="bar neutral" data-width="30"></div><div class="bar-value">30%</div></div>
       </div>
@@ -141,7 +149,7 @@
             <div class="bar-wrap"><div class="bar-label">Media UE</div><div class="bar neutral" data-width="8"></div><div class="bar-value">0,8%</div></div>
             <div class="bar-wrap"><div class="bar-label">Francia</div><div class="bar neutral" data-width="7"></div><div class="bar-value">0,7%</div></div>
             <div class="bar-wrap"><div class="bar-label">Germania</div><div class="bar neutral" data-width="-1"></div><div class="bar-value">-0,2%</div></div>
-            <div class="bar-wrap"><div class="bar-label">Italia</div><div class="bar positive" data-width="5"></div><div class="bar-value">0,5%</div></div>
+            <div class="bar-wrap"><div class="bar-label">Italia</div><div class="bar accent" data-width="5"></div><div class="bar-value">0,5%</div></div>
           </div>
         </div>
       </div>
@@ -196,10 +204,10 @@
       <h2 style="margin-top:6px">La spesa pubblica va soprattutto in welfare e interessi</h2>
       <p>Ogni 100 euro di spesa, più di 40 vanno a previdenza e welfare, 15 a sanità e 8 agli interessi sul debito. Gli investimenti restano una minoranza.</p>
       <div class="bar-block">
-        <div class="bar-wrap"><div class="bar-label">Welfare / previdenza</div><div class="bar" data-width="42"></div><div class="bar-value">42%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar" data-width="15"></div><div class="bar-value">15%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Interessi debito</div><div class="bar" data-width="8"></div><div class="bar-value">8%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Istruzione e ricerca</div><div class="bar" data-width="7"></div><div class="bar-value">7%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Welfare / previdenza</div><div class="bar accent" data-width="42"></div><div class="bar-value">42%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Sanità</div><div class="bar neutral" data-width="15"></div><div class="bar-value">15%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Interessi debito</div><div class="bar neutral" data-width="8"></div><div class="bar-value">8%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Istruzione e ricerca</div><div class="bar neutral" data-width="7"></div><div class="bar-value">7%</div></div>
         <div class="bar-wrap"><div class="bar-label">Investimenti e altro</div><div class="bar neutral" data-width="28"></div><div class="bar-value">28%</div></div>
       </div>
       <div class="note">Spesa per funzione, stima 2024. Fonte: MEF/RGS.</div>
@@ -271,7 +279,7 @@
         const ease = 1 - Math.pow(1-p,3);
         const cur = target * ease;
         if(suffix.includes('%') || suffix.includes(' mln') || suffix.includes(' mld') || suffix.includes(' anni')){
-          el.innerHTML = (decimals ? cur.toFixed(1) : Math.round(cur)) + (suffix ? '<span class="suffix">'+suffix+'</span>' : '');
+          el.innerHTML = (decimals ? cur.toFixed(1) : Math.round(cur)) + (suffix ? '<span class="suffix">'+suffix+'</span>>>' : '');
         } else {
           el.textContent = (decimals ? cur.toFixed(1) : Math.round(cur)) + suffix;
         }
