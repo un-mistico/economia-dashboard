@@ -24,10 +24,6 @@
 
     
     .top-nav .brand span{color:var(--accent)}
-    .scrolly .bar.positive{background:var(--positive)}
-    .scrolly .bar.negative{background:var(--negative)}
-    .scrolly .bar.neutral{background:var(--neutral)}
-    .scrolly .bar.shade{background:var(--accent-dim)}
     .final p{max-width:560px;margin:0 auto 28px}
     
   </style>
@@ -119,17 +115,10 @@
       <div class="big-num accent" data-target="42.7" data-suffix="%">0%</div>
       <h2>Lo Stato prende quasi 43 euro ogni 100 di PIL</h2>
       <p>La pressione fiscale italiana è tra le più alte d'Europa. Su 10 monete da 1 euro, 4 vanno allo Stato.</p>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin:20px 0">
-        <div style="width:180px;height:180px;border-radius:50%;background:conic-gradient(var(--accent) 0% 42.7%, #333 42.7% 100%);position:relative;box-shadow:0 0 20px rgba(224,122,95,0.15)">
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
-            <div style="font-size:32px;font-weight:800;color:#fff">42,7%</div>
-            <div style="font-size:11px;color:var(--text-dim)">allo Stato</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:24px;font-size:13px;color:var(--text-dim)">
-          <span><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:var(--accent);margin-right:6px;vertical-align:middle"></span>43 € allo Stato</span>
-          <span><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#333;margin-right:6px;vertical-align:middle"></span>57 € al settore privato</span>
-        </div>
+      <div class="bar-block" style="max-width:520px;margin:20px 0">
+        <div class="label">Su 100 € di PIL, dove vanno?</div>
+        <div class="bar-wrap"><div class="bar-label">Stato (tasse + contributi)</div><div class="bar accent" data-width="43"></div><div class="bar-value">42,7%</div></div>
+        <div class="bar-wrap"><div class="bar-label">Resto (economia privata)</div><div class="bar neutral" data-width="57"></div><div class="bar-value">57,3%</div></div>
       </div>
       <div class="note">La pressione fiscale calcola il gettito effettivo, non i crediti d'imposta.</div>
     </div>
