@@ -36,15 +36,15 @@
     .kpi{background:#16161B;border:1px solid #222;border-radius:10px;padding:16px 18px}
     .kpi .val{font-size:26px;font-weight:800;color:#fff}
     .kpi .val.accent{color:#E07A5F}
-    .kpi .val.blue{color:#4A6FA5}
-    .kpi .val.green{color:#5B8C5A}
-    .kpi .val.red{color:#C45A3D}
-    .kpi .val.gold{color:#C9A227}
+    .kpi .val.info{color:#4A6FA5}
+    .kpi .val.positive{color:#81b873}
+    .kpi .val.negative{color:#e63a46}
+    .kpi .val.warn{color:#c8a327}
     .kpi .lbl{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
     .kpi .trend{font-size:11px;margin-top:6px}
-    .trend-up{color:#E07A5F}.trend-down{color:#5B8C5A}.trend-neutral{color:#888}
+    .trend-up{color:#E07A5F}.trend-down{color:#81b873}.trend-neutral{color:#888}
     .kpi .badge{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 6px;border-radius:4px;margin-top:6px}
-    .badge-official{background:#1A3A1A;color:#5B8C5A}
+    .badge-official{background:#1A3A1A;color:#81b873}
     .badge-estimate{background:#3A2A1A;color:#C9A227}
     .badge-stock{background:#1A1A2A;color:#8888AA}
     .badge-flow{background:#1A2A1A;color:#5B8C5A}
@@ -56,7 +56,7 @@
     .chart-container{position:relative;width:100%;height:280px}
     .chart-container.tall{height:360px}
     .insight-box{background:#121A12;border:1px solid #1A3A1A;border-radius:8px;padding:14px 18px;margin:12px 0}
-    .insight-box .text{font-size:13px;color:#5B8C5A;font-weight:500}
+    .insight-box .text{font-size:13px;color:#81b873;font-weight:500}
     .warning-box{background:#1A1212;border:1px solid #3A2222;border-radius:8px;padding:14px 18px;margin:12px 0}
     .warning-box .text{font-size:13px;color:#E07A5F;font-weight:600}
     .method-box{background:#16161B;border:1px solid #222;border-radius:8px;padding:16px 18px;margin:12px 0}
@@ -142,15 +142,15 @@
   <div id="panoramica" class="pane active">
     <div class="kpi-grid">
       <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Il PIL è la ricchezza totale prodotta in Italia in un anno. Ai prezzi correnti include l'inflazione; in volume no.</span></span><div class="val" id="kpi-pil">€2.258Mld</div><div class="lbl">PIL 2025 (prezzi correnti)</div><div class="trend trend-neutral" id="kpi-pil-trend">+0,5% volume · +2,5% nominale</div></div>
-      <div class="kpi"><div class="val red" id="kpi-debito">137,1%</div><div class="lbl">Debito pubblico / PIL</div><div class="trend trend-up" id="kpi-debito-trend">+2,4pp vs 2024</div></div>
+      <div class="kpi"><div class="val negative" id="kpi-debito">137,1%</div><div class="lbl">Debito pubblico / PIL</div><div class="trend trend-up" id="kpi-debito-trend">+2,4pp vs 2024</div></div>
       <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Quanto lo Stato spende in più di quanto incassa, in % del PIL. Negativo = debito che sale.</span></span><div class="val" id="kpi-deficit">-3,1%</div><div class="lbl">Deficit / PIL</div><div class="trend trend-down" id="kpi-deficit-trend">-0,3pp vs 2024</div></div>
       <div class="kpi"><div class="val accent" id="kpi-pressione">43,1%</div><div class="lbl">Pressione fiscale / PIL</div><div class="trend trend-up" id="kpi-pressione-trend">+0,7pp vs 2024</div></div>
     </div>
     <div class="kpi-grid" style="margin-top:-4px">
       <div class="kpi"><span class="info-tooltip" style="float:right;margin-top:-4px"><span class="icon">i</span><span class="tooltip-text">Spesa pubblica totale diviso PIL. Dice quanta parte della ricchezza passa per decisioni politiche.</span></span><div class="val" id="kpi-spesa">51,2%</div><div class="lbl">Spesa pubblica / PIL</div></div>
-      <div class="kpi"><div class="val red" id="kpi-interessi">3,8%</div><div class="lbl">Spesa interessi / PIL</div></div>
-      <div class="kpi"><div class="val green" id="kpi-primario">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-produttivita">-1,4%</div><div class="lbl">Produttività 2024 (var. %)</div></div>
+      <div class="kpi"><div class="val negative" id="kpi-interessi">3,8%</div><div class="lbl">Spesa interessi / PIL</div></div>
+      <div class="kpi"><div class="val positive" id="kpi-primario">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
+      <div class="kpi"><div class="val info" id="kpi-produttivita">-1,4%</div><div class="lbl">Produttività 2024 (var. %)</div></div>
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Debito pubblico / PIL (2015-2025)</h3><div class="chart-container"><canvas id="chart-debito-storico"></canvas></div></div>
@@ -193,7 +193,7 @@
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-pil2">€2.258Mld</div><div class="lbl">PIL 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-pil-vol">+0,5%</div><div class="lbl">Crescita volume 2025</div></div>
-      <div class="kpi"><div class="val green" id="kpi-investimenti">+3,5%</div><div class="lbl">Investimenti fissi lordi</div></div>
+      <div class="kpi"><div class="val positive" id="kpi-investimenti">+3,5%</div><div class="lbl">Investimenti fissi lordi</div></div>
       <div class="kpi"><div class="val" id="kpi-occupazione">+1,3%</div><div class="lbl">Unità di lavoro</div></div>
     </div>
     <div class="method-box">
@@ -253,8 +253,8 @@
     <div class="kpi-grid">
       <div class="kpi"><div class="val accent" id="kpi-pressione2">43,1%</div><div class="lbl">Pressione fiscale 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-tributaria">29,3%</div><div class="lbl">Pressione tributaria 2025</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-irpef">€79,2Mld</div><div class="lbl">IRPEF 2024</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-iva">€94,1Mld</div><div class="lbl">IVA 2024</div></div>
+      <div class="kpi"><div class="val info" id="kpi-irpef">€79,2Mld</div><div class="lbl">IRPEF 2024</div></div>
+      <div class="kpi"><div class="val info" id="kpi-iva">€94,1Mld</div><div class="lbl">IVA 2024</div></div>
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Pressione fiscale e tributaria Italia (2015-2025, % PIL)</h3><div class="chart-container"><canvas id="chart-pressione-storico"></canvas></div></div>
@@ -300,7 +300,7 @@
     <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>dove vanno i soldi pubblici</strong>. La maggior parte è bloccata in pensioni, sanità e interessi sul debito: la fetta libera per nuove politiche è più piccola di quanto sembri.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-spesa2">51,2%</div><div class="lbl">Spesa pubblica / PIL 2025</div></div>
-      <div class="kpi"><div class="val red" id="kpi-protezione">42,2%</div><div class="lbl">Protezione sociale / spesa totale</div></div>
+      <div class="kpi"><div class="val negative" id="kpi-protezione">42,2%</div><div class="lbl">Protezione sociale / spesa totale</div></div>
       <div class="kpi"><div class="val" id="kpi-sanita">16,0%</div><div class="lbl">Sanità / spesa totale</div></div>
       <div class="kpi"><div class="val" id="kpi-istruzione">9,6%</div><div class="lbl">Istruzione / spesa totale</div></div>
     </div>
@@ -356,9 +356,9 @@
   <div id="debito" class="pane">
     <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si vede <strong>quanto lo Stato deve e a che costo</strong>. Il debito alto non è un problema solo "morale": assorbe soldi che non vanno più a scuole, ospedali o investimenti.</p></div>
     <div class="kpi-grid">
-      <div class="kpi"><div class="val red" id="kpi-debito2">137,1%</div><div class="lbl">Debito / PIL 2025</div></div>
+      <div class="kpi"><div class="val negative" id="kpi-debito2">137,1%</div><div class="lbl">Debito / PIL 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-debito-ass">€3.095Mld</div><div class="lbl">Debito pubblico nominale (stima)</div></div>
-      <div class="kpi"><div class="val green" id="kpi-primario2">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
+      <div class="kpi"><div class="val positive" id="kpi-primario2">+0,7%</div><div class="lbl">Saldo primario / PIL</div></div>
       <div class="kpi"><div class="val" id="kpi-costo">2,97%</div><div class="lbl">Costo medio stock debito</div></div>
     </div>
     <div class="chart-grid cols-2">
@@ -402,9 +402,9 @@
   <div id="welfare" class="pane">
     <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab confronta l'Italia con l'Europa su <strong>pensioni e sanità</strong>. Serve per capire se spendiamo tanto perché siamo generosi o perché abbiamo tanti anziani e pochi giovani.</p></div>
     <div class="kpi-grid">
-      <div class="kpi"><div class="val gold" id="kpi-pensioni">13,05%</div><div class="lbl">Spesa pensioni / PIL 2024</div></div>
+      <div class="kpi"><div class="val warn" id="kpi-pensioni">13,05%</div><div class="lbl">Spesa pensioni / PIL 2024</div></div>
       <div class="kpi"><div class="val" id="kpi-sanita-pil">6,3%</div><div class="lbl">Spesa sanità pubblica / PIL</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-ocse-sanita">7,1%</div><div class="lbl">Media OCSE sanità / PIL</div></div>
+      <div class="kpi"><div class="val info" id="kpi-ocse-sanita">7,1%</div><div class="lbl">Media OCSE sanità / PIL</div></div>
       <div class="kpi"><div class="val" id="kpi-istruzione-pil">3,8%</div><div class="lbl">Spesa istruzione / PIL (stima)</div></div>
     </div>
     <div class="chart-grid cols-2">
@@ -447,14 +447,14 @@
     <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Qui si guarda <strong>quanta gente lavora e quanto guadagna</strong>. Attenzione: "disoccupazione bassa" non sempre significa che tutto va bene, se tanta gente è inattiva o i salari sono fermi.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-occupati">24,1M</div><div class="lbl">Occupati 2025 (IV trim)</div></div>
-      <div class="kpi"><div class="val green" id="kpi-disoccupazione">5,7%</div><div class="lbl">Tasso disoccupazione 2025</div></div>
+      <div class="kpi"><div class="val positive" id="kpi-disoccupazione">5,7%</div><div class="lbl">Tasso disoccupazione 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-partecipazione">62,6%</div><div class="lbl">Tasso attività 15-64 (2025)</div></div>
       <div class="kpi"><div class="val" id="kpi-inattivita">33,5%</div><div class="lbl">Tasso inattività 15-64 (2025)</div></div>
     </div>
     <div class="kpi-grid" style="margin-top:-4px">
       <div class="kpi"><div class="val accent" id="kpi-stipendio">€31.856</div><div class="lbl">RAL media lorda dipendenti (2022)</div></div>
       <div class="kpi"><div class="val" id="kpi-retrib">+3,1%</div><div class="lbl">Retribuzioni contrattuali 2025</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-partiteiva">5,2M</div><div class="lbl">Partite IVA attive (stima)</div></div>
+      <div class="kpi"><div class="val info" id="kpi-partiteiva">5,2M</div><div class="lbl">Partite IVA attive (stima)</div></div>
       <div class="kpi"><div class="val" id="kpi-societa">1,3M</div><div class="lbl">Società di capitali attive (stima)</div></div>
     </div>
     <div class="method-box">
@@ -506,9 +506,9 @@
     <div class="method-box" style="margin-bottom:16px"><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">Questa tab mostra <strong>cosa vendiamo all'estero e cosa compriamo</strong>. L'export è il punto di forza italiano, ma se importiamo più di quanto esportiamo in volume, la crescita ne risente.</p></div>
     <div class="kpi-grid">
       <div class="kpi"><div class="val" id="kpi-export">€643Mld</div><div class="lbl">Export beni 2025</div></div>
-      <div class="kpi"><div class="val green" id="kpi-surplus">+€50,7Mld</div><div class="lbl">Surplus commerciale beni 2025</div></div>
+      <div class="kpi"><div class="val positive" id="kpi-surplus">+€50,7Mld</div><div class="lbl">Surplus commerciale beni 2025</div></div>
       <div class="kpi"><div class="val" id="kpi-import">€592Mld</div><div class="lbl">Import beni 2025</div></div>
-      <div class="kpi"><div class="val blue" id="kpi-contocorrente">+€53Mld</div><div class="lbl">Saldo conto corrente (stima)</div></div>
+      <div class="kpi"><div class="val info" id="kpi-contocorrente">+€53Mld</div><div class="lbl">Saldo conto corrente (stima)</div></div>
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Export, import e saldo commerciale beni (2015-2025, mld €)</h3><div class="chart-container"><canvas id="chart-commercio"></canvas></div></div>
