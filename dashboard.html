@@ -535,7 +535,7 @@ function renderTabCharts(tab){
     });
     charts['spesa-funzione'] = buildChart('chart-spesa-funzione', {
       type:'bar',
-      data:{labels:['Protezione sociale','Sanità','PA/general','Istruzione','Interessi','Difesa','Abitazioni/territ'],datasets:[{data:[42.2,16.0,15.0,9.6,7.4,2.5,7.3],backgroundColor:[red,blue,grey,'#555',gold,'#E07A5F','#E07A5F'],borderWidth:0}]},
+      data:{labels:['Protezione sociale','Sanità','PA/general','Istruzione','Interessi','Difesa','Abitazioni/territ'],datasets:[{label:'Spesa pubblica per funzione (% del totale)',data:[42.2,16.0,15.0,9.6,7.4,2.5,7.3],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
     charts['pressione-ue'] = buildChart('chart-pressione-ue', {
@@ -546,7 +546,7 @@ function renderTabCharts(tab){
     const pilSettoreSorted = sortByValue(['Servizi','Industria','Costruzioni','Agricoltura'],[1632.8,444.8,128.2,52.3]);
     charts['pil-settore'] = buildChart('chart-pil-settore', {
       type:'bar',
-      data:{labels:pilSettoreSorted.labels,datasets:[{data:pilSettoreSorted.values,backgroundColor:pilSettoreSorted.labels.map(l=>l.includes('Servizi')?blue:l.includes('Industria')?accent:l.includes('Costruzioni')?gold:grey),borderRadius:4}]},
+      data:{labels:pilSettoreSorted.labels,datasets:[{label:'PIL per settore (mld €)',data:pilSettoreSorted.values,backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
   }
@@ -559,14 +559,14 @@ function renderTabCharts(tab){
     const pilSettoreSorted2 = sortByValue(['Servizi','Industria','Costruzioni','Agricoltura'],[1632.8,444.8,128.2,52.3]);
     charts['pil-settore-det'] = buildChart('chart-pil-settore-det', {
       type:'bar',
-      data:{labels:pilSettoreSorted2.labels,datasets:[{data:pilSettoreSorted2.values,backgroundColor:pilSettoreSorted2.labels.map(l=>l.includes('Servizi')?blue:l.includes('Industria')?accent:l.includes('Costruzioni')?gold:grey),borderRadius:4}]},
+      data:{labels:pilSettoreSorted2.labels,datasets:[{label:'PIL per settore (mld €)',data:pilSettoreSorted2.values,backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
     charts['pil-componenti'] = buildChart('chart-pil-componenti', {
       type:'bar',
       data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Domanda interna netta',data:[1.4,1.4,1.7,1.0,0.4,-7.8,6.4,2.8,1.5,0.6,1.5],backgroundColor:blue},
-        {label:'Domanda estera netta',data:[-0.5,-0.3,0.3,-0.1,0.0,-0.3,0.6,-0.7,0.1,0.1,-0.7],backgroundColor:green},
+        {label:'Domanda interna netta',data:[1.4,1.4,1.7,1.0,0.4,-7.8,6.4,2.8,1.5,0.6,1.5],backgroundColor:accent},
+        {label:'Domanda estera netta',data:[-0.5,-0.3,0.3,-0.1,0.0,-0.3,0.6,-0.7,0.1,0.1,-0.7],backgroundColor:'rgba(224,122,95,0.5)'},
         {label:'Variazione scorte',data:[0.0,0.0,-0.4,0.0,-0.1,0.0,0.0,0.0,0.0,0.0,-0.2],backgroundColor:grey}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:false,ticks:{callback:v=>(v>0?'+':'')+v+'pp'},grid:{color:gridColor}}}}
@@ -575,9 +575,9 @@ function renderTabCharts(tab){
       type:'bar',
       data:{labels:['2015','2017','2019','2021','2023','2025'],datasets:[
         {label:'Italia',data:[0.9,1.7,0.3,7.0,0.7,0.5],backgroundColor:accent,borderRadius:4},
-        {label:'Germania',data:[1.5,2.7,1.0,3.2,-0.3,0.2],backgroundColor:grey,borderRadius:4},
-        {label:'Francia',data:[1.1,2.4,1.8,6.8,0.7,0.8],backgroundColor:blue,borderRadius:4},
-        {label:'Spagna',data:[3.8,3.0,2.0,5.5,2.7,3.0],backgroundColor:green,borderRadius:4}
+        {label:'Germania',data:[1.5,2.7,1.0,3.2,-0.3,0.2],backgroundColor:'rgba(224,122,95,0.7)',borderRadius:4},
+        {label:'Francia',data:[1.1,2.4,1.8,6.8,0.7,0.8],backgroundColor:'rgba(224,122,95,0.5)',borderRadius:4},
+        {label:'Spagna',data:[3.8,3.0,2.0,5.5,2.7,3.0],backgroundColor:'rgba(224,122,95,0.3)',borderRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
@@ -585,9 +585,9 @@ function renderTabCharts(tab){
       type:'bar',
       data:{labels:['2015','2017','2019','2021','2023','2024'],datasets:[
         {label:'Italia',data:[100.2,101.5,102.8,105.2,106.5,104.9],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4},
-        {label:'Germania',data:[109.0,113.2,116.0,117.8,120.2,121.5],borderColor:grey,backgroundColor:grey,tension:0.3,pointRadius:4},
-        {label:'Francia',data:[105.5,108.0,110.5,113.2,116.0,117.5],borderColor:blue,backgroundColor:blue,tension:0.3,pointRadius:4},
-        {label:'Spagna',data:[102.0,107.0,110.5,114.0,118.5,121.0],borderColor:green,backgroundColor:green,tension:0.3,pointRadius:4}
+        {label:'Germania',data:[109.0,113.2,116.0,117.8,120.2,121.5],borderColor:'rgba(224,122,95,0.7)',backgroundColor:'rgba(224,122,95,0.7)',tension:0.3,pointRadius:4},
+        {label:'Francia',data:[105.5,108.0,110.5,113.2,116.0,117.5],borderColor:'rgba(224,122,95,0.5)',backgroundColor:'rgba(224,122,95,0.5)',tension:0.3,pointRadius:4},
+        {label:'Spagna',data:[102.0,107.0,110.5,114.0,118.5,121.0],borderColor:'rgba(224,122,95,0.3)',backgroundColor:'rgba(224,122,95,0.3)',tension:0.3,pointRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}},title:{display:true,text:'Indice 2010=100',color:'#888',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
@@ -598,18 +598,18 @@ function renderTabCharts(tab){
       type:'line',
       data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
         {label:'Pressione fiscale',data:[43.3,42.9,42.4,42.1,42.4,45.8,43.8,43.5,43.8,42.4,43.1],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4},
-        {label:'Pressione tributaria',data:[28.6,28.5,28.3,28.1,28.0,29.5,29.8,29.2,29.1,28.8,29.3],borderColor:blue,backgroundColor:blue,tension:0.3,pointRadius:4}
+        {label:'Pressione tributaria',data:[28.6,28.5,28.3,28.1,28.0,29.5,29.8,29.2,29.1,28.8,29.3],borderColor:'rgba(224,122,95,0.5)',backgroundColor:'rgba(224,122,95,0.5)',tension:0.3,pointRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
     charts['entrate-tipo'] = buildChart('chart-entrate-tipo', {
       type:'bar',
-      data:{labels:['Imposte dirette','IVA','Accise e monopoli','Tasse sui beni/servizi','Contributi sociali','Altre'],datasets:[{data:[16.2,11.9,4.8,4.8,15.1,1.8],backgroundColor:[accent,blue,gold,'#E07A5F','#E07A5F',grey],borderWidth:0}]},
+      data:{labels:['Imposte dirette','IVA','Accise e monopoli','Tasse sui beni/servizi','Contributi sociali','Altre'],datasets:[{label:'Entrate pubbliche (% PIL)',data:[16.2,11.9,4.8,4.8,15.1,1.8],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
     });
     charts['entrate-gruppi'] = buildChart('chart-entrate-gruppi', {
       type:'bar',
-      data:{labels:['Dipendenti privati','Dipendenti pubblici','Pensionati','Autonomi/P.IVA','Società (IRES+IRAP)','IVA/accise','Altro'],datasets:[{data:[35.2,35.0,23.0,6.8,10.2,21.5,3.7],backgroundColor:[accent,accent,'#E07A5F',blue,'#E07A5F',gold,grey],borderRadius:4}]},
+      data:{labels:['Dipendenti privati','Dipendenti pubblici','Pensionati','Autonomi/P.IVA','Società (IRES+IRAP)','IVA/accise','Altro'],datasets:[{label:'Entrate fiscali per gruppo (%)',data:[35.2,35.0,23.0,6.8,10.2,21.5,3.7],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% entrate tributarie erariali'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
     charts['taxgap'] = buildChart('chart-taxgap', {
@@ -621,12 +621,12 @@ function renderTabCharts(tab){
   if(tab==='spesa'){
     charts['spesa-settore'] = buildChart('chart-spesa-settore', {
       type:'bar',
-      data:{labels:['Protezione sociale','Sanità','Interessi','Istruzione','Difesa','Pubblica amministrazione','Abitazioni/territorio','Altre'],datasets:[{data:[42.2,16.0,7.4,9.6,2.5,12.0,7.0,3.3],backgroundColor:[red,'#E07A5F',gold,'#555','#E07A5F',grey,'#E07A5F','#777'],borderWidth:0}]},
+      data:{labels:['Protezione sociale','Sanità','Interessi','Istruzione','Difesa','Pubblica amministrazione','Abitazioni/territorio','Altre'],datasets:[{label:'Spesa pubblica per settore (% totale)',data:[42.2,16.0,7.4,9.6,2.5,12.0,7.0,3.3],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
     charts['protezione-sociale'] = buildChart('chart-protezione-sociale', {
       type:'bar',
-      data:{labels:['Pensioni vecchiaia/reversibilità','Sopravvivenza','Disabilità/malattia','Famiglia/bambini','Disoccupazione','Esclusione sociale','Abitazione','Altre'],datasets:[{data:[68.2,5.5,4.0,7.0,3.5,4.8,4.0,3.0],backgroundColor:[red,'#E07A5F','#E07A5F','#555',gold,'#E07A5F','#E07A5F','#777'],borderWidth:0}]},
+      data:{labels:['Pensioni vecchiaia/reversibilità','Sopravvivenza','Disabilità/malattia','Famiglia/bambini','Disoccupazione','Esclusione sociale','Abitazione','Altre'],datasets:[{label:'Composizione protezione sociale (%)',data:[68.2,5.5,4.0,7.0,3.5,4.8,4.0,3.0],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
     charts['spesa-storico'] = buildChart('chart-spesa-storico', {
@@ -636,7 +636,7 @@ function renderTabCharts(tab){
     });
     charts['interessi'] = buildChart('chart-interessi', {
       type:'bar',
-      data:{labels:['Interessi','Protezione sociale','Sanità','Istruzione','Difesa','Altre'],datasets:[{data:[3.8,21.6,8.2,4.9,1.3,11.4],backgroundColor:[gold,red,'#E07A5F','#555','#E07A5F',grey],borderRadius:4}]},
+      data:{labels:['Interessi','Protezione sociale','Sanità','Istruzione','Difesa','Altre'],datasets:[{label:'Spesa (% PIL)',data:[3.8,21.6,8.2,4.9,1.3,11.4],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% PIL'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
   }
@@ -649,8 +649,8 @@ function renderTabCharts(tab){
     charts['deficit'] = buildChart('chart-deficit', {
       type:'bar',
       data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Deficit/PIL',data:[-2.6,-2.4,-2.4,-2.2,-1.6,-9.4,-7.2,-8.5,-3.6,-3.4,-3.1],backgroundColor:[red,red,red,red,red,'#E07A5F','#E07A5F','#E07A5F',red,red,red],borderRadius:4},
-        {label:'Saldo primario/PIL',data:[0.4,0.7,0.6,0.9,1.6,-3.5,-0.8,-3.8,0.5,0.5,0.7],backgroundColor:[green,green,green,green,green,'#E07A5F','#E07A5F','#E07A5F',green,green,green],borderRadius:4}
+        {label:'Deficit/PIL',data:[-2.6,-2.4,-2.4,-2.2,-1.6,-9.4,-7.2,-8.5,-3.6,-3.4,-3.1],backgroundColor:accent,borderRadius:4},
+        {label:'Saldo primario/PIL',data:[0.4,0.7,0.6,0.9,1.6,-3.5,-0.8,-3.8,0.5,0.5,0.7],backgroundColor:'rgba(224,122,95,0.5)',borderRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
@@ -679,7 +679,7 @@ function renderTabCharts(tab){
     });
     charts['welfare-voci'] = buildChart('chart-welfare-voci', {
       type:'bar',
-      data:{labels:['Pensioni','Sanità','Malattia/disabilità','Famiglia','Disoccupazione','Povertà/esclusione','Altro'],datasets:[{data:[13.1,6.3,1.0,1.2,0.8,0.9,1.6],backgroundColor:[red,'#E07A5F','#555',gold,'#E07A5F','#E07A5F',grey],borderRadius:4}]},
+      data:{labels:['Pensioni','Sanità','Malattia/disabilità','Famiglia','Disoccupazione','Povertà/esclusione','Altro'],datasets:[{label:'Trasferimenti sociali (% PIL)',data:[13.1,6.3,1.0,1.2,0.8,0.9,1.6],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% PIL'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
   }
@@ -704,7 +704,7 @@ function renderTabCharts(tab){
     });
     charts['stipendi'] = buildChart('chart-stipendi', {
       type:'bar',
-      data:{labels:['Operai','Impiegati','Quadri/Funzionari','Manager'],datasets:[{data:[26800,34200,55800,119400],backgroundColor:[grey,blue,accent,gold],borderRadius:4}]},
+      data:{labels:['Operai','Impiegati','Quadri/Funzionari','Manager'],datasets:[{label:'RAL media (€)',data:[26800,34200,55800,119400],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw.toLocaleString()}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'€'+(v/1000)+'k'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
   }
@@ -713,24 +713,24 @@ function renderTabCharts(tab){
     charts['commercio'] = buildChart('chart-commercio', {
       type:'line',
       data:{labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[
-        {label:'Export',data:[416,417,450,461,479,423,516,615,624,623,643],borderColor:green,backgroundColor:green,tension:0.3,pointRadius:4},
-        {label:'Import',data:[355,359,397,424,435,377,474,640,620,609,592],borderColor:red,backgroundColor:red,tension:0.3,pointRadius:4}
+        {label:'Export',data:[416,417,450,461,479,423,516,615,624,623,643],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4},
+        {label:'Import',data:[355,359,397,424,435,377,474,640,620,609,592],borderColor:'rgba(224,122,95,0.5)',backgroundColor:'rgba(224,122,95,0.5)',tension:0.3,pointRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
     charts['pil-composizione'] = buildChart('chart-pil-composizione', {
       type:'bar',
-      data:{labels:['Consumi privati','Consumi PA','Investimenti','Esportazioni','Importazioni (detratte)','Variaz. scorte'],datasets:[{data:[60.8,18.5,18.2,30.5,-28.5,0.5],backgroundColor:[blue,'#E07A5F',gold,green,'#E07A5F',grey],borderWidth:0}]},
+      data:{labels:['Consumi privati','Consumi PA','Investimenti','Esportazioni','Importazioni (detratte)','Variaz. scorte'],datasets:[{label:'Composizione PIL 2025 (%)',data:[60.8,18.5,18.2,30.5,-28.5,0.5],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
     });
     charts['export-settori'] = buildChart('chart-export-settori', {
       type:'bar',
-      data:{labels:['Meccanica e macchinari','Moda (tessile, abbigliamento, pelletteria, calzature)','Agroalimentare','Farmaceutica e chimica','Automotive','Metallurgia e acciaio','Mobili e arredamento','Altre'],datasets:[{data:[22,11,9,8,7,6,5,32],backgroundColor:[accent,'#E07A5F',green,'#E07A5F','#E07A5F','#E07A5F','#E07A5F',grey],borderRadius:4}]},
+      data:{labels:['Meccanica e macchinari','Moda (tessile, abbigliamento, pelletteria, calzature)','Agroalimentare','Farmaceutica e chimica','Automotive','Metallurgia e acciaio','Mobili e arredamento','Altre'],datasets:[{label:'Export per settore (%)',data:[22,11,9,8,7,6,5,32],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'%'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
     });
     charts['export-dest'] = buildChart('chart-export-dest', {
       type:'bar',
-      data:{labels:['UE-27','Stati Uniti','Svizzera','Cina','Regno Unito','Altri extra-UE'],datasets:[{data:[55,10,6,3,4,22],backgroundColor:[blue,accent,gold,'#E07A5F','#E07A5F',grey],borderWidth:0}]},
+      data:{labels:['UE-27','Stati Uniti','Svizzera','Cina','Regno Unito','Altri extra-UE'],datasets:[{label:'Destinazioni export (%)',data:[55,10,6,3,4,22],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
   }
@@ -738,19 +738,19 @@ function renderTabCharts(tab){
     const govLabels = ['Prodi 2006-08','Berlusconi 2008-11','Monti 2011-13','Renzi 2014-16','Gentiloni 2016-18','Conte I 2018-19','Conte II 2019-21','Draghi 2021-22','Meloni 2022-25'];
     charts['debito-governi'] = buildChart('chart-debito-governi', {
       type:'bar',
-      data:{labels:govLabels,datasets:[{label:'Debito fine mandato (mld €)',data:[1669,1916,2041,2229,2286,2463,2603,2771,3024],backgroundColor:[grey,red,grey,grey,grey,grey,grey,accent,red],borderRadius:4}]},
+      data:{labels:govLabels,datasets:[{label:'Debito fine mandato (mld €)',data:[1669,1916,2041,2229,2286,2463,2603,2771,3024],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:false,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
     });
     charts['pil-governi'] = buildChart('chart-pil-governi', {
       type:'bar',
-      data:{labels:govLabels,datasets:[{data:[1.5,-1.1,-2.8,0.9,1.7,0.3,-3.1,4.2,0.7],backgroundColor:[green,red,'#E07A5F',green,green,green,'#E07A5F',green,green],borderRadius:4}]},
+      data:{labels:govLabels,datasets:[{label:'Crescita media annua PIL (%)',data:[1.5,-1.1,-2.8,0.9,1.7,0.3,-3.1,4.2,0.7],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw>0?'+':'')+ctx.raw+'%'}}},scales:{x:{beginAtZero:false,ticks:{callback:v=>(v>0?'+':'')+v+'%'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
     });
     charts['debitopil-governi'] = buildChart('chart-debitopil-governi', {
       type:'bar',
       data:{labels:govLabels,datasets:[
-        {label:'Inizio',data:[102.4,102.4,132.5,132.7,134.1,134.4,150.8,144.4,137.3],backgroundColor:grey,borderRadius:4},
-        {label:'Fine',data:[102.5,119.7,132.5,132.7,134.1,134.4,150.8,144.4,137.1],backgroundColor:[red,accent,grey,grey,grey,grey,grey,accent,red],borderRadius:4}
+        {label:'Inizio governo',data:[102.4,102.4,132.5,132.7,134.1,134.4,150.8,144.4,137.3],backgroundColor:'rgba(224,122,95,0.5)',borderRadius:4},
+        {label:'Fine governo',data:[102.5,119.7,132.5,132.7,134.1,134.4,150.8,144.4,137.1],backgroundColor:accent,borderRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45}},y:{beginAtZero:false,ticks:{callback:v=>v+'%'},grid:{color:gridColor}}}}
     });
