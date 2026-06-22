@@ -59,7 +59,7 @@
       <div class="label">Debito pubblico / PIL <span class="year-badge">2025</span>></div>
       <div class="big-num accent" data-target="137.1" data-suffix="%">137,1%</div>
       <h2>L'Italia è la seconda economia avanzata del G7 più indebitata, dopo il Giappone</h2>
-      <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. Non è un flusso annuale: è una <span class="highlight">montagna</span>> costruita in decenni.</p>
+      <p>Il debito accumulato supera il valore di tutto ciò che il Paese produce in un anno. È una <span class="highlight">montagna</span> costruita in decenni.</p>
       <div class="mini-chart" style="margin-top:18px">
         <div class="label">Debito / PIL, Italia (2005-2025)</div>
         <svg viewBox="0 0 420 140" style="width:100%;max-width:440px;height:auto">
@@ -102,7 +102,7 @@
             <div class="bar-wrap"><div class="bar-label">2022</div><div class="bar accent" data-width="53"></div><div class="bar-value">-5,3%</div></div>
             <div class="bar-wrap"><div class="bar-label">2024</div><div class="bar accent" data-width="36"></div><div class="bar-value">-3,6%</div></div>
             <div class="bar-wrap"><div class="bar-label">2025 (stima)</div><div class="bar accent" data-width="31"></div><div class="bar-value">-3,1%</div></div>
-            <div class="bar-wrap"><div class="bar-label">Target UE 3%</div><div class="bar shade" data-width="30"></div><div class="bar-value">3,0%</div></div>
+            <div class="bar-wrap"><div class="bar-label">Target UE 3%</div><div class="bar neutral" data-width="30"></div><div class="bar-value">3,0%</div></div>
       </div>
       <div class="note">Il target UE 3% non è previsto prima del 2027.</div>
     </div>
@@ -115,10 +115,18 @@
       <div class="big-num accent" data-target="43.1" data-suffix="%">43,1%</div>
       <h2>Il totale di tasse e contributi versati equivale al 43,1% della ricchezza totale prodotta nel Paese</h2>
       <p>La pressione fiscale italiana è tra le più alte d'Europa. Su 10 monete da 1 euro, 4 vanno allo Stato.</p>
-      <div class="bar-block" style="max-width:520px;margin:20px 0">
-        <div class="label">Su 100 € di PIL, dove vanno?</div>
-        <div class="bar-wrap"><div class="bar-label">Stato (tasse + contributi)</div><div class="bar accent" data-width="43"></div><div class="bar-value">43,1%</div></div>
-        <div class="bar-wrap"><div class="bar-label">Resto (economia privata)</div><div class="bar neutral" data-width="57"></div><div class="bar-value">56,9%</div></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin:24px 0">
+        <div class="label" style="text-align:center">Su 100 € di PIL, dove vanno?</div>
+        <div style="position:relative;width:200px;height:200px;border-radius:50%;background:conic-gradient(var(--accent) 0% 43.1%, #555 43.1% 100%)">
+          <div style="position:absolute;inset:28px;border-radius:50%;background:var(--bg,#111);display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <div style="font-size:32px;font-weight:700;color:var(--accent)">43,1%</div>
+            <div style="font-size:13px;color:#888;margin-top:2px">pressione fiscale</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:20px;font-size:13px;flex-wrap:wrap;justify-content:center">
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:var(--accent);display:inline-block"></span> Stato (tasse + contributi) 43,1%</div>
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#555;display:inline-block"></span> Resto (economia privata) 56,9%</div>
+        </div>
       </div>
       <div class="note">La pressione fiscale calcola il gettito effettivo, non i crediti d'imposta.</div>
       <div class="note">⚠️ Stima evasione: ~80-90 mld €/anno (MEF). Chi paga le tasse subisce una pressione reale più alta del 43,1%.</div>
