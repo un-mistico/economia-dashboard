@@ -405,7 +405,7 @@
       <p>Un confronto per <strong>periodo di governo</strong> non attribuisce tutti i meriti o le colpe al governo in carica: l'economia dipende anche da crisi esterne (pandemia, guerra, inflazione), dalla BCE e dai governi precedenti. Serve però per contestualizzare i numeri quando si sente dire "con noi è andata peggio/meglio".</p>
     </div>
     <div class="chart-grid">
-      <div class="chart-box"><h3>Debito pubblico per governo (mld €, fine mandato)</h3><div class="chart-container tall"><canvas id="chart-debito-governi"></canvas></div></div>
+      
     </div>
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Crescita media annua del PIL per governo (%)</h3><div class="chart-container"><canvas id="chart-pil-governi"></canvas></div></div>
@@ -756,11 +756,6 @@ function renderTabCharts(tab){
   }
   if(tab==='governi'){
     const govLabels = ['Prodi 2006-08','Berlusconi 2008-11','Monti 2011-13','Renzi 2014-16','Gentiloni 2016-18','Conte I 2018-19','Conte II 2019-21','Draghi 2021-22','Meloni 2022-25'];
-    charts['debito-governi'] = buildChart('chart-debito-governi', {
-      type:'bar',
-      data:{labels:govLabels,datasets:[{label:'Debito fine mandato (mld €)',data:[1669,1916,2041,2229,2286,2463,2603,2771,3024],backgroundColor:accent,borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:false,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}}
-    });
     charts['pil-governi'] = buildChart('chart-pil-governi', {
       type:'bar',
       data:{labels:govLabels,datasets:[{label:'Crescita media annua PIL (%)',data:[1.5,-1.1,-2.8,0.9,1.7,0.3,-3.1,4.2,0.7],backgroundColor:accent,borderRadius:4}]},
