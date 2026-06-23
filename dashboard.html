@@ -160,6 +160,9 @@
       <div class="chart-box"><h3>Pressione fiscale Italia vs UE (2024)</h3><div class="chart-container"><canvas id="chart-pressione-ue"></canvas></div></div>
       <div class="chart-box"><h3>PIL generato per settore (mld €, 2024)</h3><div class="chart-container"><canvas id="chart-pil-settore"></canvas></div></div>
     </div>
+    <div class="chart-grid">
+      <div class="chart-box"><h3>PIL pro capite (PPA, €, 2025)</h3><div class="chart-container"><canvas id="chart-pil-procapite"></canvas></div></div>
+    </div>
     <div class="insight-box"><div class="text" id="panoramica-insight">Nel 2025 l'Italia ha un PIL di €2.258 miliardi, ma il debito pubblico supera il 137% del PIL. La pressione fiscale è al 43,1% del PIL, tra le più alte d'Europa. I servizi generano il 72% del PIL. La produttività del lavoro è stagnante da vent'anni e nel 2024 è calata dell'1,4%.</div></div>
     
   
@@ -293,6 +296,9 @@
       <h4>Perché il debito sale nonostante il deficit scenda?</h4>
       <p>Il rapporto debito/PIL può salire anche con un deficit basso se il PIL nominale cresce meno del costo medio del debito (effetto "palla di neve"). Nel 2025 il PIL nominale è cresciuto del 2,5%, ma il costo medio dello stock era ~2,97%. In più, i crediti d'imposta dei bonus edilizi hanno aggiunto debito fuori bilancio (stock-flow adjustment ~€51 mld).</p>
     </div>
+    <div class="chart-grid">
+      <div class="chart-box"><h3>Superbonus 110%: previsione vs costo reale (mld €)</h3><div class="chart-container"><canvas id="chart-superbonus"></canvas></div></div>
+    </div>
     <div class="warning-box">
       <h4>Il Superbonus come trasferimento regressivo</h4>
       <div class="text">In economia, 'regressivo' è un trasferimento che avvantaggia proporzionalmente chi ha redditi più alti. Il Superbonus 110% è un caso di studio: lo Stato ha generato oltre 150 miliardi di euro di debito per ristrutturare abitazioni private. I fondi sono stati intercettati quasi interamente dai contribuenti dell'ultimo quintile di reddito (proprietari di case multiple, villette, immobili di pregio). Le fasce a basso reddito, spesso in affitto o in case popolari, sono state tagliate fuori ma ripagheranno il debito attraverso la tassazione generale (IVA sui consumi di base) e l'inflazione edilizia.</div>
@@ -317,6 +323,9 @@
     <div class="chart-grid cols-2">
       <div class="chart-box"><h3>Pensioni / PIL storico (2015-2024)</h3><div class="chart-container"><canvas id="chart-pensioni-storico"></canvas></div></div>
       <div class="chart-box"><h3>Trasferimenti sociali per funzione (% PIL, 2024)</h3><div class="chart-container"><canvas id="chart-welfare-voci"></canvas></div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box"><h3>Distribuzione ricchezza: chi possiede cosa (%)</h3><div class="chart-container"><canvas id="chart-gini-ricchezza"></canvas></div></div>
     </div>
     <div class="insight-box"><div class="text">Le pensioni pesano più del 13% del PIL, tra le voci più alte d'Europa. La spesa sanitaria pubblica invece è sotto la media OCSE: il SSN copre solo il 73% della spesa sanitaria totale, mentre il resto è pagato dalle famiglie. I trasferimenti sociali italiani sono generosi ma poco targetizzati.</div></div>
     <div class="method-box">
@@ -579,6 +588,11 @@ function renderTabCharts(tab){
       data:{labels:pilSettoreSorted.labels,datasets:[{label:'PIL per settore (mld €)',data:pilSettoreSorted.values,backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
+    charts['pil-procapite'] = buildChart('chart-pil-procapite', {
+      type:'bar',
+      data:{labels:['Germania','Media UE','Italia','Francia','Spagna'],datasets:[{label:'PIL pro capite PPA (€)',data:[50000,41600,40000,40000,37000],backgroundColor:[grey,grey,accent,grey,grey],borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw.toLocaleString('it-IT')}}},scales:{x:{beginAtZero:false,ticks:{callback:v=>'€'+(v/1000)+'K'},grid:{color:gridColor}},y:{grid:{display:false}}}}
+    });
   }
   if(tab==='pil'){
     charts['pil-storico'] = buildChart('chart-pil-storico', {
@@ -689,6 +703,11 @@ function renderTabCharts(tab){
       data:{labels:['Grecia','Italia','Francia','Spagna','Germania','Portogallo','UE-27'],datasets:[{label:'2024',data:[153.1,134.7,109.9,101.7,62.7,97.2,81.4],backgroundColor:[grey,accent,grey,grey,grey,grey,grey],borderRadius:4}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
+    charts['superbonus'] = buildChart('chart-superbonus', {
+      type:'bar',
+      data:{labels:['Previsione iniziale\n(2020)','Costo attuale\n(2025)'],datasets:[{label:'Superbonus 110% (mld €)',data:[40,150],backgroundColor:[grey,accent],borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'€'+v+' mld'},grid:{color:gridColor}},x:{grid:{display:false}}}}
+    });
   }
 
   if(tab==='welfare'){
@@ -711,6 +730,11 @@ function renderTabCharts(tab){
       type:'bar',
       data:{labels:['Pensioni','Sanità','Malattia/disabilità','Famiglia','Disoccupazione','Povertà/esclusione','Altro'],datasets:[{label:'Trasferimenti sociali (% PIL)',data:[13.1,6.3,1.0,1.2,0.8,0.9,1.6],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% PIL'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
+    });
+    charts['gini-ricchezza'] = buildChart('chart-gini-ricchezza', {
+      type:'bar',
+      data:{labels:['Top 10%','40-90%','Bottom 50%'],datasets:[{label:'Quota ricchezza netta (%)',data:[60.6,32.2,7.2],backgroundColor:[accent,grey,grey],borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% della ricchezza nazionale'}}},scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
   }
   if(tab==='lavoro'){
