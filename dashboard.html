@@ -575,7 +575,7 @@ function renderTabCharts(tab){
     charts['spesa-funzione'] = buildChart('chart-spesa-funzione', {
       type:'bar',
       data:{labels:['Protezione sociale','Sanità','PA/general','Istruzione','Interessi','Difesa','Abitazioni/territ'],datasets:[{label:'Spesa pubblica per funzione (% del totale)',data:[42.2,16.0,15.0,9.6,7.4,2.5,7.3],backgroundColor:accent,borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
     charts['pressione-ue'] = buildChart('chart-pressione-ue', {
       type:'bar',
@@ -649,7 +649,7 @@ function renderTabCharts(tab){
     charts['entrate-tipo'] = buildChart('chart-entrate-tipo', {
       type:'bar',
       data:{labels:['Imposte dirette','IVA','Accise e monopoli','Tasse sui beni/servizi','Contributi sociali','Altre'],datasets:[{label:'Entrate pubbliche (% PIL)',data:[16.2,11.9,4.8,4.8,15.1,1.8],backgroundColor:accent,borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
     });
     charts['entrate-gruppi'] = buildChart('chart-entrate-gruppi', {
       type:'bar',
@@ -666,12 +666,12 @@ function renderTabCharts(tab){
     charts['spesa-settore'] = buildChart('chart-spesa-settore', {
       type:'bar',
       data:{labels:['Protezione sociale','Sanità','Interessi','Istruzione','Difesa','Pubblica amministrazione','Abitazioni/territorio','Altre'],datasets:[{label:'Spesa pubblica per settore (% totale)',data:[42.2,16.0,7.4,9.6,2.5,12.0,7.0,3.3],backgroundColor:accent,borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
     charts['protezione-sociale'] = buildChart('chart-protezione-sociale', {
       type:'bar',
       data:{labels:['Pensioni vecchiaia/reversibilità','Sopravvivenza','Disabilità/malattia','Famiglia/bambini','Disoccupazione','Esclusione sociale','Abitazione','Altre'],datasets:[{label:'Composizione protezione sociale (%)',data:[68.2,5.5,4.0,7.0,3.5,4.8,4.0,3.0],backgroundColor:accent,borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
     charts['spesa-storico'] = buildChart('chart-spesa-storico', {
       type:'line',
@@ -775,7 +775,7 @@ function renderTabCharts(tab){
     charts['pil-composizione'] = buildChart('chart-pil-composizione', {
       type:'bar',
       data:{labels:['Consumi privati','Consumi PA','Investimenti','Esportazioni','Importazioni (detratte)','Variaz. scorte'],datasets:[{label:'Composizione PIL 2025 (%)',data:[60.8,18.5,18.2,30.5,-28.5,0.5],backgroundColor:accent,borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'% PIL'}}}}
     });
     charts['export-settori'] = buildChart('chart-export-settori', {
       type:'bar',
@@ -785,7 +785,7 @@ function renderTabCharts(tab){
     charts['export-dest'] = buildChart('chart-export-dest', {
       type:'bar',
       data:{labels:['UE-27','Stati Uniti','Svizzera','Cina','Regno Unito','Altri extra-UE'],datasets:[{label:'Destinazioni export (%)',data:[55,10,6,3,4,22],backgroundColor:accent,borderWidth:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:11}},reverse:true},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
     });
   }
   if(tab==='governi'){
