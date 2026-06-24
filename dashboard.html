@@ -273,7 +273,30 @@
       <p style="font-size:12px;color:#666;margin-top:10px;line-height:1.5">Dati OCSE Social Expenditure, Health Statistics, Income Distribution, Eurostat. Gli indici aggregati possono variare secondo la definizione.</p>
     </div>
     <div class="warning-box"><div class="text">La protezione sociale assorbe oltre il 42% della spesa pubblica. Tra questa, le pensioni sono la voce più pesante. La spesa sanitaria pubblica è al 6,3% del PIL, sotto la media UE e OCSE. L'Italia spende molto in welfare ma lo distribuisce meno bene della media europea: la redistribuzione efficace e la concentrazione sui poveri sono inferiori alla media UE.</div></div>
-<div class="footer-info">MEF/RGS · ISTAT · OCSE Health/Social/Income · INPS · upBilancio · GIMBE</div>
+
+    <!-- COFOG: Spesa per funzione Italia vs UE27 -->
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Spesa pubblica per funzione (% PIL, 2023)<br><span style="font-size:12px;color:#888;font-weight:400">Italia vs UE27 · COFOG · Fonte: Eurostat (gov_10a_exp)</span></h3>
+        <div class="chart-container tall"><canvas id="chart-cofog"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Partecipazioni pubbliche -->
+    <div class="kpi-grid" style="margin-top:0">
+      <div class="kpi"><div class="val accent">39.000</div><div class="lbl">Partecipazioni totali</div><div class="trend trend-neutral">Al 31/12/2022</div></div>
+      <div class="kpi"><div class="val accent">37%</div><div class="lbl">Non conformi (TUSP)</div></div>
+      <div class="kpi"><div class="val accent">191</div><div class="lbl">Società in perdita (4 esercizi)</div></div>
+      <div class="kpi"><div class="val accent">13</div><div class="lbl">Tra le top 50 società italiane</div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Partecipazioni pubbliche: 39.000 società, 37% irregolari<br><span style="font-size:12px;color:#888;font-weight:400">Fonte: Corte dei Conti — Referto 2025</span></h3>
+        <div class="chart-container"><canvas id="chart-partecipate"></canvas></div>
+      </div>
+    </div>
+
+<div class="footer-info">MEF/RGS · ISTAT · OCSE Health/Social/Income · INPS · upBilancio · GIMBE · Eurostat (gov_10a_exp) · Corte dei Conti Referto 2025</div>
   </div>
 
   <!-- DEBITO -->
@@ -328,6 +351,20 @@
       <div class="chart-box"><h3>Distribuzione ricchezza: chi possiede cosa (%)</h3><div class="chart-container"><canvas id="chart-gini-ricchezza"></canvas></div></div>
     </div>
     <div class="insight-box"><div class="text">Le pensioni pesano più del 13% del PIL, tra le voci più alte d'Europa. La spesa sanitaria pubblica invece è sotto la media OCSE: il SSN copre solo il 73% della spesa sanitaria totale, mentre il resto è pagato dalle famiglie. I trasferimenti sociali italiani sono generosi ma poco targetizzati.</div></div>
+
+    <!-- Welfare INPS: contributi vs spesa -->
+    <div class="kpi-grid" style="margin-top:0">
+      <div class="kpi"><div class="val" id="kpi-inps-entrate">€284 mld</div><div class="lbl">Contributi INPS raccolti (2024)</div></div>
+      <div class="kpi"><div class="val accent" id="kpi-inps-spesa">€417 mld</div><div class="lbl">Spesa INPS prestazioni (2024)</div></div>
+      <div class="kpi"><div class="val accent" id="kpi-inps-gap">€133 mld</div><div class="lbl">Gap (spesa − entrate)</div></div>
+      <div class="kpi"><div class="val" id="kpi-inps-trasf">€180,7 mld</div><div class="lbl">Trasferimenti statali a INPS</div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Welfare: l'INPS spende 133 mld in più di quanto raccoglie<br><span style="font-size:12px;color:#888;font-weight:400">Contributi vs spesa prestazioni (mld €, 2024) · Fonte: INPS XXIV Rapporto Annuale 2024</span></h3>
+        <div class="chart-container"><canvas id="chart-welfare-inps"></canvas></div>
+      </div>
+    </div>
     <div class="method-box">
       <h4>Disuguaglianza: redditi sotto controllo, patrimoni fuori controllo</h4>
       <p><strong>Il coefficiente di Gini misura la disuguaglianza</strong> (0 = uguaglianza perfetta, 1 = una persona possiede tutto). In Italia: Gini sui redditi netti ~0,30-0,32, in linea con la media europea, mitigato da un sistema fiscale formale progressivo. Gini sulla ricchezza netta (immobili e attività finanziarie) ~0,70. Il divario dimostra che la vera iniquità sociale in Italia non si genera dagli stipendi, ma dai capitali accumulati e tramandati.</p>
@@ -683,6 +720,40 @@ function renderTabCharts(tab){
       data:{labels:['Interessi','Protezione sociale','Sanità','Istruzione','Difesa','Altre'],datasets:[{label:'Spesa (% PIL)',data:[3.8,21.6,8.2,4.9,1.3,11.4],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% PIL'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
+    /* COFOG: Spesa per funzione Italia vs UE27 (horizontal grouped bars) */
+    charts['cofog'] = buildChart('chart-cofog', {
+      type:'bar',
+      data:{
+        labels:['Protezione sociale','Sanità','Servizi generali PA','Affari economici','Istruzione','Abitazioni/servizi collettivi','Difesa','Ordine pubblico','Protezione ambiente','Ricreazione cultura'],
+        datasets:[
+          {label:'Italia',data:[21.1,6.5,7.4,5.8,3.9,4.3,1.2,1.7,0.9,0.8],backgroundColor:'#e8833a',borderRadius:3},
+          {label:'UE27',data:[19.2,7.3,5.9,5.8,4.7,1.2,1.3,1.7,0.8,1.2],backgroundColor:'#5a7a8a',borderRadius:3}
+        ]
+      },
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}},
+          tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw+'% PIL'}}},
+        scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false},ticks:{font:{size:10}}}}
+      }
+    });
+    /* Partecipazioni pubbliche: bar chart */
+    charts['partecipate'] = buildChart('chart-partecipate', {
+      type:'bar',
+      data:{
+        labels:['Partecipazioni totali','Non conformi (%)','Anomale zero dip. (%)','In perdita (4 esercizi)','Tra top 50 società'],
+        datasets:[{label:'Valore',data:[39000,37,14,191,13],backgroundColor:['#e8833a','#e8833a','rgba(232,131,58,0.7)','#e8833a','rgba(232,131,58,0.7)'],borderRadius:4}]
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},
+          tooltip:{callbacks:{label:ctx=>{
+            const lbl=ctx.label;
+            if(lbl.includes('%')) return ctx.raw+'%';
+            if(lbl.includes('totali')) return ctx.raw.toLocaleString('it-IT');
+            return ctx.raw;
+          }}}},
+        scales:{y:{type:'logarithmic',beginAtZero:true,ticks:{color:'#888'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:10}}}}
+      }
+    });
   }
   if(tab==='debito'){
     charts['debito-lungo'] = buildChart('chart-debito-lungo', {
@@ -735,6 +806,19 @@ function renderTabCharts(tab){
       type:'bar',
       data:{labels:['Top 10%','40-90%','Bottom 50%'],datasets:[{label:'Quota ricchezza netta (%)',data:[60.6,32.2,7.2],backgroundColor:[accent,grey,grey],borderRadius:4}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% della ricchezza nazionale'}}},scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
+    });
+    /* Welfare INPS: contributi vs spesa (comparison bars) */
+    charts['welfare-inps'] = buildChart('chart-welfare-inps', {
+      type:'bar',
+      data:{
+        labels:['Contributi INPS','Spesa prestazioni','Gap','Trasferimenti statali','Spesa pensioni'],
+        datasets:[{label:'Mld €',data:[284,417,133,180.7,320.6],backgroundColor:[accent,'#e8833a','rgba(232,131,58,0.7)','rgba(232,131,58,0.5)','rgba(232,131,58,0.3)'],borderRadius:4}]
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},
+          tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},
+        scales:{y:{beginAtZero:true,ticks:{callback:v=>'€'+v+' mld'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:10}}}}
+      }
     });
   }
   if(tab==='lavoro'){
