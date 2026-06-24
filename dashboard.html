@@ -200,6 +200,21 @@
       <div class="chart-box"><h3>Produttività del lavoro: Italia vs UE (indice 2010=100)<span class="info-tooltip"><span class="icon">i</span><span class="tooltip-text">Produttività = PIL / ore lavorate. Indica quanta ricchezza produciamo in un'ora di lavoro rispetto agli altri paesi.</span></span></h3><div class="chart-container"><canvas id="chart-produttivita"></canvas></div>
       <p style="font-size:12px;color:#666;margin-top:10px;line-height:1.5">Confronto tra Italia, Germania, Francia e Spagna solo per gli anni selezionati (non serie continua).</p></div>
     </div>
+
+    <!-- VENTURE CAPITAL: Italia vs Europa -->
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="val accent">0,03%</div><div class="lbl">PIL in VC (Italia)</div><div class="trend trend-down">vs 0,5% UK · 0,09% Germania</div></div>
+      <div class="kpi"><div class="val accent">0</div><div class="lbl">Startup unicorn italiane</div><div class="trend trend-down">Francia 1 · Germania 1 · UK 1</div></div>
+      <div class="kpi"><div class="val accent">2.894</div><div class="lbl">Startup che hanno raccolto</div><div class="trend trend-neutral">su 12.842 registrate (22%)</div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Venture Capital: l'Italia raccoglie 10 volte meno del Regno Unito<br><span style="font-size:12px;color:#888;font-weight:400">Investimenti VC in mld € (2024) · Fonte: Growth Capital / Banca d'Italia</span></h3>
+        <div class="chart-container"><canvas id="chart-venture-capital"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-box"><div class="text">L'Italia raccoglie €1,5 miliardi di venture capital all'anno, contro €14 miliardi del Regno Unito (quasi 10 volte di più) e €5,2 miliardi della Germania. Lo 0,03% del PIL italiano va in VC, contro lo 0,5% del PIL britannico. Su 12.842 startup innovative registrate al MIMIT, solo 2.894 (il 22%) hanno completato almeno un round di raccolta. Nessuna startup italiana è diventata unicorn (valutazione >$1 mld).</div></div>
+
     <div class="method-box">
       <h4>Cosa è il PIL ai prezzi di mercato?</h4>
       <p>Il Prodotto interno lordo (PIL) misura il valore dei beni e servizi prodotti nel paese. <strong>Ai prezzi di mercato</strong> include le imposte nette sui prodotti ed è la base su cui si calcolano debito/PIL, spesa/PIL e pressione fiscale. La <strong>crescita in volume</strong> esclude l'inflazione e indica la crescita reale. <strong>Produttività del lavoro</strong> = PIL reale / ore lavorate: indica quanta ricchezza si produce in un'ora di lavoro.</p>
@@ -352,6 +367,20 @@
     </div>
     <div class="insight-box"><div class="text">Le pensioni pesano più del 13% del PIL, tra le voci più alte d'Europa. La spesa sanitaria pubblica invece è sotto la media OCSE: il SSN copre solo il 73% della spesa sanitaria totale, mentre il resto è pagato dalle famiglie. I trasferimenti sociali italiani sono generosi ma poco targetizzati.</div></div>
 
+    <!-- INFERMIERI: Italia vs Europa -->
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="val accent">6,93</div><div class="lbl">Infermieri / 1.000 ab. (Italia)</div><div class="trend trend-down">vs 8,3 media UE27</div></div>
+      <div class="kpi"><div class="val accent">-1,37</div><div class="lbl">Gap vs media UE</div><div class="trend trend-down">inferiore del 16,5%</div></div>
+      <div class="kpi"><div class="val accent">65-175K</div><div class="lbl">Carenza stimata infermieri</div><div class="trend trend-down">Corte dei Conti / FNOP</div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Infermieri per 1.000 abitanti: l'Italia sotto la media UE<br><span style="font-size:12px;color:#888;font-weight:400">Numero infermieri per 1.000 abitanti · Fonte: Eurostat / OECD 2023</span></h3>
+        <div class="chart-container"><canvas id="chart-infermieri-ue"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-box"><div class="text">L'Italia ha 6,93 infermieri ogni 1.000 abitanti, contro una media UE di 8,3 (-1,37, sotto del 16,5%). La Norvegia arriva a 15,62 e la Germania a 11,98. Secondo la Corte dei Conti e il FNOP, la carenza stimata di infermieri in Italia oscilla tra 65.000 e 175.000 unità, con conseguenze sulla sicurezza delle cure e sulla sostenibilità del Servizio Sanitario Nazionale.</div></div>
+
     <!-- Welfare INPS: contributi vs spesa -->
     <div class="kpi-grid" style="margin-top:0">
       <div class="kpi"><div class="val" id="kpi-inps-entrate">€284 mld</div><div class="lbl">Contributi INPS raccolti (2024)</div></div>
@@ -406,7 +435,21 @@
       <h4>Note sul mercato del lavoro</h4>
       <p>Gli occupati hanno superato i 24 milioni nel 2025, record storico. La crescita è però trainata in parte dagli autonomi e dai contratti a termine; i dipendenti a tempo indeterminato crescono più lentamente. La RAL media ISTAT 2022 è lorda e a tempo pieno. La produttività del lavoro resta stagnante da anni.</p>
     </div>
-<div class="footer-info">ISTAT — Mercato del lavoro · INPS · MEF/Dipartimento Finanze · Infocamere · Unioncamere</div>
+
+    <!-- OCCUPAZIONE GAP: Italia vs UE -->
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="val accent">-8,7pp</div><div class="lbl">Gap occupazione totale</div><div class="trend trend-down">Italia 67,1% vs UE 75,8%</div></div>
+      <div class="kpi"><div class="val accent">-13,4pp</div><div class="lbl">Gap donne</div><div class="trend trend-down">Italia 57,4% vs UE 70,8%</div></div>
+      <div class="kpi"><div class="val accent">-15,1pp</div><div class="lbl">Gap giovani</div><div class="trend trend-down">Italia 34,4% vs UE 49,5%</div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Gap occupazionale: l'Italia è ultima in Europa<br><span style="font-size:12px;color:#888;font-weight:400">Tasso occupazione %, Italia vs Media UE27 · Fonte: Eurostat LFS 2024</span></h3>
+        <div class="chart-container"><canvas id="chart-occupazione-ue"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-box"><div class="text">L'Italia ha il tasso di occupazione più basso tra i grandi paesi europei: 67,1% contro una media UE del 75,8% (-8,7 punti percentuali). Il gap è ancora più ampio per le donne (-13,4pp: 57,4% vs 70,8%) e per i giovani 15-29 anni (-15,1pp: 34,4% vs 49,5%). L'Italia è l'ultimo paese dell'Unione Europea per partecipazione femminile e giovanile al mercato del lavoro.</div></div>
+<div class="footer-info">ISTAT — Mercato del lavoro · INPS · MEF/Dipartimento Finanze · Infocamere · Unioncamere · Eurostat LFS 2024</div>
   </div>
 
   <!-- COMMERCIO -->
@@ -672,6 +715,12 @@ function renderTabCharts(tab){
       ]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}},title:{display:true,text:'Indice 2010=100',color:'#888',font:{size:11}}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
+    /* Venture Capital: Italia vs Europa (horizontal bar) */
+    charts['venture-capital'] = buildChart('chart-venture-capital', {
+      type:'bar',
+      data:{labels:['Italia','Spagna','Francia','Germania','Regno Unito'],datasets:[{label:'VC investments (mld €, 2024)',data:[1.5,2.0,4.8,5.2,14.0],backgroundColor:['#e8833a','#5a7a8a','#5a7a8a','#5a7a8a','#5a7a8a'],borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'€'+v+' mld'},grid:{color:gridColor}},y:{grid:{display:false}}}}
+    });
   }
 
   if(tab==='fisco'){
@@ -807,6 +856,12 @@ function renderTabCharts(tab){
       data:{labels:['Top 10%','40-90%','Bottom 50%'],datasets:[{label:'Quota ricchezza netta (%)',data:[60.6,32.2,7.2],backgroundColor:[accent,grey,grey],borderRadius:4}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'% della ricchezza nazionale'}}},scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false}}}}
     });
+    /* Infermieri per 1.000 abitanti: Italia vs Europa (horizontal bar) */
+    charts['infermieri-ue'] = buildChart('chart-infermieri-ue', {
+      type:'bar',
+      data:{labels:['Italia','Spagna','Media UE27','Francia','Germania','Norvegia'],datasets:[{label:'Infermieri / 1.000 ab.',data:[6.93,6.0,8.3,8.84,11.98,15.62],backgroundColor:['#e8833a','#5a7a8a','#5a7a8a','#5a7a8a','#5a7a8a','#5a7a8a'],borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+' infermieri / 1.000 ab.'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v},grid:{color:gridColor}},y:{grid:{display:false}}}}
+    });
     /* Welfare INPS: contributi vs spesa (comparison bars) */
     charts['welfare-inps'] = buildChart('chart-welfare-inps', {
       type:'bar',
@@ -844,6 +899,18 @@ function renderTabCharts(tab){
       type:'bar',
       data:{labels:['Operai','Impiegati','Quadri/Funzionari','Manager'],datasets:[{label:'RAL media (€)',data:[26800,34200,55800,119400],backgroundColor:accent,borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw.toLocaleString()}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'€'+(v/1000)+'k'},grid:{color:gridColor}},y:{grid:{display:false}}}}
+    });
+    /* Occupazione gap: Italia vs UE (grouped bar) */
+    charts['occupazione-ue'] = buildChart('chart-occupazione-ue', {
+      type:'bar',
+      data:{
+        labels:['Occupazione totale (20-64)','Occupazione femminile','Occupazione giovanile (15-29)'],
+        datasets:[
+          {label:'Italia',data:[67.1,57.4,34.4],backgroundColor:'#e8833a',borderRadius:4},
+          {label:'Media UE27',data:[75.8,70.8,49.5],backgroundColor:'#5a7a8a',borderRadius:4}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw+'%'}}},scales:{y:{beginAtZero:true,max:90,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:11}}}}}
     });
   }
 
@@ -924,6 +991,9 @@ document.getElementById('yearSelect').addEventListener('change', e => {
         <tr><td>tasse.csv</td><td>Pressione fiscale e aliquote principali</td><td class="num">5</td><td class="num"><a href="data/tasse.csv" download>CSV</a></td></tr>
         <tr><td>lavoro.csv</td><td>Occupazione, disoccupazione, tassi ILO</td><td class="num">8</td><td class="num"><a href="data/lavoro.csv" download>CSV</a></td></tr>
         <tr><td>commercio.csv</td><td>Export, import, saldo commerciale</td><td class="num">7</td><td class="num"><a href="data/commercio.csv" download>CSV</a></td></tr>
+        <tr><td>venture_capital.csv</td><td>VC investments per paese, startup registrate e unicorn</td><td class="num">8</td><td class="num"><a href="data/venture_capital.csv" download>CSV</a></td></tr>
+        <tr><td>occupazione_ue.csv</td><td>Tassi occupazione Italia vs UE (totale, femminile, giovanile)</td><td class="num">7</td><td class="num"><a href="data/occupazione_ue.csv" download>CSV</a></td></tr>
+        <tr><td>infermieri_ue.csv</td><td>Infermieri e medici per 1.000 abitanti per paese</td><td class="num">7</td><td class="num"><a href="data/infermieri_ue.csv" download>CSV</a></td></tr>
         <tr><td>metodologia.csv</td><td>Definizione, fonte e caveat di ogni indicatore</td><td class="num">11</td><td class="num"><a href="data/metodologia.csv" download>CSV</a></td></tr>
       </table>
     </div>
