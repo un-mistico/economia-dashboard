@@ -215,6 +215,15 @@
     </div>
     <div class="insight-box"><div class="text">L'Italia raccoglie €1,5 miliardi di venture capital all'anno, contro €14 miliardi del Regno Unito (quasi 10 volte di più) e €5,2 miliardi della Germania. Lo 0,03% del PIL italiano va in VC, contro lo 0,5% del PIL britannico. Su 12.842 startup innovative registrate al MIMIT, solo 2.894 (il 22%) hanno completato almeno un round di raccolta. Nessuna startup italiana è diventata unicorn (valutazione >$1 mld).</div></div>
 
+    <!-- PIL PRO CAPITE STORICO: Italia vs UE -->
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>PIL pro capite: l'Italia è scesa sotto la media UE<br><span style="font-size:12px;color:#888;font-weight:400">PIL pro capite in PPS (UE=100) · Fonte: Eurostat, European Commission</span></h3>
+        <div class="chart-container"><canvas id="chart-pil-procapite-storico"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-box"><div class="text">Nel 1995 l'Italia era sopra la media europea (104,8 contro 100 UE-15). Da lì il declino: nel 2025 il PIL pro capite italiano è al 91% della media UE-27, sotto Francia (93%) e Germania (110%). La Spagna, partita molto più indietro (77,7 nel 1995), ha quasi raggiunto l'Italia. Il gap si è aperto soprattutto dopo il 2008: crisi del debito, bassa crescita, produttività stagnante.</div></div>
+
     <div class="method-box">
       <h4>Cosa è il PIL ai prezzi di mercato?</h4>
       <p>Il Prodotto interno lordo (PIL) misura il valore dei beni e servizi prodotti nel paese. <strong>Ai prezzi di mercato</strong> include le imposte nette sui prodotti ed è la base su cui si calcolano debito/PIL, spesa/PIL e pressione fiscale. La <strong>crescita in volume</strong> esclude l'inflazione e indica la crescita reale. <strong>Produttività del lavoro</strong> = PIL reale / ore lavorate: indica quanta ricchezza si produce in un'ora di lavoro.</p>
@@ -399,6 +408,15 @@
       <p><strong>Il coefficiente di Gini misura la disuguaglianza</strong> (0 = uguaglianza perfetta, 1 = una persona possiede tutto). In Italia: Gini sui redditi netti ~0,30-0,32, in linea con la media europea, mitigato da un sistema fiscale formale progressivo. Gini sulla ricchezza netta (immobili e attività finanziarie) ~0,70. Il divario dimostra che la vera iniquità sociale in Italia non si genera dagli stipendi, ma dai capitali accumulati e tramandati.</p>
       <p><strong>Fonte:</strong> Banca d'Italia, Indagine sui bilanci delle famiglie; Eurostat</p>
     </div>
+
+    <!-- GINI NEL TEMPO: Italia vs UE -->
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Disuguaglianza dei redditi nel tempo: Italia vs UE<br><span style="font-size:12px;color:#888;font-weight:400">Coefficiente di Gini sui redditi equivalenti · Fonte: Eurostat (tessi190)</span></h3>
+        <div class="chart-container"><canvas id="chart-gini-temporale"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-box"><div class="text">Il Gini italiano è costantemente sopra la media UE: da 32,7 nel 2005 a 31,0 nel 2025, mentre la UE è scesa da ~30,5 a 29,2. Il picco di disuguaglianza è stato nel 2018 (33,4), in corrispondenza della flat tax sui forfettari e del reddito di cittadinanza ancora assente. Da allora l'Italia è migliorata, ma il gap con la UE resta di ~1,8 punti. Da notare: il Gini misura solo i redditi, non i patrimoni (dove l'Italia è molto più disuguale, Gini 0,70).</div></div>
 <div class="footer-info">INPS · MEF/RGS Rapporto n.26 · OCSE Health/Social · upBilancio · GIMBE</div>
   </div>
 
@@ -483,6 +501,24 @@
       </table>
     </div>
     <div class="insight-box"><div class="text">L'Italia ha un surplus commerciale strutturale sui beni (~€50 mld nel 2025) e un saldo conto corrente positivo. L'export è trainato da meccanica, moda, agroalimentare e farmaceutica. La domanda estera netta però ha contribuito negativamente alla crescita 2025 (-0,7pp) perché le importazioni sono cresciute più delle esportazioni in volume. La produttività del lavoro è il tallone d'Achille: l'Italia produce per ora lavorata circa il 20% in meno della Germania.</div></div>
+
+    <!-- DOVE L'ITALIA SOPRAPERFORMA -->
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="val accent">16,6%</div><div class="lbl">Manifattura / GVA (Italia)</div><div class="trend trend-up">vs 15,9% UE · 10,7% Francia</div></div>
+      <div class="kpi"><div class="val accent">+48%</div><div class="lbl">Crescita export 2015-2025</div><div class="trend trend-up">La piu' alta del G7</div></div>
+      <div class="kpi"><div class="val accent">4°</div><div class="lbl">Export mondiale 2025</div><div class="trend trend-up">superato il Giappone</div></div>
+    </div>
+    <div class="chart-grid cols-2">
+      <div class="chart-box">
+        <h3>Manifattura: l'Italia sopra la media UE<br><span style="font-size:12px;color:#888;font-weight:400">GVA manifatturiero / totale (%), 2024 · Fonte: Eurostat</span></h3>
+        <div class="chart-container"><canvas id="chart-manifattura-ue"></canvas></div>
+      </div>
+      <div class="chart-box">
+        <h3>Crescita export: l'Italia guida il G7<br><span style="font-size:12px;color:#888;font-weight:400">Variazione export 2015-2025 (%) · Fonte: OECD</span></h3>
+        <div class="chart-container"><canvas id="chart-export-growth-g7"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-box"><div class="text">Non tutto va male. L'Italia è il 4° export mondiale, 2° in Europa dopo la Germania. La manifattura vale il 16,6% del GVA nazionale, sopra la media UE (15,9%) e ben sopra Francia (10,7%) e Spagna (11,9%). La crescita export 2015-2025 è del +48%, la più alta del G7 (Francia +28%, Germania +27%). L'Italia è prima al mondo in 201 prodotti di nicchia (ceramica, occhiali, macchinari per imballaggio, superyacht). Base export diversificata: i top 100 prodotti coprono il 40% dell'export (vs 50,5% Francia, 67,6% Corea).</div></div>
 <div class="footer-info">ISTAT — Commercio estero · Banca d'Italia — Bilancia dei pagamenti · MAECI · Prometeia/I-Com · OCSE · Eurostat</div>
   </div>
 
@@ -721,6 +757,18 @@ function renderTabCharts(tab){
       data:{labels:['Italia','Spagna','Francia','Germania','Regno Unito'],datasets:[{label:'VC investments (mld €, 2024)',data:[1.5,2.0,4.8,5.2,14.0],backgroundColor:['#e8833a','#5a7a8a','#5a7a8a','#5a7a8a','#5a7a8a'],borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'€'+ctx.raw+' mld'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'€'+v+' mld'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
+    /* PIL pro capite storico: Italia vs UE vs Germania vs Francia vs Spagna (line chart) */
+    charts['pil-procapite-storico'] = buildChart('chart-pil-procapite-storico', {
+      type:'line',
+      data:{labels:['1995','2000','2005','2010','2015','2017','2024'],datasets:[
+        {label:'Italia',data:[104.8,101.9,94.0,94.0,88.2,87.6,91.0],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:5,borderWidth:3},
+        {label:'Germania',data:[110.3,101.8,102.4,108.3,113.5,113.4,110.0],borderColor:grey,backgroundColor:grey,tension:0.3,pointRadius:4},
+        {label:'Francia',data:[108.0,107.0,105.0,103.0,99.0,98.0,93.0],borderColor:'#7a8a9a',backgroundColor:'#7a8a9a',tension:0.3,pointRadius:4},
+        {label:'Spagna',data:[77.7,83.0,88.7,88.5,85.7,87.8,89.0],borderColor:'#6a7a8a',backgroundColor:'#6a7a8a',tension:0.3,pointRadius:4},
+        {label:'UE media',data:[100,100,100,100,100,100,100],borderColor:'#555',backgroundColor:'#555',borderDash:[5,5],tension:0,pointRadius:0,borderWidth:1}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw+' (UE=100)'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v},grid:{color:gridColor}},x:{grid:{display:false}}}}
+    });
   }
 
   if(tab==='fisco'){
@@ -875,6 +923,15 @@ function renderTabCharts(tab){
         scales:{y:{beginAtZero:true,ticks:{callback:v=>'€'+v+' mld'},grid:{color:gridColor}},x:{grid:{display:false},ticks:{font:{size:10}}}}
       }
     });
+    /* Gini coefficient nel tempo: Italia vs UE (line chart) */
+    charts['gini-temporale'] = buildChart('chart-gini-temporale', {
+      type:'line',
+      data:{labels:['2005','2008','2010','2013','2016','2018','2020','2021','2023','2024','2025'],datasets:[
+        {label:'Italia',data:[32.7,31.2,31.7,32.8,33.1,33.4,32.5,32.9,31.5,32.2,31.0],borderColor:accent,backgroundColor:accent,tension:0.3,pointRadius:4,borderWidth:3},
+        {label:'UE-27',data:[30.5,30.4,30.5,30.7,30.7,30.5,30.0,30.1,29.6,29.4,29.2],borderColor:grey,backgroundColor:grey,tension:0.3,pointRadius:3,borderWidth:2}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#aaa',font:{size:11}}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>v},grid:{color:gridColor}},x:{grid:{display:false}}}}
+    });
   }
   if(tab==='lavoro'){
     charts['occupati'] = buildChart('chart-occupati', {
@@ -937,6 +994,18 @@ function renderTabCharts(tab){
       type:'bar',
       data:{labels:['UE-27','Stati Uniti','Svizzera','Cina','Regno Unito','Altri extra-UE'],datasets:[{label:'Destinazioni export (%)',data:[55,10,6,3,4,22],backgroundColor:accent,borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}
+    });
+    /* Manifattura GVA: Italia vs UE (horizontal bar) */
+    charts['manifattura-ue'] = buildChart('chart-manifattura-ue', {
+      type:'bar',
+      data:{labels:['Germania','Polonia','Italia','Media UE','Spagna','Francia'],datasets:[{label:'GVA manifatturiero / totale (%)',data:[19.9,18.1,16.6,15.9,11.9,10.7],backgroundColor:[grey,grey,accent,grey,grey,grey],borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'%'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
+    });
+    /* Export growth G7: Italia vs peers (horizontal bar) */
+    charts['export-growth-g7'] = buildChart('chart-export-growth-g7', {
+      type:'bar',
+      data:{labels:['Italia','Francia','Germania','Giappone','USA','UK','Canada'],datasets:[{label:'Crescita export 2015-2025 (%)',data:[48,28,27,15,12,8,5],backgroundColor:[accent,grey,grey,grey,grey,grey,grey],borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'+'+ctx.raw+'%'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'+'+v+'%'},grid:{color:gridColor}},y:{grid:{display:false}}}}
     });
   }
   if(tab==='governi'){
@@ -1028,6 +1097,9 @@ document.getElementById('yearSelect').addEventListener('change', e => {
         <tr><td>venture_capital.csv</td><td>VC investments per paese, startup registrate e unicorn</td><td class="num">8</td><td class="num"><a href="data/venture_capital.csv" download>CSV</a></td></tr>
         <tr><td>occupazione_ue.csv</td><td>Tassi occupazione Italia vs UE (totale, femminile, giovanile)</td><td class="num">7</td><td class="num"><a href="data/occupazione_ue.csv" download>CSV</a></td></tr>
         <tr><td>infermieri_ue.csv</td><td>Infermieri e medici per 1.000 abitanti per paese</td><td class="num">7</td><td class="num"><a href="data/infermieri_ue.csv" download>CSV</a></td></tr>
+        <tr><td>pil_procapite_storico.csv</td><td>PIL pro capite PPS (UE=100) 1995-2024, Italia vs peers</td><td class="num">8</td><td class="num"><a href="data/pil_procapite_storico.csv" download>CSV</a></td></tr>
+        <tr><td>gini_temporale.csv</td><td>Coefficiente Gini Italia vs UE-27 (2005-2025)</td><td class="num">22</td><td class="num"><a href="data/gini_temporale.csv" download>CSV</a></td></tr>
+        <tr><td>manifattura_export_strength.csv</td><td>GVA manifatturiero e crescita export G7</td><td class="num">10</td><td class="num"><a href="data/manifattura_export_strength.csv" download>CSV</a></td></tr>
         <tr><td>metodologia.csv</td><td>Definizione, fonte e caveat di ogni indicatore</td><td class="num">11</td><td class="num"><a href="data/metodologia.csv" download>CSV</a></td></tr>
       </table>
     </div>
